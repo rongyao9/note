@@ -1,5 +1,7 @@
-    实现思路：先转化为base64，再转换为file对象，用到canvas的toDataURL
-    
+ # 在线url转化为base64或者file对象
+ 实现思路：先转化为base64，再转换为file对象，用到canvas的toDataURL
+
+  <pre>
     urlToBase64 (src) {
       // 获取图片的type
       let _this = this 
@@ -21,12 +23,11 @@
           // return base64
           //输出file对象
          return file
-
       }
-      img.src = src;
-   },
-
- //  base64 => file
+      img.src = src
+      },
+</pre>
+base64 => file
 
     dataURLtoFile (dataurl, filename) {
       var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
