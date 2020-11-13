@@ -3,7 +3,7 @@
 
 #### 处理方案
 
-> 在项目根目录下创建`.eslintrc.js`文件，并添加如下代码
+在项目根目录下创建`.eslintrc.js`文件，并添加如下代码
 
 <pre>   
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     env: {
       node: true
     },
-    'extends': [
+    'extends': [ 
       'plugin:vue/essential',
       'eslint:recommended'
     ],
