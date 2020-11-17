@@ -1,0 +1,28 @@
+*{padding:0;margin:0}
+h1,h2,h3{font-size:100%}
+a,input,p,span{font-size:12px}
+a{text-decoration:none;color:#000}
+ul{list-style-type:none}
+.footer{width:100%;background-color:#000;color:#fff;padding:10px 0;}
+.footer{text-align:center;font-weight:900}
+.main{width:100%}
+@media all and (min-width: 1024px){
+    .main{width:1000px;margin:0 auto;}
+}
+.main-left .menu p{color:#fff;padding:5px 15px}
+.main-left .menu .col1{background-color:#417AB9}
+.main-left .menu .col2{background-color:#427637}
+.main-left .menu ul li{background-color:#fff;padding:5px 15px;border:1px solid #ccc;overflow:hidden}
+.menu ul li span{float:right;color:#fff;padding:2px 5px;border-radius:5px}
+.labe1{background-color:#4078B9}
+.labe2{background-color:#61BC5C}
+.labe3{background-color:#D25447}
+.labe4{background-color:#6ABFE1}
+.labe5{background-color:#E7AE39}
+.main-right .title{background-color:#F5F5F5;padding:6px 15px}
+.main-right .title a{color:#083c95;font-size:14px}
+.item{text-align:center;padding: 0px 20px; }
+.item p a{color:#083c95}
+.item h1{color:#083c95;font-weight:900}
+.item h2{color:#C4231D;font-weight:900;margin:5px 0}
+.item .btn1{color:#fff;background-color:#68B65B;display:block;width:70px;padding:5px 0;margin:10px auto;border-radius:3px}
