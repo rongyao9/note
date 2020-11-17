@@ -16,4 +16,4 @@
     noresize:如果container尺寸不会发生变化，最好设置它可以优化性能
 #### 用法:
 
-    外层容器设置高度，el-scrollbar的高度100%,包裹住需要滚动的dom结构
+    外层容器设置高度，el-scrollbar的高度100%，包裹住需要滚动的dom结构
