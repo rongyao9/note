@@ -1,0 +1,26 @@
+爬虫
+    步骤：
+	1.导入模块
+	    import requests 前后台传输对象
+	    from bs4 import BeautifulSoup 爬虫对象		
+	2.找到页面
+	    #获得页面路径，返回requests里
+	    url=requests.get("https://movie.douban.com/subject/26266893")
+	    #爬取页面上的所有标签
+	    str=BeautifulSoup(url.text,'html.parser')
+	3.查找指定值
+	    text=title.find("span",attrs={"property":"v:itemreviewed"})	
+	    print(text)#查找指定标签
+	    print(text.text)#查找制定标签里的内容
+	4.查找多个值
+	    返回所有含相同属性的标签
+	    spans=str.findAll("span",attrs={"property":"v:genre"})
+
+爬虫图片+上传下载
+	1.获得路径，可以是js或json数据
+	    urllib.request.urlopen("http://pvp.qq.com/...")
+	2.res.read()获得json里的字符串
+	3.decode("utf-8")修改字符集
+	4.not os.path.exists("D:\hero\\")判断路径是否存在 true为不存在
+	5.os.mkdir("D://hero\\")创建新路径
+	6.urllib.request.urlretrieve(原地址，存放地址)下载文件
