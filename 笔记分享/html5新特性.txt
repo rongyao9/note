@@ -1,0 +1,585 @@
+
+html5和html4的区别?
+	1.html5新添加了一些标签，html4里刨除了某一些标签
+	2.html4里显示动态效果，用的是gif和flash，但是此文件影响页面加载速度，并且不兼容所有浏览器，所以html5里用标签和js来实现动画
+	3.html4所有标签兼容所有浏览器，html5标签兼容兼容高版本浏览器
+
+canvas动画
+	svg和canvas的区别？
+	1.svg不依赖分辨率，而canvas以来分辨率
+	2.svg不支持事件处理，而canvas支持事件操作
+	3.svg的文本渲染能力弱，而canvas渲染能力强
+	4.svg画图复杂度高会减慢渲染速度，而canvas里可以添加图片
+	5.avg适合做静态图，canvas适合做动画和游戏
+画布
+	<canvas></canvas>
+步骤
+	//1.获得页面画布
+		var con1=document.getElementById("con1");	
+	//2.创建画笔 创建上下文
+		var cxt1=con1.getContext("2d");
+	//3.画直线
+		cxt1.moveTo(50,50);//开始坐标
+		cxt1.lineTo(200,200);//结束坐标
+		cxt1.stroke();//连城线
+		cxt1.lineWidth设置线体粗细
+		cxt1.strokeStyle设置线体颜色
+画曲线
+	二次曲线
+	  cxt1.quadraticCurveTo(x1,y1,x2,y2);
+	贝塞尔曲线
+	  cxt1.bezierCurveTo(x1,y1,x2,y2,x3,y3);
+画三角形
+     空心
+	cxt1.moveTo(400,20);
+	cxt1.lineTo(2.,300);
+	cxt1.lineTo(780,300);
+	cxt1.lineTO(400,20);
+	cxt1.stroke();
+     实心
+	cxt1.fillStyle="red";//设置填充色
+	cxt1.moveTo(400,20);
+	cxt1.lineTo(20,300);
+	cxt1.lineTo(780,300);
+	cxt1.lineTo(400,20);
+	cxt1.fill();//填充颜色
+    cxt1.lineCap线体两端样式
+	butt对接点  round圆  square方块
+    cxt1.linejoin线条转折处的样式
+	bevel平角 miter尖角 round圆角
+矩形
+	空心
+		cxt1.strokeStyle="red";
+		cxt1.strokeRect(50,50,400,300);
+	实心
+		cxt1.fillStyle="blue";
+		cxt1.fillRect(300,300,400,300);
+		cxt1.fill();
+圆形
+	空心
+		cxt1.arc(中心点x,中心点y，半径，弧长开始位置，结束位置,false);
+		cxt1.stroke();
+	实心
+		cxt1.arc(500,200,100,0,Math.PI*2,false);
+		cxt1.fill()
+begin和close的作用
+		begin开始画笔 close结束画笔
+		如果在页面上画两个图片，会被当成一个图形绘制，图形的样式也会被设置成统一的样式，在每一个图形前后加上这两个方法就会让图形之间不会有冲突，并且closePath结束路径，可以上没填满的形状自动合并。
+save和restore的作用
+    save保存图形  restore返回之前的图形状态
+    如果画了多个图形，每一个图形都有一个save方法，则新的图形样式会覆盖之前的图形样式，如果在某一个图形之间设置了restore,则当前图形的样式会采用上一个图形的样式。
+	
+文字
+	空心
+		cxt1.font="80px 楷体";
+		cxt1.strokeText("看看文字效果",100,100);
+	实心
+		cxt1.fillText("看看文字效果",100,400);
+图片
+	var img=new Image();//创建图片
+	img.crc-"img/1,jpg";//设置地址
+	cxt1.drawImage(img,0,0,con1.width,con1.height);//绘制
+组合图形
+	cxt.globalCompositeOperation组合方法
+	1.source-over新图形在旧图形之上(默认)
+	2.destiantion-over旧图形在新图形之上	
+	3.source-atop绘制旧图形所有面积和新图形的交叉位置
+	4.destiantion-stop绘制新图形所有面积和旧图形的交叉位置
+	5.source-in绘制两个图形的交叉位置，按新图形颜色显示
+	6.destiantion-in绘制两个图形的交叉位置，按旧图形颜色显示
+	7.source-out绘制新图形，减去旧图形交叉的面积
+	8.destiantion-out绘制旧图形，减去新图形交叉的面积
+	9.lighter绘制两个图形，交叉位置加色处理
+	10.darker绘制两个图形，交叉位置减色处理
+	11.copy只绘制新图形
+	12.xor绘制两个图形，交叉位置变透明
+阴影效果
+	1.cxt.shadowOffsetX水平位置
+	2.cxt.shadowOffsetY垂直位置
+	3.cxt.shadowBlur模糊效果
+	4.cxt.shaowColor颜色
+透明度
+	cxt.globalAlpha透明度 0-1之间的值
+渐变
+	线性渐变
+		var linear=cxt.createLinearGradiet(200,0,200,300);
+		linear.addColorStop(0,"red");//添加颜色和位置
+		linear.addColorStop(0.5,"blue");
+		cxt.fillStyle=linear;//把渐变色付给背景色
+		cst.fillRect(0,0,400,300)
+	径向渐变
+		var rad=cet.createRadialGradient(中心点x，中心点y，小半径，3中心点x，中心点y，大半径);
+		rad.addColorStop(0,"red")
+		rad.addColorStop(0.6,"yellow");
+		cxt.fillStyle=rad;
+		cxt.arc(300,300,100,0,Math.PI*2,false);
+		cxt.fill();
+矩阵变换
+		1.cxt.translate(x,y)移动
+		2.cxt.scale(x,y)缩放
+		3.cxt.rotate()旋转 默认顺时针 填入弧度
+		4.cxt.transform(宽度，水平扭曲，垂直扭曲，高度，水平移动，垂直移动)
+其他
+	1.cxt.alearRect()清除矩形面积
+	2.cxt.clip()裁切形状
+	
+媒体文件操作
+	1.src定义媒体文件路径
+	2.controls是否显示控件
+	3.autoplay是否要自动播放
+	4.load()重新播放
+	5.paused判断是否是暂停状态 true为暂停
+	6.pause()暂停
+	7.play()继续播放
+	8.preload设置预加载和缓冲 auto自动预加载多个文件 none不设置
+	9.muted静音状态 true为静音状态 
+	10.volume读取音量范围 0-1之间
+	11.playbackRate设置媒体播放速度 1-5之间
+	12.duration总播放时间
+	13.currentTime当前播放时间
+	14.startTime开始播放时间
+地图
+	制作地图
+	例如
+	<map name="planetmap">
+	<area chape="rect" coords="0,0,110,260" href="sun.htm" alt="Sun">
+	<area chape="circle" coords="180,139,14" href="venus.htm"  alt="Venus">
+	</map>
+	获取地图
+	  常用:谷歌(国外)，百度(位置不精),高德(轿车app),腾讯(小程序)
+	获得目标位置
+   	  1.IP地址：通过IP地址获得网络的物理地址
+    	  2.GPS：通过卫星定位返回地理数据
+    	  3.WiFi:当用户通过设备连接附近wifi，定位当前位置
+    	  4.移动或联通基站：通过访问公司服务器进行连接
+    	  5.用户指定：通过网站或定位传输
+	  6.公司基站:找到用户离哪个基站最近，计算得出
+	属性和方法
+	1.novigator.geolocation.getCurrentPosition
+	2.成功函数
+	  latitude纬度
+	  longitude经度
+	  accuracy准确度
+	  altitude海拔高度	
+	  altitudeAcuracy海拔高度的精确度
+	  heading前进方向
+	  speed地面速度
+	  timestamp获取位置信息的时间
+	3.错误函数
+	  erro.code错误信息
+	  0未知错误 1用户拒绝位置访问 2获取地理位置信息失败 3获取位置超时
+	4.配置参数
+	  enableHighAcuracy是否采用高经度获取位置
+	  timeout获取位置信息的超时时间
+	  maximumAge浏览器重新获取位置的时间间隔
+	  经度:45.707043
+	  纬度:126.607407
+
+web workers应用 多线程应用
+	js是单线程机制，也可以模拟多线程，例如周期函数和延迟函数，程序处于单线程状态，会造成处理时间过长，或无法响应的状态，所以我们可以用web workers模拟多线程。
+	斐波那契数列
+	在不考虑生老病死的情况下，平均每两只兔子可以生小兔子，问兔子的产量共有多少只？例如1,1,2,3,5,8,13	
+	单线程
+  	 sum.onclick= function () {
+                var n=document.getElementById("num").value;
+               document.getElementById("vlue").value=fun(n)
+            }
+            btn.onclick=function(){
+                alert("没有阻塞")
+            }
+            function fun(n){
+                if(n<=2){
+                    return 1;
+                }
+                else{
+                    return fun(n-1)+fun(n-2);
+                }
+            }
+	多线程
+	sum.onclick=function(){
+                var w=new Worker("test.js");//
+                w.onmessage=function(event){
+                    document.getElementById("vlue").value=event.data
+                }
+                var n=document.getElementById("num").value;
+                w.postMessage(n);
+            }
+            btn.onclick=function(){
+                alert("没有阻塞");
+            }
+	function fun(n){
+  	  if(n<=2){
+   	     return 1;
+   	 }
+   	 else{
+   	     return fun(n-1)+fun(n-2)
+   	 }
+	}
+    	onmessage=function(event){
+    	   var v=fun(event.data)
+    	    postMessafe(v)
+  	  }
+1.var w=new Worker("test.js");//创建多线程，去找要执行多线程的js文件
+2.postMessage(v)向多线程里发送数据
+3.w.onmessage=function(){}接收函数
+4.event.data接收post里传回的数据
+
+文件操作
+    操作对象
+	Blob获得字节长度对象
+	File获取文件对象
+  	FileList获取多个文件对象
+	FileRrader读取文件对象
+    获取文件信息
+	1.document.getElementByName("files")[0].files[0]
+	2.file.name获取文件名称
+	3.file.size获得文件字节长度
+	4.file.type获得文件类型
+	5.file.lastModifedDate获取最后修改日期
+	例如
+ 		var file=document.getElementsByName("files")[0].files[0];
+                var name=file.name;
+                var size=file.size;
+                var time=file.lastModifiedDate;
+                var type=file.type;	  
+		<input type="file" name="files" accept="img/*"/>
+    获得多个文件信息
+	fileList对象是一个集合，获得文件列表里的所有内容，但是html4中，只支持一个文件上传，在html5中file标签里增加multiple属性，可以上传多个文件，如果不设置。文件信息获取不到
+	var files=document.getElementByName("files")[0].files;
+                var names="";
+                for(i=0;i<files.length;i++){
+                    names+=files[i].name+"<br>";
+                }
+	<input type="file" name="files" multiple accept="img/*"/>
+读取文件对象(fileReader)
+	1.readerAsBinaryString以二进制字符串读取文件
+	2.readAsDataURL以字符串形式进度读取文件
+	3.readAsTest以某种字符编码读取文件
+	4.result获取读取出的文件信息
+	5.loaded获取当前读取的字节数
+	6.abort()中断读取数据
+	7.file.webkitSlice(开始字节数，步长)分段读取
+事件操作
+	1.onloadstart读取文件开始时触发
+	2.onprogress读取文件过程中触发
+	3.onload文件读取成功时触发
+	4.onabort文件中断时触发
+	5.onerror读取文件错误时触发
+	6.onloadend读取文件完成时触发(无论是否成功)
+二进制读取方式
+ 	var v=document.getElementsByName("files")[0].files[0];
+            var r=new FileReader();
+            r.readAsBinaryString(V);
+            r.onload=function(e){
+            var data+=this.result;
+            document.getElementById("div1").innerHTML=data;
+                }
+字符串读取方式
+	  var v=document.getElementsByName("files")[0].files[0];
+                var r=new FileReader();
+		r.readAsDataURL(v);
+                if(/image\/\w+/.test(v.type)){
+                   r.onload=function(){
+                   var data="<img src='"+this.result+"'>;
+                   document.getElementById("div1").innerHTML=data;
+                    }
+                }
+分段读取
+	 r.onload=function(e){
+                   loaded+=e.loaded;
+                    document.getElementById("pro").value(loaded/total)*100;
+                    if(loaded<total){read(loaded);}
+                    else{loaded=total;}
+停止
+ 	 function read(start){
+              var blob=file.slice(start,start+step+1);
+                r.readAsText(blob,"utf-8");
+            }
+            var end=document.getElementById("end");
+            end.onclick=function(){
+                if(this.value=="中断"){ if(r){ r.abort();} }
+                else{if(r){read(loaded)}
+		}
+文件拖拽
+	1.draggable="true"设置标签是否可以被拖拽
+	  例如<img src="" draggable="true">
+	2.DataTransfer拖拽对象
+	  getData()获得数据 setData(text/url,对象/text);
+	3.preventefaule()启动元素的放置事件
+	  一般通过ondrop事件进行调用
+	4.dropEffect被拖动的元素放置的行为
+	  none不能将元素放在目标之上
+	  move将拖动的元素可以移动到目标之上
+	  copy将元素赋值到目标
+	  link拖动元素的连接可以在目标元素打开
+	5.effectAllowed设置元素允许被拖动的效果 一般设置在ondragstart事件里
+	  uninitialized:没有给元素设置任何行为
+	  none:被拖动的元素不能有任何行为
+	  copy:只允许复制
+	  link:只允许打开链接
+	  move:只允许进行移动
+	  copyLink:允许复制并且打开链接
+	  copyMove:允许复制并且移动
+	  all:都允许
+	6.事件
+	  ondargstart元素被拖拽时触发,拖拽元素调用
+	  ondragenter拖拽元素进入到目标元素触发，目标元素调用
+	  ondragover拖拽元素在目标元素上移动触发,目标元素调用
+	  ondragend拖拽元素完成后触发,拖拽元素调用
+	  ondrop拖拽元素在目标元素上,并且鼠标松开触发,目标元素调用
+	例如：
+	    img.ondragstart=function(ev){//文件被拖拽时 
+                ev.dataTransfer.setData("Text",ev.target.id)//设置拖拽对象
+            }
+            div.ondragover=function(ev){//被移动时
+                ev.preventDefault();//开启放置功能
+            }
+            div.ondrop=function(ev){//被放置时
+               var v=ev.dataTransfer.getData("Text");//获取拖拽对象		
+	       var d=document.getElementById(v);
+               div.appendChild(d);
+            }
+web sockets 网络通信技术
+	实现原理,web sockets通过ajax异步传输效果执行，每一次传输就是用户和服务器之间的交互过程，所以就增加了传输的数据量，web sockets解决了这个问题,一旦http建立后，双方就可以通过这个连接通道自由交互，直到一方关闭连接
+	http网络传输连接方式?
+	轮询:用户定时向服务器发送Ajax请求，服务器接收到请求后马上返回相应信息，并且关闭连接，优点:后台写作容易 缺点：浪费资源，浪费贷宽
+	长轮询：用户定时向服务器发送Ajax请求，服务器接到就hold住链接，直到有新的消息才返回给客户，客户端处理完信息之后，会再向客户发送请求。优点：在没有消息的状态下没有请求，所以耗费资源校；缺点：服务器hold住链接时耗费资源，难维护
+	长连接：在页面里隐藏一个iframe，将iframe的src路径设置为长连接的请求，服务器就能源源不断的向客户发送数据。有点：消息发送速度快。缺点：内存消耗过大
+	web socket一般实现全双工通讯网络技术，依靠客户端和服务器端的长连接，双向实施通讯，优点：速度快，异步处理，缺点：兼容性不好
+	步骤：
+	1.var ws=new WebSockets("ws://ip:端口号/文件夹/文件");
+	  ws或者wss协议进行写作
+	2.ws.send("内容");发送数据
+	3.ws.onmessage=function(e){}接收函数
+	4.e.data接收数据
+	5.ws.close关闭连接
+	6.ws.onclose=function(){}关闭监听事件
+	7.readyState记录连接状态
+	  0正在连接  1表示已连接  2正在关闭连接 3连接已关闭
+manifes离线应用
+	用来在网络断开的情况下，也可以正常应用文件内容。
+	主要可以缓存html,css，js，img等相关文件
+本地缓存和浏览器缓存的区别？	
+	1.网页缓存主要是为了加快网页的加载速度，每一个网页打开都会被缓存，为本地缓存只能缓存指定页面
+	2.在网络连接的情况下，网页缓存才好使，而本地缓存在离线的状态下仍然可进行访问
+	3.对于用户而言，浏览器缓存的东西是未知的，而本地缓存是程序员指定的
+操作
+	1.<html manifes="aa.manifest">指定要加载的文件目录
+	2.文件里的关键字
+	  CACHE MANIFEST必须写在开头，告知浏览器该文件对资源进行配置
+	  version 1.0版本号
+	CACHE指定需要缓存的文件信息
+	NETWORK指定不需要缓存的文件信息
+	FALLBACK无法访问时的备用文件
+	以#开头写注释
+	3.window.applicationCache定义离线对象
+	4.status缓存状态
+	  0未缓存 1空闲 2检查中 3下载中 4更新就绪 5过期
+	5.update 用来检查manifest是否有更新，如果有就下载同时触发updateReady
+	6.swapCache执行更新操作，只能在updateReady里进行调用
+	7.abort停止执行本地缓存
+	8.事件
+	  onupdateready对本地进行更新
+	  onchecking用来检查manifest是否存在
+	  ondownloading浏览器请求manifest中需要缓存的资源文件
+	  onnoupdate文件是否被更新，没有更新时触发	
+	  onprogress下载文件时周期进行触发，可以获得下载文件的个数和信息
+	  oncached下载结束触发
+	  onobsolete没找到文件时触发
+	  onerror发生缓存错误时进行触发
+cookie
+	vookie用来存储表单里的值，或者页面logo图片等内容，抱一个网站共享一套cookie，并不是浏览器提供的，是由程序员创建的，一个文件大小不得超过4kb,每个网站只能存20个，在一点期限内会自动过期
+	定义：
+	    document.cookie//获得或修改cookie值
+	多次调用cookie存储，信息不会被覆盖
+	  document.cookie="user=zhangsan";
+          document.cookie="password=123";//没有覆盖user
+	如果不存储时间，则浏览器关闭后会消失，时间由程序员指定
+	  var t=new Date();
+	  t.setDate(t.getDate()+30);//指定30天后过期
+	  document.cookie="exires"+t;
+	 自己封装cookie值得操作
+	 例如：
+	   function setCookie(attr,value,time){
+            var t=new Date();
+            t.setDate(t.getDate()+time);
+            document.cookie=attr+"="+value+
+            ";expires="+t;
+        }
+        function delCookie(attr){
+            var t=new Date();
+            t.setDate(t.getDate()-1);
+            document.cookie=attr+"=''"+";expires="+t;
+        }
+        function getCookie(attr){
+            var v=document.cookie.split(";");
+            for(i=0;i<v.length;i++){
+                var name=v[i].split("=");
+                if(name[0]==attr){
+                    return name[1];
+                }
+            }
+html5本地存储
+	本地存储和cookie得区别
+	1.cookie存储在浏览器目录下，本地存储存储在用户磁盘下
+	2.本地存储是在客户端使用，cookie值在服务器端使用
+	3.本地存储无需网络就可以调用，cookie需要联网
+	4.cookie只能存储4kb大小，而本地存储可以存储更多
+	5.cookie有自己的声明周期，而本地存储可以更持久
+存储方法
+	localStorage:叫做本地存储，将数据存储在硬盘中，关闭浏览器不会被清空，除非手动删除
+	seesionStorage:叫做绘画存储，将数据存储在session对象中，一旦session关闭，数据也会随之清除
+	属性和方式
+	1.clear()清空数据
+	2.setItem(key,value)修改或保存数据
+	3.getItem(key)获得属性值
+	4.key()遍历属性
+
+web sql database
+	database丰富了本地存储的功能，提高了web程序的性能，但是对复杂关系的数据处理并不是很理想，属于js脚本内置数据库。
+	属性和方法
+	1.openDatabase(数据库名称，版本号，描述，大小)
+	  例如:openDatabase(mydb,"1.0","student",1024*1024)
+	  如果此数据库存在，则显示，如果不存在则添加
+	2.db.transaction(要执行的内容,错误处理，成功返回)数据操作函数
+	  事物的提交和回滚
+	3.transaction.executeSql(执行语句,[定义变量值],成功函数，失败函数)
+
+sql语句的写作
+	1.创建表
+	  create table if not exists stu(
+		sid REAL UNIQUE,
+		sname TEXT,
+		sex  TEXT,
+	)
+	2.添加数据
+	  insert into stu(sid,sname,sex)
+	  values (1,'xiaoming','nan')
+	3.查询
+	  select * from stu
+	  select sid,sname from stu where sex='nan'
+	4.修改
+	  update stu
+	  set sname='xiaohong',sex='nv'
+	  where sid=1
+	5.删除
+	  delete from stu where sid=2
+文档通信 跨域
+	文档通信是一种跨域技术，用来访问不同端口号，域名，ip，协议等信息时，进行跨文档通信。由于安全因素考虑，放置利用脚本恶意串改数据，一般不建议采用跨文档技术，但是此方法也解决了同源策略带来的麻烦
+	解决办法
+    1.document.domain+iframe解决
+	    用来解决同主域，不同子域的访问
+	例如:
+	    //a页面
+		document.domain="a.html";
+		var ifr=document.getElementById("iframe");
+		ifr.src="http://nei.er.com/b.jsp";
+		ifr.style.display="none"
+	   //b也买你
+		document.domain="a.html";
+    2.动态创建script
+		var js=document.createElement("script");
+		js.type="text/JavaScript";
+		js.src="http:www.er.com:8080/b.js"
+		document.head.appendChild(js);
+    3.iframe+location.hash
+		  function start(){
+            var ifr=document.getElementById("iframe");
+            ifr.src="http://www.er.com/b.js";
+            ifr.style.display="none"
+        }
+        function check(){
+            try{
+                var data=location.hash?location.hash.substring(1);
+            }catch(e){
+                alert("锚点异常")
+            }
+        }
+        setInterval("check()",2000);
+    4.window.name和iframe
+		  function fun(url,func){
+            var flag=true;
+            ifr=document.getElementById("iframe");
+            ifr.src="www.er.com/b.js";
+            ifr.style.display="none";
+            if(flag){
+                ifr.src="www.er.com/b.js";
+                flag=false;
+            }
+            else{
+                func(ifr.contentWindow.name);
+                var v=ifr.connectWith.name;
+                ifr.contentWindow.close();
+            }
+      	  }
+     	   //b页面
+            function func(){
+                window.name="值"
+                return window.name
+            }
+    5.web stockes
+	 var stocket=new WebScoket("ws://www.er.com/b.js")
+            stocket.send("hello");
+            stocket.onmessage=function(e){
+                var v=e.data
+            }
+    6..postMessage
+		 function fun1(){
+            var ifr=document.getElementById("frame");
+            ifr.style.display="none";
+            var url=ifr.src="http://www.er.com.b.js";
+            ifr.contentWindow.postMessage("hello",url);
+        }
+        //b页面
+        window.addEventListener("message",function(){
+            if(e.orgin=="http://www.er.com.a.js"){
+                var v= e.data;
+            }
+        },false)
+    7.Jsonp
+	function fun(repose){
+            var v=repose.data;
+            var s=document.createElement("script");
+            s.scr="http://www.er.com/b.js?name=zhang";
+            document.head.appendChild(s);
+        }
+    //b页面  用ajax接收
+    8.cors  
+	function fun(methed,url){
+		var xhr=new XMLHttpRequest();
+	if("withCredentas"in xhr){xhr.open(methed,rul,true)}
+	else{
+		var xhr.new=XDmainRequest();
+		xhr.open(methed,url);
+	}
+		return xhr;
+	}
+	var r=fun("get","http://www.er.com/b.js"),
+	r.send("hello")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
