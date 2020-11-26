@@ -1,0 +1,786 @@
+html
+  超文本标记语言，扩展名包括.html和.htm,文件名称区分大小写，标签不区分大小写，标签成对出现，属性写在标签里，属性前后无顺序，属性的值要用单双引号引起来
+  基本标签
+  1.<!DOCTYPE html>注记 用来翻译html代码，用来让浏览器的版本兼容
+  2.<html>主标记 其他标签必须写在html里
+  3.<head>头部  窗体信息和外部导入文件
+  4.<body>身体 用来放置页面上显示的内容  
+  5.<meta charset="UTF-8">字符集
+    iso8859-1欧美字符集
+    gbk中文字符集
+    big5繁体字
+    utf-8本地字符集
+  6.<title></title>窗体名称	
+  7.<!-- 注释 -->
+  8.<br>换行 &nbsp;空格
+  9.<h1>~<h6>标题标记
+  10.<p>段落标记
+  11.<a href="#">超链接 href定义路径
+  12.<span>布局标签 行级元素
+  13.<div>布局标签 块级元素
+  绝对路径
+     http://www.baidu.com
+     file:///D:text/aa.html		
+  相对路径
+     ee/work2.html
+     ../ee/work2.html
+css介绍
+  层叠样式表,用来调整页面美观感，代码写作简单，减少重复定义，使html和css代码相分离
+  语法
+    1.行内
+       style="color:red"
+    2.内嵌
+    <style>
+        p{color: blue;}
+    </style>
+    3.外部引用
+    <link rel="stylesheet" href="../css/style1.css">
+  选择器
+     1.p{}标签选择器
+     2. .d1{}类选择 选择class属性  	
+  文字样式
+     1.color颜色
+	单词：red
+        十六进制值：#0f0f0f
+        色阶:rgb(255,0,0)
+     2.font-size文字大小
+       单位：像素px或百分比%
+     3.font-weight文字加粗
+	100-900 默认为400 bold(700) lighter(300)
+        bolder(900)
+     4.font-family文字类型
+	font-family:"黑体",Anal
+     5.font-style字体样式
+       normal正常 italic斜体
+     6.text-decoration文本装饰
+       none无样式 underline下划线 ouverline上划线
+       line-througth删除线
+     7.letter-spacing字体间隔
+	单位：像素px或百分比%
+     8.word-spacing单词间隔
+        单位：像素px或百分比%
+     9.line-height行高
+	 单位：像素px或百分比%
+     10.text-indent首行缩进
+	单位：像素px或百分比%
+     11.text-align水平对齐
+        left左 right右 center中
+     12.vertical-align垂直对齐
+	top上 bottom下 supper上标 sub下标 middle中
+ 注意：vertical-align必须要有参照物，设置两种不同字体大小的居中，如果要文字居中标签里面积用行高=标签高度
+    html
+    1.图片
+	<img src=""> src定义路径
+        jpg静态 png退底图 gif动态图
+    2.窗体图标  
+       <link rel="shortcut icon" href="img/n1.ico">
+css
+   选择器
+     1.*{}通配符选择器 所有标签
+     2.#font{}id选择器 选择id属性 id名称唯一
+     3.p,h1,div{}并集选择器
+     4.p.d1{}交集选择器
+     5.div h1{}后代选择器	
+   尺寸
+     1.width宽度 单位:像素或百分比
+     2.height高度 单位:像素或百分比	
+   边框
+     1.border-width边框粗细  单位:像素或百分比
+     2.border-color边框颜色
+     3.border-style边框样式
+	solid实线 double双边线 dotted点线
+	dashed虚线 none无线体
+     方向:left左 right右 top上 bottom下
+     简写:border:1px solid red		
+   背景 
+     1.background-color背景颜色
+     2.background-image:url()背景图片
+     3.background-repeat背景平铺
+	repeat平铺 repeat-x水平平铺 repeat-y垂直平铺
+	no-repeat不平铺
+     4.background-position背景位置
+	方向:left right top bottom		
+        单位:像素或百分比 x y
+     5.background-attachment背景的固定方式
+	fixed固定 scroll滚动
+*****行内、内嵌、外部引用的优先级？
+  当三种样式定义了不同属性，会把所有属性累加显示；当三种样式定义了相同属性，那么会先执行行内，其次是内嵌，最后是外部引用样式
+******选择器的权重？
+  id名称的权重为100，class名称的权重为10，标签名权重为1
+  例如: #div .font #w p{}//100+10+100+1=211
+html
+  列表
+  有序	
+     <ol>
+	<li></li>
+	<li></li>
+     </ol>
+  无序	   
+     <ul>
+	<li></li>
+	<li></li>
+     </ul>
+css属性
+   列表
+   1.list-style-type列表图形
+	disc实心圆  circle空心圆 square方块 
+	decimal阿拉伯数字 lower-roman小写罗马数字 
+	upper-roman大写罗马数字 lower-alpha小写英文字母
+	upper-alpha大写英文字母 none不使用项目符号
+   2.list-style-image:url()列表图片
+   3.list-style-position列表对齐方式
+      inside内对齐 outside外对齐
+边距
+  内边距padding	
+  外边距margin
+  单位:像素或百分比定义
+  方向：left左 right右 top上 bottom下
+  写作：
+   1.一个值 显示四边的距离
+   2.二个值 上下 左右
+   3.三个值 上 左右 下
+   4.四个值 上 右 下 左
+  注意：边框，内边距，外边距都在页面上占有面积
+  作用：
+	1.用来设置页面上所有元素的空隙
+  	  *{padding: 0px;margin: 0px;}
+        2.用来设置块级元素的水平居中
+          div{width:200px;margin:0px auto}
+  居中文字 text-align:center
+  居中图片 text-align:center
+******块级，行级，空标签都有哪些？
+块级：div,p,h1~h6,ul,ol,li
+行级：a,span
+空：img,br,&nbsp,meta
+  浮动
+  1.float浮动
+    left左浮动 right右浮动
+  2.clear清除浮动
+    left左浮动 right右浮动 both清除两边
+  3.overflow超出对象的显示方式
+    visible不剪切也不添加滚动条 hidden隐藏
+    auto显示滚动条 scroll总是滚动条
+  注意：
+   1.谁设置浮动，谁会脱离标准流，会在页面上漂浮
+   2.如果一个元素浮动，会挡住后面的兄弟元素，解决方法给被挡住的元素设置清除浮动
+   3.当所有孩子都为浮动，父类会没有高度，解决方法：
+     (1)给父类添加高度，但是需要计算
+     (2)设置一个不浮动的孩子，设置清除浮动属性
+     (3)给父类设置overflow:hidden/auto撑开面积
+ 伪类选择器
+    1.a:link{}没访问的效果
+    2.a:visited{}被访问过的效果
+    3.a:hove{}鼠标悬停的效果 
+    4.a:active{}被选中的效果
+ 元素的显示方式 	
+    1.visibility元素的隐藏显示
+      visible可见 hidden隐藏
+    2.display 设置元素的显示方式
+      none隐藏元素 block显示成块级 
+      inline显示成行级 inline-block显示成块行级特点
+ 区别：
+   visibility的隐藏会为元素保留物理面积，display的隐藏会清空面积 
+ 注意:inline-block属性有兼容性问题，不兼容IE6-7;不要用它来调li的同行显示，会让li不明宽高，造成错位
+伪类的写作顺序：
+  hove必须在link visited之后，active必须在hover之后
+html表单
+  1.<input type="text">普通文本框
+  2.<input type="password">密码框
+  3.<input type="radio" name="sex">单选框
+  4.<input type="checkbox" name="like">复选框
+  5.<input type="file">上传附件
+  6.<select>下拉框
+       <option>学生</option>
+       <option>教师</option>
+    </select>
+  7.<textarea></textarea>文本域
+  8.<input type="submit" value="登录">提交
+  9.<input type="reset" value="清空">重置
+  10.<input type="button" value="验证">校验
+  11.表单 
+     <form></form> 
+     作用:
+        1.可以定义路径跳转页面
+        2.可以让按钮有操作事件
+     属性
+	action定义路径
+	method定义传值方式 get/post
+******get和post区别？
+ get：传值信息显示在地址栏里，get解决的中文能力差，get传值数量有限
+ post：隐藏传值信息，post解决的中文能力强，post传值数量较多
+ 表单属性
+     1.name定义名称 在表单里可以给文本框分类，也可以用作于传值
+     2.value给文本框定义默认值，也可以给按钮定义名字
+     3.maxlength限制文本框的输入长度
+     4.size定义文本框的宽度
+     5.checked定义单选和复选框的选项为选中状态
+     6.readonly只读 可以进行选择复制文字
+     7.dissabled禁用 不可选择，不可提交传值
+表格table
+     1.<table>表格
+     2.<tr>行
+     3.<td>单元格
+     4.<th>单元格（标题）
+  表格属性
+     1.border边框 数字类型 默认为0
+     2.width宽度 单位：像素或百分比
+     3.height高度 单位：	像素或百分比
+     4.algin水平对齐方式
+	left左 right右 center中
+     5.valign垂直对象方式
+        top上 bottom下 middle中
+     6.cellpadding内间距  数字类型
+     7.cellspacing外间距  数字类型
+     8.rowspan合并行 数字类型
+     9.colspan合并列 数字类型
+  表格css样式
+     1.border-collapse合并边框
+	separate边框独立 collspase合并
+     2.border-spacing边框间距（外间距）
+       单位：像素或百分比 
+     3.empty-cells隐藏没有内容的边框
+	show显示 hide隐藏
+css布局    
+  定位
+  1.position定位方式
+     static无特殊定位 absolate绝对定位 relative相对定位 fixed固定定位
+  2.z-index层级关系
+     单位：整数 默认为0
+    方向：left左 right右 top上 bottom下
+******定位的区别
+  固定:会脱离标准流，永远参照body进行定位
+  绝对:会脱离标准流，没有父类会参照body进行定位，有定位的父类，会参照父类进行定位
+  相对:不会脱离标准流，永远参照自己进行定位
+  用相对定位嵌套绝对定位	
+css选择器
+   关系选择器
+     1.div>p{}子选择器
+     2.h1+p{}相邻元素（下一个）
+     3.h1~p{}后面所以兄弟
+   属性选择器	
+     1.input[type]{}属性选择器
+     2.input[name='user']{}属性值选择器
+     3.div[class~='a']{}选择属性值的其中之一		
+html5
+   媒体
+     1.音频
+     2.视频
+     属性：
+	src定义路径
+	autoplay="autoplay"设置自动播放
+	controls="controls"设置显示控件		
+   表单	
+     1.日期  <input type="date">
+     2.显示年月 <input type="month">
+     3.显示时间 <input type="time">
+     4.显示第几周 <input type="week">
+     5.颜色<input type="color">
+     6.滚动条<input type="range">
+     7.电话<input type="tel">
+     8.数字<input type="number">
+	滚动条和数字属性：min="18"最小值 max="80"最大值 step="5"移动步长	 	
+css3
+   浏览器前缀
+    1.-webkit代表谷歌浏览器
+    2.-moz代表火狐浏览器
+    3.-o代表欧朋浏览器
+    4.-kthml代表苹果浏览器
+    5.-ms代表IE浏览器
+   字体
+    1.text-shadow文字阴影
+      值的顺序：水平距离 垂直距离 模糊效果 颜色
+      一个标签可以设置多个阴影	
+    2.word-wrap文本强制换行
+	nromal默认 break-word换行
+    3.text-overflow超出文本显示省略符
+	clip剪切 ellipsis省略符
+      注意：必须要设置overflow属性
+    4.writing-mode字体书写方向
+       horizontal-tb默认方向  vertical-rl垂直方向自右而左的书写方（非IE） 
+       vertical-lr垂直方向自左而右的书写方式（非IE） 
+       lr-tb左-右，上-下（IE）   tb-rl上-下，右-左（IE）	
+   边框
+    1.box-shadow边框阴影
+      值的顺序：inset（内阴影）水平距离 垂直距离 模糊效果 颜色
+      一个标签可以设置多个阴影		
+    2.border-radius边框圆角
+      单位：像素或百分比
+      值的写作：
+	一个值：四边都有圆角
+	二个值：左上-右下 右上-左下
+        三个值：左上 右上-左下 右下
+        四个值：	左上 右上 右下 左下      
+   颜色 
+	1.rgba(0,0,0,0.5)背景透明
+        2.opacity元素透明
+	  0-1之间的值，可以为小数
+   背景
+      1.background-size背景大小
+	单位：像素或百分比
+	方向：x y
+      2.background-clip背景裁切
+	paading-box按边距裁切 border-box-按边框裁切
+        content-box按填充裁切 text按形状裁切
+   其他
+     1.resize任意改变元素大小
+	none不允许调整  both两边都可调整 
+	horizontal水平可调整  vertical垂直可调整
+       必须设置：overflow: auto;	
+     2.cursor鼠标样式修改
+  css3选择器
+    伪类选择器
+	1.first-chlid{}选择第一个孩子
+        2.last-chlid{}选择最后一个孩子
+        3.nth-chlid(2){}选择第几个孩子
+	  odd奇数  even偶数 3n+1倍数
+	4.only-chlid{}选择仅有一个孩子
+	5.first-of-type{}选择第一个兄弟
+	6.last-of-type{}选择最后一个兄弟
+        7.nth-of-type(2){}选择第几个兄弟
+        8.only-of-type{}选择仅有一个兄弟
+	9.div:not(.d1){}刨除某一个元素
+        10.div:empty{}选择空内容的元素
+ 变换 transform
+    (1)translate(x,y,z)平移 默认值给x轴
+	单位：像素或百分比
+        translateX()水平移动
+	translateY()垂直移动
+	translateZ()前后移动
+    (2)scale(x,y,z)缩放 默认值会给三个方向设置
+	单位：正数，可以为小数
+        scaleX()宽度
+	scaleY()高度
+	scaleZ()厚度
+    (3)rotate(x,y,z)旋转 默认值给z轴
+	单位：度数deg
+        rotateX()水平旋转
+	rotateY()垂直旋转	
+	rotateZ()中心轴旋转
+    (4)skew(x,y)扭曲  默认值给X轴
+	单位：度数deg
+	skewX()水平扭曲
+	skewY()垂直扭曲
+    (5)matrix(1,0,0,1,0,0)矩阵变换
+	值的顺序：宽度,垂直扭曲,水平扭曲,高度,水平移动,垂直移动	
+  过度
+     1.transition-property指定css属性
+	all所有 none不指定
+     2.transition-duration过度时间
+	  单位：秒数s
+     3.transition-timing-funtion动画类型
+	linear线性 ease平滑 ease-in由慢到快 ease-out由快到慢
+	ease-in-out由慢到快再到慢
+     4.transition-delay延迟时间
+	  单位：秒数s
+  transform-style:preserve-3d设置元素为3D效果
+  transform-orgin：x y z设置原点位置偏移
+  自定义动画
+    1.animation-name定义动画名称
+    2.animation-duration持续时间
+	单位：秒数s
+    3.animation-timing-function动画类型
+      linear线性 ease平滑 ease-in由慢到快 ease-out由快到慢
+	ease-in-out由慢到快再到慢
+    4.animation-delay延迟时间
+	单位:秒数s
+    5.animation-iteration-count循环次数
+	单位：正整数，默认1次 infinte无限循环
+    6.animation-dirction是否反向运动
+	normal正常 alternate正反方向交替
+    7.animation-play-state动画状态
+	running运动 paused停止
+    8.animation-fill-mode动画时间之外的状态
+	none默认 forwards结束状态 backwards开始状态
+  执行动画
+    @keyframes 名称{
+	方法一：
+	from{}
+	to{}
+	方法二：
+	0%{}
+	100%{}
+    }	
+页面兼容性
+   1.兼容电脑端浏览器，最小宽度兼容到1000px
+   2.去掉页面上所有元素的空白*{padding:0px;margin:0px}
+   3.水平居中块级元素margin:0px auto,水平居中文字和图片text-align:center
+   4.盒模型的面积计算
+	高版本（严谨模式）:边框+内边距+外边距+填充
+        低版本(怪异模式):边框+内边距+填充	 	
+   5.当前面的兄弟元素设置了浮动，后面的元素会被挡住，解决方法，给后面的元素设置清除浮动
+   6.当所有孩子都为浮动，父类会没有高度，解决方法:
+     (1)给父类添加高度，但是需要计算
+     (2)添加一个不浮动的孩子，设置为清除浮动，尽量不要创建空元素
+     (3)给父类设置overflow：hidden/auto,会隐藏动画效果
+     (4)设置伪类
+          .wrap:after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+对象伪类:beafor{}:after{}是在元素前后添加文本和对象内容的，但是如果不写文本， content属性不得省略
+   7.定位的设置方式采用相对定位嵌套绝对定位
+   8.伪类设置先后有顺序，可以按照笔记里顺序写作，在IE6以下伪类只能设置在超链接深身上
+   9.不要删除版本注记，否则会把标准模式变成怪异模式
+   10.在兼容IE8以下时，不要用html5和css3的标签和属性，都不兼容
+   11.页面上设置浮动元素，并且设置了左右外边距，会出现双重边距，解决办法：
+	display:inline-block
+   12.1px高度问题，在IE6里设置不了，解决办法： overflow: hidden;
+   13.图片和外包元素会自动保留空白，解决方法：给图片设置vertical-align:top;
+   14.border和outline的区别：outline显示在边框的外面，outline在页面上不占像素，outline不兼容IE6
+   15.文本和表单里的文本域对齐，给文本域设置:vertical-align: top;	
+   16.如果给图片设置了超链接，在低版本浏览器下会出现边框，去掉边框，图片设置border：0px
+   17.元素水平垂直居中的方式，用定位
+   例如：
+	div{
+	   width:300px;
+	   height:200px;
+	   position:absoluble;
+	   top:50%;
+	   margin-top:-100px;
+	   left:50%;
+	   margin-left:-150px;	
+	}	
+css兼容性符号
+   1.css选择符级
+     *body div{}//兼容IE7以下
+     *+body div{}//兼容IE7以上
+   2.css属性级
+     *width:200px//兼容IE7以下
+     _width:200px//兼容IE6以下	     
+     >width:200px//兼容IE7以下
+     background-color: #ccc\0;//兼容IE8以上
+     background-color: #ccc\9;//兼容IE5以上
+     width：200px!important;//必须放在相同属性的前面 兼容IE7以上
+   3.条件
+	不支持IE10以上
+     语法
+	1.判断相等
+	 <!--[if IE 7]><![endif]-->	
+        2.比较运算符 lt小于 lte小于等于 gt大于 gte大于等于 ！不等于
+	 <!--[if lt IE 7]><![endif]-->
+	3.多个条件并存 &并且 |或者
+	 <!--[if IE 8）]><![endif]-->
+  html的剩余标签
+    <strong>字体样式</strong>加粗
+    <b>字体样式</b>加粗
+    区别：strong是给文字物理加粗，b设置样式上有加粗的效果
+    标签符号：&lt小于号 &gt大于号
+    菜单列表
+    <dl>
+        <dt>计算机</dt>
+        	<dd>java语言</dd>
+        	<dd>c语言</dd>
+        <dt>计算机</dt>
+        	<dd>java语言</dd>
+        	<dd>c语言</dd>
+    </dl>	
+    移动文字
+	 <marquee></marquee>
+      属性：
+	  direction方向 left左 right右 up上 down下
+	  behavior移动方式 scroll无限运行 slide一次 alternate来回移动
+	  loop循环次数 单位：正整数
+          scrollamount速度  单位：正整数
+	  scrolldelay延迟时间 单位：毫秒数 	
+    框架
+	外联框架（过时）
+	<frameset rows="100px,*,100px">
+    	  <frame src="top.html">
+     	  <frameset cols="200px,*">
+        	<frame src="left.html">
+        	<frame src="right.html">
+    	  </frameset>
+    	  <frame src="bottom.html">
+	</frameset>
+	rows分行
+	cols分列
+	frameset是分层标签
+	frame嵌入页面
+	
+	内联框架
+<iframe src="">
+属性：
+1.frameborder框架 单位：正整数
+2.scrolling是否显示滚动条 yes/no/auto
+3.width宽度 单位：像素或百分比
+4.height高度 单位：像素或百分比
+5.marginwidth左右间距 单位：像素或百分比
+6.marginheight上下间距 单位：像素或百分比
+7.sanbox限制内容
+  ""限制所有
+  allow-same-orign是否访问服务器
+  allow-script是否访问js
+  allow-froms是否允许表单跳转
+  allow-top-nowigation是否允许超链接跳转
+
+******iframe的缺点和解决方法
+缺点:
+1.iframe会阻止js里的onload(页面加载)事件
+2.iframe和当前页面共享链接池，而浏览器对相同域的链接有限制，所以会影响页面的并行加载
+
+解决方法：
+1.sanbox限制属性来显示iframe的请求内容
+2.可以通过js给iframe动态添加src，让框架里的请求延迟加载
+******
+
+
+css
+  导入样式
+	@import url("")导入css文件
+	@import "global.css";
+
+  link与import区别:
+  1.link属于html标签，@import属于css语法
+  2.link没有兼容性问题，@import不兼容IE8以下
+  3.link的加载速度比@import快
+
+  导入字体
+  @font-face导入字体
+	例如：
+	@font-size{
+	font-family:'font1'
+	src:""
+	}
+
+  字符集
+  @charset "utf-8"
+
+
+
+css精灵 css sprites
+  css精灵也叫做雪碧，是一种css图片拼合技术，将网页中多个图片合并到一张图片中，再用背景定位的方式精确到每一个图片的位置
+
+  优点：
+	1.减少图片加载时的请求次数
+	2.提高浏览器和服务器的加载速度
+
+
+
+设置flash：<embed src="banner.swf" wmode="transparent"></embed>
+
+  属性：
+	width宽度
+	height高度
+	wmode显示范式
+	window显示矩形窗口 transparent背景透明 apaque隐藏到后面
+
+
+
+***页面布局
+  1.固定宽度布局 设置宽度为1000px，设置margin:0 auto
+  （1）浮动法
+	设置孩子为左右浮动，父类设置为overflow:hidden，warp外包解决分辨率不同串行问题
+  （2）定位法
+	父类设置相对定位，孩子如果都为绝对定位，父类要设置固定高度；可以设置高度最大的孩子为相对定位，用来占父类标准流面积
+  （3）转化表格法
+	给父类设置display:table，给孩子元素设置display:table-cell
+	注意：所有的属性和css属性都必须用表格属性值
+  2.变宽布局 宽度都为100%
+  （1）等比变宽法
+	可以设置定位和浮动方式，页面采用百分比形式定义，但是为了防止页面缩小，造成内容串行，可以设置最小的孩子宽度为固定像素，百分比的孩子设置min-width，像素值满足1000px比例
+  （2）单列固定法
+	可以设置定位和浮动方式，页面采用百分比形式定义，把页面最小宽度元素设置成固定像素，另一个元素设置成100%。让出最小宽度元素位置，例如：margin-right:-350px;
+html5布局标签（替代div）
+  1.<header>头部
+  2.<footer>底部
+  3.<section>中间
+  4.<nav>菜单
+  5.<aside>广告部分
+  6.<article>文章部分
+
+css3属性
+  1.线性渐变
+	写法1
+	background:gradient(linear,center top,center bottom, from(red),to(#ffffff),color-stop(0.8,blue));
+	值的顺序：线性类型，开始位置(x,y)，结束位置(x,y)，起始颜色，终止颜色，添加颜色(位置:0-1之间的值)
+	写法2
+	background:linear-gradient(left top,red,white,blue)
+	background:linear-gradient(30deg,red,white,blue)
+	值的顺序：开始位置，颜色1，颜色2……
+  2.径向渐变
+	写法1
+	background:(radial,150 150,30,150 150,150,from(blue),to(#fff),color-stop(0.5,yellow));
+	值的顺序：径向类型，内圆中心点(x,y)，内圆半径，外圆中心点(x,y)，外圆半径，起始颜色，结束颜色，添加颜色(位置:0-1之间的值)
+	写法2
+	background:radial-gradient(50px 100px,green,#ffffff)
+	值的顺序：中心点位置(x y)，颜色1，颜色2……
+  3.倒影
+	box-reflect:below 0px radial-gradient(blue,transparent 80%)
+	值的顺序：方向 距离 渐变色
+	方向值：left左 right右 above上边 below下边
+
+svg定义：
+  1.svg代表伸缩矢量图片
+  2.可以通过任何文本编辑器来修改
+  3.可以被搜索、脚本化或压缩
+  4.在页面放大缩小时，矢量图的质量不会失真
+  5.在任何分辨率下可以高质量打印，但是有兼容性问题
+
+画图工具
+  0.画布
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>
+  1.线体
+<line x1="0" y1="0" x2="100" y2="100" stroke="red" stroke-width="5"></line>
+	属性：x1 y1起始坐标 x2 y2终止坐标
+	      stroke线体颜色 stroke-width粗细
+  2.矩形
+<rect x="50" y="50" width="400" height="300" fill="blue" stroke="black"></rect>
+	属性：x y起始坐标 width宽度 height高度 fill填充色
+  3.圆
+<circle cx="300" cy="250" r="50" style="stroke: red;stroke-width: 10"></circle>
+	属性：cx cy中心点坐标 r半径 属性也都可以写在style里面
+  4.椭圆
+<ellipse cx="300" cy="250" rx="150" ry="100"></ellipse>
+	属性：cx cy中心点坐标 rx水平半径 ry垂直半径
+  5.路径
+<path d="M10 400 C10 400 200 100 450 400 Z" stroke="red" fill="white"></path>
+	M开始位置 Z结束位置 L直线 H水平线 V垂直线 C曲线 S平滑曲线
+	Q二次贝塞尔曲线 T平滑贝塞尔曲线 A使用椭圆
+  6.多边形
+<polygon points="0,400 300,0 600,400"></polygon>
+	注意：xy的点坐标以逗号分隔，多个点坐标以空格分隔
+  7.渐变色
+  线性
+<defs>
+<linearGradient id="line" x1="50%" y1="0%" x2="50%" y2="100%">
+<stop offset="0%" stop-color="red"></stop>
+<stop offset="100%" stop-color="white"></stop>
+</linearGradient>
+</defs>
+	属性：x1 y1起始位置 x2 y2终止位置 注意必须有百分比设置
+	      offset颜色位置 stop-color填充颜色
+              fill="url(#line)"添加渐变到任意的形状里
+  径向
+<defs>
+<radialGradient id="red" cx="50%" cy="50%" fx="50%" fy="50%">
+<stop offset="0%" stop-color="blue"></stop>
+<stop offset="100%" stop-color="yellow"></stop>
+</radialGradient>
+</defs>
+	属性：cx cy内圆半径 fx fy外圆半径  注意必须有百分比设置
+	      offset颜色位置 stop-color填充颜色
+              fill="url(#red)"添加渐变到任意的形状里
+  8.阴影
+<defs>
+<filter id="fit" x="0" y="0" width="200%" height="200%">
+<feOffset result="offout" dx="20" dy="20" in="SourceGraphic"></feOffset>
+<feGaussianBlur result="blurOut" in="offOut" stdDeviation="10"></feGaussianBlur>
+</filter>
+</defs>
+	属性：x y阴影的起始位置 width宽度 height高度
+	      feOfeeset设置阴影的位置 dx水平偏移 dy垂直偏移
+	      feGaussianBlur设置阴影的模糊程度
+	      result规定类型 in设置高斯模糊效果
+多列布局
+  1.column-width 设置对象的宽度
+	单位：像素或百分比
+  2.column-count 对象的列数
+	单位：数字，正整数
+  3.column-gap 对象的间距
+	单位：像素或百分比
+  4.column-rule 对象的边框
+	column-rule-width
+	column-rule-color
+	column-rule-style
+	线体 粗细 颜色
+  5.column-span 横跨所有列
+	all所有 none不跨列
+  6.column-fill 高度统一
+	auto自适应 balace按最高一列统一
+  7.column-break-befor 在元素之前断行
+  8.column-break-after 在元素之后断行
+	always断行 avoid避免断行 auto自适应
+  9.column-break-inside是否断行
+	avoid避免断行 auto自适应
+
+响应式布局
+  例如：
+@media all and(max-width:1000px){
+.wrap{
+	background-color:blue;
+      }
+}
+@media媒体查询条件
+属性值
+  min-width最小宽度 max-width最大宽度
+  min-height最小高度 max-height最大高度
+写作注意：每一个单词之间必须要有空格
+设备属性
+  √all所有设备 aural听觉设备 braille点字触觉设备 print打印预览等
+  √handled便携设备 projection投影设备 √screen显示器设备
+  tty打字机或终端设备 embossed盲文打印机
+响应式页面的制作
+  1.响应式布局，不支持IE以下，做所有设备支持一个页面代码
+  2.在head标签里，必须写
+	<meta name="viewport" content="width=device-		
+	width,initial-scale=1" />
+	viewport规定响应式布局设备
+	width=device-width获取当前设备的宽度
+	initial-scale=1初始缩放比例
+	minimum-scale=0.5最小缩放比例
+	maximum-scale=1.5最大缩放比例
+	user-scaleable=yes是否可以调整缩放
+  3.设备所兼容的宽度范围
+	电脑端：1000px以上
+	平板端：780-998px
+	手机端：780px以下
+  4.页面上如果存在设备里有不同效果时，用media文件进行调整，但是会  
+    增加css的代码量，所以尽量优化代码。
+  5.页面上元素要用百分比设置宽度
+  6.如果图片要随着页面宽度而改变，要设置：width:100%;height:auto
+  7.字体大小要随着页面分辨率改变，要用em或百分比做单位
+  8.页面上内外边距也要采用百分比定义，减少内边距的使用
+  9.页面上基本都采用浮动布局，如果孩子元素面积超出父类，则自动换行
+  10.页面上要减少定位设置，除非做元素的水平垂直居中，或动画效果
+按设备分辨率导出CSS
+  例如：
+  <link rel="stylesheet" href="" media="all and (min-  width:1000px)">
+
+伸缩盒子旧->弹性盒子模型
+  1.display:box 开启盒模型
+  2.box-orient 排列方式
+    horizontal水平排列 vertical纵向排列
+  3.box-pack水平对齐方式
+    start开始位置 center中间位置 end结束位置
+  4.box-pack垂直对齐方式
+    start开始位置 center中间位置 end结束位置
+  5.box-flex分配剩余空间
+    单位：正数
+  6.box-flex-group分组
+    单位：正整数，默认为1，值越大越优先分配
+  7.box-ordinal-group显示顺序
+    单位：正整数，默认为1，值越小越显示在前边
+  8.box-direction倒序
+    normal正序 reverse倒序
+  9.box-lines元素换行
+    single不换行 nultiple换行
+
+伸缩盒子新->流布局
+  1.display:flex开启盒模型
+  2.flex-grow扩展比率
+    单位：正数，默认为0
+  3.flex-shrink收缩比率
+    单位：正数，默认为1
+  4.flex-basis收缩基准值
+    单位：正数
+  5.flex-flow排列方式
+ （1）flex-direction位置
+      row从左到右 row-reserve从右到左
+      column从上到下 column-reverse从下到上
+ （2）flex-wrap换行设置
+      nowrap不换行 wrap换行 wrap-reverse反转换行
+  6.align-content堆叠伸缩行的对齐方式
+    flex-start开始位置 center中间位置 flex-end结束位置
+    space-between两端对齐 space-round左右分布 stretch占满父类
+  7.align-items元素在侧轴（纵轴）方向上的对齐方式
+    flex-start开始位置 center中间位置 flex-end结束位置
+    baseline基线对齐 stretch占满父类
+  8.align-self元素在侧轴（纵轴）方向上的对齐方式
+    flex-start开始位置 center中间位置 flex-end结束位置
+    baseline基线对齐 stretch占满父类 auto自适应
+  9.justify-content元素在侧轴（横轴）方向上的对齐方式
+    flex-start开始位置 center中间位置 flex-end结束位置
+    pace-between两端对齐 space-around左右分布
+ 10.order出现顺序
+    单位：正整数
