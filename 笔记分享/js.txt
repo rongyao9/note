@@ -1,0 +1,1412 @@
+js介绍
+  JavaScript，简称js,是由网景公司开发，它不属于html代码的一部分，用来控制html+css的变化，是一种插件式语言，也叫做脚本语言。作用：动画效果，验证表单，制作游戏等。
+  语法特点：
+	字母大小写敏感，不要以数字开头，定义的值要用单双引号引起来，每一话都要以分号结尾
+  注释：
+	html:<!-- html注释 -->
+	css:/*css注释*/
+	js:/*多行注释*/   //单行注释
+	ctrl+/ 注释内容
+  MVC模式
+	m模型层:html
+	v视图层:css
+	c控制层:js
+  对话框
+	1.警告框 alert("请输入用户名")
+	2.询问框 confirm("你确定要删除吗")
+	3.输入框 prompt("请输入数字",0)
+  变量
+	var a=11;var b="aa";var c=true;
+******js代码可以放在页面上任何位置，要写在<script>标签里
+基本数据类型
+  数字类型（整型、浮点型），字符串，布尔类型（true.false）
+输出语句
+  document.write();//直接输出
+  document.writeln();//带空格属性
+运算符
+  基本运算符
+	+ - * / % ++ --
+  赋值运算符
+	+= -= *= /= %=
+  比较运算符
+	== === > >= < <=
+  逻辑运算符
+	&& || ！
+****页面上返回的所有值都是字符串类型
+前++和后++的区别？
+  前++是先自身加1，再执行其它语句；后++先执行其他语句，后加1
+空值的定义
+  var a=""; var a=null; var a=undefined	
+  第一个代表变量有值，但值为空。null和undefined是js里的一种类型，null可以与其它数值类型相互转化，可以运算，而undefined不可以。null属于object类型，undefined本身是一种类型。
+数字类型的转化
+  1.隐式类型的转化
+	6/4;//都是整型数字，但是可以得1.5，直接变成了浮点型
+  2.显式类型的转化
+	1.Number()转化为数字类型 可以转化布尔，不能转化字母
+	2.parseInt()转化为整型 不可以转化布尔，但是可以转化数字开头字母
+	3.parseFloat()转化成浮点型 同上，区别在于可以转化小数点
+	  NaN类型 not a number 不是一个数字
+	  isNaN()验证是否为数字
+	  is not a number ture字符串类型 false数字类型
+判断
+  1.if/else
+	if(满足条件){执行语句}
+	else if(满足条件){执行语句}
+	......
+	else{以上条件都不满足才执行}
+  2.switch
+	switch(变量){
+	case 值1:执行语句;break;
+	case 值2:执行语句;break;
+	......
+	default:以上条件都不满足才执行
+	}	
+循环
+  1.while()
+    while(满足范围){
+	执行语句
+    }
+  2.do/while()
+    do{
+	执行语句
+    }while(满足条件)
+******区别
+  while先判断后执行,do/while先执行后判断，在不满足条件的情况下，do/while会比while多走一次
+  3.for()
+    for(付初值;满足范围;做运算){
+	执行语句
+    }
+结束语句
+  1.break 跳出指定循环，
+  2.continue 跳出当前循环
+  3.return 跳出所有循环，但是必须与函数连用
+  跳出指定循环方式
+  aa:func1
+  bb:func2
+  break aa
+数组
+数组的定义：是可以存储多个值，通过数组下标查找数组里的值，但是下标从0开始，js里的数组可以   同时存放多种数组类型值
+  1.var x=new Array();//定义一个空数组
+  2.var x=new Array(3);//定义一个长度为3的数组
+  3.var x=new Array(3,4,7,9);//定义数组里的值
+  4.var x=[3,"aa",true];//数组的简写方式
+  数组的操作:
+	x[2]=34;//此下标没有值则添加，有值则修改
+	x[1]=null;//删除数组里的值，保留位置
+	delete x[3]//删除数组里的值，不保留位置
+  遍历:
+	for(i=0;i<x.length;i++){
+		x[i];//查找值
+	}
+属性和方法
+  1.length 数组长度
+  2.concat() 连接或更多的数组，并返回结果
+  3.join() 把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔
+  4.pop() 删除并返回数组的最后一个元素
+  5.push() 向数组的末尾添加一个或更多元素，并返回新的长度
+  6.reverse() 颠倒数组中元素的顺序
+  7.shift() 删除并返回数组的第一个元素
+  8.slice() 从某个已有的数组返回选定的元素
+  9.sort() 对数组的元素进行排序
+  10.splice() 删除元素，并向数组添加新元素
+  11.unshift() 向数组的开头添加一个或更多元素，并返回新的长度
+ 排序数字类型的方法
+        function fun(a,b){
+               return a-b;
+             }
+               document.writeln(x.sort(fun));
+ 函数
+  1.普通函数
+      function fun（）{
+             执行语句
+           }
+          fun（）；
+  2.带参数的函数
+      function fun（a,b）{
+         a+b;//执行参数
+        }
+         fun（2，3）；
+  3.带返回值的函数
+      function fun（a,b）{
+          return a+b;
+         }
+          var v=fun (3,4);//接受返回值
+  4.递归函数   自己调用自己
+        function fun（num）{
+             if(num>=1){
+                  sum+=num;
+                }
+                  return fun(num-1);
+              }
+  事件
+     1.onclick（）鼠标单击事件         2.ondblclick（）鼠标双击事件
+     3.onmouseover（）鼠标移近         4.onmouseout（）鼠标移出
+     5.onblur（）失去焦点              6.onfocus（）获得焦点
+     7.onsubmit（）提交                8.onreset（）重置   
+获得页面内容
+  1.document.getElementById（）；通过id名获得
+  2.document.getElementsByTagName()；通过标签名获得
+  3.document.getElementByClassName（）；通过class名获得
+  4.标签.value;//获得或更改属性
+    标签.style;//获得或更改css
+ 5.标签.innerHTML;//获得或更改文本或标签
+
+进制转化
+  二进制与十进制
+  二进制转化十进制 2次幂
+  十进制转化二进制 2除尽，倒着输出
+
+  二进制与八进制
+  二进制转化八进制 3位拆，0补齐，2次幂
+  八进制转化二进制 拆各位，2除尽，不够3位0补齐，倒着输出
+
+  二进制与十六进制
+  二进制转化十六进制 4位拆，0补齐，2次幂
+  十六进制转化二进制 拆各位，2除尽，不够4位0补齐，倒着输出
+
+  十进制与八进制
+  十进制转化八进制 8除尽，倒着输出
+  八进制转化十进制 8次幂
+
+  十进制与十六进制 10->A 11->B 12->C
+  十进制转化十六进制 9除尽，倒着输出
+  十六进制转化十进制 16次幂
+
+RGB与十六进制转十进制
+  颜色:A9D35E
+  R:A9 G:D3 B:5E
+  R:169 G:211 B:94
+  rbg(169,211,94)
+
+数据类型
+  number数字，string字符串，boolean布尔，null空，undefined未定义，object对象
+  
+  trpeof操作符
+  number数字，string字符串，boolean布尔，null空，undefined未定义，object对象,function函数
+
+  例如:
+	var a="asd";
+	document.write（typeof a）;//string
+  定义进制变量
+	var a=0b10010110
+	var a=0226
+	var a=0x96
+  parseInt()转化进制数
+	parseInt("D3",16);//211十进制数
+	parseInt("0XD3");//211
+	parseInt("226",8);//150
+	parseInt(0b10010110);//150
+	parseInt("10010110",2);//150
+  
+  位操作符
+  1.按位非not
+	例如 var a=25;var b=~a b=?
+	解释:把二进制数的0变成1，1变成0
+	25转化二进制：0000000000000000000011001
+		转化：1111111111111111111100110
+	结果为:-26
+  2.按位与and
+	例如 var a=25;var b=a&3 b=?
+	解释:二进制数都为0则得0，都为1则得1，不相同得0
+	25转化二进制:0000000000000000000011001
+	3转化二进制: 0000000000000000000000011
+		转化:0000000000000000000000001
+	结果为:1
+  3.按位或or
+	例如 var a=25;var b=a|3 b=?
+	解释:二进制数都为0则得0，都为1则得1，不相同得1
+	25转化二进制:0000000000000000000011001
+	3转化二进制: 0000000000000000000000011
+		转化:0000000000000000000011011
+	结果为:27
+  4.按位异或(xor)
+	例如 var a=25;var b=a^3 b=?
+	解释:二进制数都为0则得0，都为1则得0，不相同得1
+	25转化二进制:0000000000000000000011001
+	3转化二进制: 0000000000000000000000011
+		转化:0000000000000000000011010
+	结果为:26
+  5.左移
+	例如 var a=25;var b=a<<5 b=?
+	解释:二进制数都为0则得0，都为1则得0，不相同得1
+	2转化二进制:0000000000000000000000010
+	       转化:0000000000000000001000000
+	结果为:64
+  6.右移
+	例如 var a=25;var b=a>>5 b=?
+	解释:二进制数都为0则得0，都为1则得0，不相同得1
+	2转化二进制:0000000000000000001000000
+	       转化:0000000000000000000000010
+	结果为:2
+  7.无符号右移
+	例如 var a=-64;var b=a>>>5 b=?
+	解释:二进制数都为0则得0，都为1则得0，不相同得1
+	64转化二进制:1111111111111111111000000
+	        转化:0000011111111111111111111
+	结果为:134217726
+转义字符
+  \"双引号 \'单引号 \&取地址符 \\斜杆 \n回车 \t制表符
+条件操作符(三元表达式)
+  语法:变量=判断表达式?true返回第一个:false返回第二个
+  例如:var max=(num1>num2)?num1:num2;
+布尔类型值的特殊用处
+  逻辑与(&&)
+	1.如果第一个操作值是对象，则返回第二个
+	2.如果第二个操作值是对象，则第一个值为true的情况下，才返回第二值
+	3.如果  两个操作都为对象，则返回第二个
+	4.如果第一个操作值为null，则返回第一个
+	5.如果第一个操作值为NaN ，则返回NaN
+	6.如果第一个操作值为undefined，则返回undefined
+  逻辑非(!)
+	1.如果操作的值为对象，则返回false
+	2.如果操作的是空字符串，返回true
+	3.如果操作的是非空字符串，返回false
+	4.如果操作的是0，返回的true
+	5.如果操作的是非0的任意数（包括undefined），返回false
+	6.如果操作的值为null，则返回true
+	7.如果操作的值为NaN，则返回true
+	8.如果操作的值undefined，则返回true
+  逻辑或(||)
+	1.如果第一个操作值是对象，则返回第一个
+	2.如果第一个操作值是false，则返回第二个
+	3.如果两个操作值都为对象，则返回第一个
+	4.如果两个值都为null,undefined,NaN,则返回null,undefined,NaN
+	5.如果其中一个值都为null,undefined,NaN,则返回另一个
+for-in循环
+  注意:for-in循环的速度比for速度快，只能循环对象类型，语法定义比for简单
+  例如：for(var x in arry){//循环数组
+		document.writeln(arry[x]+"<br>");
+	}
+	for(var d in document){//循环对象
+		document.writeln(d);
+	}
+with语句
+  是将代码的作用域设置到一个特定的对象中，用来节省代码
+	with(document){
+		var b=URL;
+		var c=getElementById("font");
+		var d=title;
+	}
+函数
+  1.function fun(a,b){//函数声明
+		return a+b;
+	}
+  2.var a=function(a,b){//函数表达式
+		return a+b;
+	}
+  3.div.onclick=function(){//匿名函数
+		
+	}
+区别：
+  1.函数声明在function之后定义名称，函数表达式变量名称提前，匿名函数属于函数表达式的一种形式
+  2.函数声明在代码执行之前就被加载到了内存中，而函数表达式，何时运行，何时加载
+  3.函数声明比较占内存，函数表达式比较节省内存，可以自行回收，利于代码封装
+
+垃圾收集
+  js具有自动垃圾收集机制，不用程序员自己调用，例如c和c++必须要自己进行回收。
+函数声明在函数调用前已经存在内存中，函数表达式在调用时，才在内容中生成。局部变量在函数运行时才生成，全局变量在页面关闭后才会回收，所以如果定义多个全部变量和函数声明，会给内存造成过大压力。
+
+  标记清除
+	在变量和函数使用时，做一个标识符，例如使用时叫做“进入环境”，离开时叫做“离开环境”，在js垃圾回收机制遍历时，找到“离开环境”状态则清除
+  引用计数
+	在变量和函数使用时，做一个计数变量，当变量引用时，次数就加1，当创建了另外一个值，或把当前值覆给新的值，对这个值次数减1，当数值为0则清空
+  管理内存 自己手动清空内容
+	解决对象引用:
+	var x=new Array();
+	var x=null;
+	解决函数:
+	var fun=function(){}
+	fun=null;
+	也可以清空事件绑定
+引用类型 对象类型
+  1.数组
+  2.object对象
+    delete删除
+    toString()转成字符串类型
+  3.Date对象 日期
+    定义：
+	var time=new  Date();
+    属性和方法
+	1.getDate() 从Date对象返回一个月中的某一天
+        2.getDay() 从Date对象返回一周中的某一天
+	3.getMonth() 从Date对象返回月份0—11
+	4.getFullYear()从Date对象返回年份
+	5.getHours()返回Date对象的小时
+	6.getMinutes()返回Date对象的分钟
+	7.getSeconds()返回Date对象的秒数
+	8.getTime()返回1970年1月1日至今的毫秒数
+	9.parse()返回1970年1月1日午夜到指定日期（字符串）的毫秒数
+	10.setDate()设置Date对象中月的某一天
+	11.setMonth()设置Date对象中的月份
+	12.setFullYear()设置Date对象中的年份
+	13.setHours()设置Date对象中的小时
+	14.setMinutes()设置Date对象中的分钟
+	15.setSeconds()设置Date对象中的秒钟
+	16.toTimeString()把Date对象的时间部分转换为字符串
+	17.toDateString()把Date对象的日期部分转换为字符串
+	18.toLocaleString()根据本地时间格式换为字符串
+	19.toLocaleTimeString()根据本地时间格式换为字符串
+	20.toLocaleDateString()根据本地时间格式换为字符串
+
+regExp对象 正则表达式
+  定义:
+	var re=new RegExp("a",i);//创建对象
+	var re=/a/i;//简写
+  方法:
+	1.test()匹配字符串中是否有指定值，返回true/false
+	2.exec()匹配字符串中是否有指定值，返回指定字符串，没有返回null
+	3.compile()重新编译正则表达式
+  标志
+	1.i 表示不区分大小写
+	2.g 表示匹配所有指定值
+	3.m 表示多行匹配
+  验证类型
+	1.global是否设置了g标识，返回true/false
+	2.ignoreCase是否设置了i标识，返回true/false
+	3.multiline是否设置了m标识，返回true/false
+	4.lastIndex标识搜索多个匹配值的位置，从0开始
+	5.source返回设置好的正则表达式
+	例如:var re=/\d/g; re.global;//输出true
+
+基本包装类
+  数字 Number
+	1.Number("123.4");转化数字类型
+	2.toString()转化成字符串
+	3.tofixed(2)保留小数点的位数 必须大于等于0
+  布尔 Boolean
+  例如：
+	var b1=new Boolean(false);
+	var result1=b1&&true;//返回true
+	var b2=false;
+	var result2=b2&&true;//返回false
+  区别：
+	b1为对象类型（object），所以表示比较的不是值，而是对象和true的并列，则返回true，b2为boolean的基本类型值，则是拿false和true在表达式里比较，则返回false
+
+  字符串
+   属性和方法：
+	1.length 字符串的长度
+	2.big()用大号字体显示字符串
+	3.bold()使用粗体显示字符串
+	4.charAt()返回在指定位置的字符。从0开始
+	5.concat()连接字符串
+	6.fontcolor()使用指定的颜色来显示字符串
+	7.fontsize()使用指定的尺寸来显示字符串
+	8.indexOf()检索字符串。找不到返回-1
+	9.italics()使用斜体显示字符串
+	10.lastIndexOf()从后向前搜索字符串
+	11.link()将字符串显示为链接
+	12.localeCompare()用本地特定的顺序来比较两个字符串
+	13.match()找到一个或多个正则表达式的匹配。
+	14.replace()替换与正则表达式匹配的子串。
+	15.search()检索与正则表达式相匹配的值
+	16.slice()提取字符串的片段，并在新的字符串中返回被提取的部分
+	17.small()使用小字号来显示字符串
+	18.split()把字符串分割为字符串数组
+	19.strike()使用删除线来显示字符串
+	20.substr()从起始索引号提取字符串中指定数目的字符
+	21.substring()提取字符串中两个指定的索引号之间的字符
+	22.toLocaleLowerCase()把字符串转换为小写
+	23.toLocaleUpperCase()把字符串转换为大写
+	24.toLowerCase()把字符串转换为小写
+	25.toUpperCase()把字符串转换为大写
+三种截取方式的区别？
+  1.slice()和substring()截取到结束位置，substr()截取到指定长度。
+  2.如果开始位置为负数，则slice()和substr()是返回倒数的字符串，而substring()返回整个字符串
+  3.当截取的内容超出长度，slice()不截取任何值，substr()会截取剩余值，substring()倒着截取
+
+单体内置对象
+  全局对象 Global
+  属性和方法
+	1.encodeURI()给字符加密(不可设置特殊符号)
+	2.decodeURI()给字符解密
+	3.encodeURIComponent()给字符加密
+	4.decodeURIComponent()给字符解密
+	5.isNaN()判断是否是数字类型，true为不是数字类型
+	6.parseInt()转化成整型数
+	7.parseFloat()转化成浮点数
+	8.eval()转化解析器
+  数学对象 Math
+	1.PI 返回圆周率
+	2.abs(x)返回数的绝对值
+	3.ceil(x)对数进行上舍入
+	4.floor(x)对数进行下舍入
+	5.max(x,y)返回x和y中的最高值
+	6.min(x,y)返回x和y中的最低值
+	7.pow(x,y)返回x的y次幂
+	8.random()返回0~1之间的随机数
+	9.round(x)把数四舍五入为最接近的整数
+	10.sqrt(x)返回数的平方根
+
+
+
+面向对象的程序设计
+  面向对象的定义：
+	1.世界上一切事物都是对象，包括看见的或看不见的
+	2.抽象是在所有属性和方法中，抽取相关的属性和方法的过程
+	3.类的定义
+	  （1）类是有共同属性和行为的对象的抽象
+	  （2）类是所有变量和方法的集合
+	4.对象是类的实例化，类是对象的抽象，当遇到new关键字，才真的创建了对象
+注意：js没有class关键字，叫做基于面向对象的过程
+  面向对象特点：
+	1.封装：一个类就是一个封装，封装了所有变量和方法
+	2.继承：子类继承父类，可以使用父类下的属性和方法
+	3.多态：多态的表现形式有两种，叫做重载和重写，但是js里只有重写，没有重载概念
+
+		重载：在同一个类中，有相同的方法名，执行不同操作和传值
+		重写：在子类与父类中，有相同的方法名，执行不同的操作和传值
+JavaScript的组成部分
+  1.ECMAscript 解释器   几乎没有兼容性问题
+  2.DOM 文档对象模型    又兼容性问题
+  3.BOM 浏览器对象模型  都不兼容
+******js的机制是什么？
+  2种机制，一个叫做事件机制，一个叫做io机制。事件机制是通过页面标签的事件操作，来调用js里的函数执行相应的代码；io机制是对本地下的文件进行操作，例如：上传、下载、文档操作、获取文件信息等。
+******js是单线程还是多线程？
+  js是单线程，同理用js写的框架也都是单线程。虽然在js里存在异步函数和延迟函数，但是它们会在其他函数执行完毕之后才进行调用。
+
+js的对象创建
+  1.通过object创建对象
+	var emp=new Object();
+		emp.name="张三";
+		emp.age=33;
+		emp.say=function(){document.writeln("你好，我是"+this.name)};
+		emp.say();
+  2.自行创建
+	var emp={
+		name:"小明",
+		age:29,
+		say:function(){document.writeln(this.name+","+this.age)}
+	}
+
+属性类型修饰
+  1.configurable 是否可以通过delete删除属性，默认值为true
+  2.enumerable   是否可以通过for-in循环属性，默认值为true
+  3.writable     是否可以修改属性值，默认值为true
+  4.value	 设置属性的默认值，默认值为undefined
+  操作单个属性
+	var emp={}
+		Object.defineProperty(emp,"name",{
+			writable:true,
+			configurable:false,
+			value:"小丽"
+		})
+  访问器属性
+  1.configurable 是否可以通过delete删除属性，默认值为true
+  2.enumerable   是否可以通过for-in循环属性，默认值为true
+  3.get 读取属性时调用的函数，默认值为undefined
+  4.set 写入属性时调用的函数，默认值为undefined
+  例如：
+	var emp={_name:"小丽"}
+	Object.defineProperty(emp,"name",{
+					get:function(){
+						return this._name;
+					},
+					set.function(value){
+						this._name=value;
+					}
+				})
+				document.writeln(emp.name);
+  定义多个值
+	var emp={};
+	Object.defineProperties(emp,{
+		_name:{writable:false,value:"小丽"},
+		_age:{writable:true,value:23},
+		name:{
+			get:function(){return this._name},
+			set:function(){name}{this._name=name}
+		},
+		age:{
+			get:function(){return this._age},
+			set:function(){name}{this._age=age}
+		}
+	})
+	document.writelin(emp.name+","emp.age);
+	emp.name="小兰";emp.age=25;
+	document.writeln(emp.name+","+emp.age)
+	
+  自己定义get/set方法
+	var emp={
+		name:"小丽",age:23,
+		getName:function(){return this.name},
+		setName:function(name){this.name=name},
+		getAge:function(){return this.age},
+		setAge:function(age){this.age=age}
+	}
+	document.writeln(emp.getName()+","+emp.getAge())
+	emp.setName("小红");emp.setAge(25);
+
+构造函数（构造器）
+  用来为对象赋初值，如果你没创建构造函数，js底层机制会为你自动创建一个构造函数，只是没有参数的构造函数。当你自己创建了构造函数，可以自己进行设置参数，通过new关键创建的对象，会发现后面都带"()"，所以在实例化对象时，就已经执行了构造函数。
+
+  1.工厂模式
+	function Person(name,age){
+		var o=new Object();
+		o.name=name;
+		o.age=age;
+		o.say=function(){document.writeln("你好，主人，我是"+this.name)};
+		return o;
+	}
+	var emp=Person("小爱",22);
+	emp.say();
+  2.构造函数模式
+	function Person(name,age){
+		this.name=name;
+		this.age=age;
+		this.say=function(){document.writeln("我是"+this.name+"，需要我做些什么")}
+		
+	}
+	var emp=new Person("小杜",21);
+	emp.say();
+
+变量和作用域
+  全局变量：定义在对象和方法体外的叫做全局变量，在当前页面任何位置都可以访问到
+  局部变量：定义在对象和方法体内的叫做局部变量，只有在该方法内可以进行引用
+  特殊情况：
+	for(let i=1;i<5;i++){
+		document.writeln(i);
+	}
+	document.writeln("外面输出："+i)
+  注意：i值在for循环里定义，外面却也可以访问到
+
+基本类型和引用类型
+  基本类型：number,string,boolean,null,undefined
+  引用类型：object
+
+参数的传递
+  基本类型值，在参数传递时，传递的是值，所以函数里改变，原来值不会改变
+  引用类型值，在参数传递时，传递的是地址，所以函数里改变，原来值也会改变
+检查类型方式
+  1.typeof 用来验证引用和基本变量的数值类型
+  类型：number,string,boolean,undefined,object(包括null),function
+  2.instanceof 用来验证某变量是否属于某对象，只能验证引用类型值
+  例如
+	typeof 123;//number
+	emp instanceof Object;//true
+
+作用域和执行环境
+  执行环境指的是变量或函数有权访问其他数据，决定了他们各自的行为，每一个环境都有一个与之关联的变量对象。
+  当代码在一个环境执行时，会创建变量对象的一个作用域链，用途是保证对执行环境的有权访问，对所有变量和函数的有序访问
+
+延迟作用域链
+  1.with语句
+  2.try-catch的catch语句
+  例如：function fun(){
+		var value="?type=23";
+		with(location){
+			var url=href+value;
+		}
+		return url;
+	}
+闭包(特殊作用域)
+  闭包的写作类似于匿名函数，闭包可以让变量提升，闭包的作用是指有权访问另一个函数作用域的变量
+  优点：
+	1.闭包会在页面加载时优先在内存中生成
+	2.闭包会始终在内存中存在，直到页面关闭
+  缺点：
+	1.造成内存消耗过大，页面性能降低
+	2.在外部被调用时会改变父类的值
+  例如：function fun1(value){
+		return function(){
+			if(value>5){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+	}
+	document.writeln(fun1()());
+
+闭包与变量
+	function fun(){
+		var x=new Array();
+		for(var i=0;i<10;i++){
+			x[i]=function(){
+				return i;
+			}
+		}
+		return x;
+	}
+注意：所有闭包里输出i值都为10，闭包会在内存中优先生成，闭包里保存的并不是变量，而是整个变量对象，所以当调用i值时，它都在去寻找i值的活动对象，当前活动对象已经执行完毕，所以输出都是10
+
+this关键字
+  代表当前所操作的对象，在对象里使用，不能在对象外使用。全局的变量和函数都属于window对象的，所有全局的this代表window对象。
+  this与闭包的使用
+	var emp={
+			name:"这是我的对象"
+			fun:function(){
+				var th=this;//解决变量提升
+				return function(){
+					return th.name;
+				}
+			}
+		}
+		document.writeln(emp.fun()())
+  说明：当前闭包里引用的this指向的是window对象，既然两个对象的this关键字冲突，我们就自己定义一个新的变量，来接受当前对象的指向。
+
+继承
+	继承可以让孩子对象去使用父类对象下的方法和属性，邮箱中继承方式：接口继承和实现继承，接口继承只继承方法签名，实现继承则继承实际的方法，在js里没有接口继承。
+原型链 prototype
+	js里通过原型链实现继承，每一个对象都自带一个原型链，并且有指针指向当前对象的父类的构造函数，利用原型让一个引用类型来使用另一个引用类型下的属性和方法，从而实现了继承。
+
+例如
+	function Father(name,age){
+		this.name=name;
+		this.age=age;
+	}
+	Father.prototype.sing=function(){
+		document.writeln("啊");
+	}
+	function Son(sch1){
+		this.sch1=schl;
+	}
+	Son.prototype=new Father("张晓明"，16)；
+	var s=new Son():
+	s.sing();
+
+多态的表现  重写
+	多态的两种表现形式是重写和重载，在js里没有重载这个概念
+	重载是在同一个类中，方法名相同，参数的个数或类型不同，实现不同操作。但是在js里，如果有两个函数声明，或两个函数表达式，则下面的函数会覆盖上面的函数，如果是函数声明和函数表达式同时存在，则函数表达式会覆盖函数声明，因为函数声明会在内存中先被创建
+	重写是在子类与父类中，方法名相同，却实现不同操作
+	覆盖:孩子与父类有相容的方法，孩子的方法得到了实现，父类的方法进行了销毁
+	隐藏:孩子与父类有相容的方法，孩子的方法得到了实现，父类的方法在内存中隐藏
+	js里重写父类的方法是覆盖
+	例如：
+	function Father(name,age){
+		this.name=name;
+		this.age=age;
+	}
+	Father.prototype.sing=function(){
+		document.writeln("啊啊");
+	}
+	function Son(sch1){
+		this.sch1=schl;
+		this.sing=function(){
+			document.writeln("呃呃");
+	}
+	}
+	Son.prototype=new Father("张晓明"，16)；
+	var s=new Son();
+原型链存在的问题
+	function Father(){
+		this.color=["red","blue","green"]
+	}
+	function Son(){}
+	Son.prototype=new Father();
+	var s=new Son();
+	s.color.push("black");//添加父类的值
+	document.weiteln(s.color+"<br>");
+	var s1=newSon()；
+	document.writeln(s1.color);//会输出后添加的值
+	注意：当通过原型继承，当前父类对象会被所有实例所共享，无论创建多少个孩子，原型链都指向同一个父类地址
+借用构造器
+	call和apply方法
+	用来重新定义当前对象，变成另一个对象，例如：把父类的信息，在孩子的构造器里显示
+	语法：
+	父类对象.call(变量1，变量2，变量3.....)
+	父类对象.apply(对象，arguments)
+	例如：
+	function Father(){
+		this.color=["red","blue","green"]
+	}
+	function Son(age){
+		Father.call(this);
+		this.age=age;
+	}
+	var s1=new Son();
+	s1.color.push("yellow");
+	document.writeln(s1.color+"<br>")
+	var s2=new Son(23);
+	document.writeln(s1.color+"<br>");
+组合继承
+	function Father(name){
+		this.name=name;
+		this.color=["red","blue"];
+	}
+	Father.prototype.say=function(){
+		document.writeln("姓名："+this.name)
+	}
+	function Son(name,age){
+		Father.call(this,name)lthis.age=age;
+	}
+	Son.prototype=new Father();继承父类
+	Son.prototype.constructor=Son;//向下转型
+	Son.prototype.sayAge=function(){
+		document.writeln("年龄："+this.age)
+	}
+原型式继承
+	例如：
+	function Object(o){//通过工厂创建
+		function F(){}//创建新的孩子
+		F.prototype=o;//为孩子找到父类
+		return new F();
+	}
+	var father={
+		color:["blue","red"]
+	}
+	var s1=Object(father);//实例化孩子
+	注意：Object.create(对象)；//js里已存在的方法，原理同上
+寄生式继承
+	例如：
+	function creat(obj){
+	var clone=Object(obj);
+	clone.name="张三"；
+	clone.say=function(){
+		document.writeln(this.name);
+	}
+	return clone;
+	}
+	var father={color:["red","blue"]}
+	car s1=creat(father);
+	注意：car clone=Object(obj)；通过调用Object构造器创建
+寄生组合式继承
+	function create(f,s){
+		var father=Object(f.prototype);//创建父类
+		father.constructor=s;//指向孩子
+		s.prototype=father;//只想父类
+	}
+	function Father(){
+		this.color=["red","blue"];
+	}
+	function Son(){Father.call(this)}
+	create(Father,Son);//继承
+注意：优化了组合模式，组合模式多次调用继承方法
+其他构造器
+	原型模式
+	例如
+	function Person(){}
+	Person.prototype.name="张三";
+	Person.protype.say=function(){
+		document.writeln(this.name);
+	}
+	var p1=newPerson();//实例化第一个对象
+	var p2=newPerson();//实例化第二个对象
+	document.writeln(p1==p2);//比较地址是否相等false
+	document.writeln(p1.name==p2.name);//比较值是否相等true
+	组合使用构造函数模式和原型模式
+	例如：
+	function Person(name,age){
+		this.name=name;
+		this.age=age;
+		this.say=function(){
+		document.writeln(this.name);
+	}
+	}
+	Person.prototype={
+		constructor:Person,
+		fun:function(){
+		document.writeln(this.name+","+this.age);
+	}
+	}
+	动态原型模式
+	例如：function Person(name,age){
+	this.name=name;
+	this.age=age;
+	if(typeof this.say!= "function"){
+	Person.prototype.say=function(){
+		document.writeln(this.name);
+	}
+	}
+	}
+	寄生构造函数模式
+	例如：
+		function Person(name,age){
+		var o=new Object();
+		o.name=name;
+		o.age=age;
+		o.say=function(){
+			document.writeln(this.name)
+		}
+		return o;
+	}
+	稳妥构造函数模式
+	注意：和寄生构造函数模式相同，不同的是，新创建的对象不能引用this,不能用new操作符调用函数。
+	例如：function Person(name,age){
+		var o=new Object();
+		o.say=function(){
+			document.writeln(name);
+		}
+		return o;
+	}
+	var p1=Person("李四"，23)；
+	p1.say();
+
+
+方法：
+	1.instanceof 比较一个实例是否属于一个对象
+	2.isPrototypeOf ()验证原型链指针是否指向某一个对象
+	  例如
+		Person.prototype.siPrototypeOf(p1);//true
+	3.hasOwnProperty()验证某一个属性是否属于一个对象
+	  例如：
+		Object.hasOwnProperty("name");//true
+	4.in 验证某一个属性是否属于一个对象，无论是实例还是原型都可验证
+	例如：
+		"name" in Person;//true "name" in p1;//true
+	5.hasPrototypeProperty()当一个属性值存在实例中才返回true
+	例如：
+		Object.hasPrototypeProperty(p1,"name")
+	6.Object.keys()可枚举对象下的所有属性和方法名称
+	例如：var k=Object.keys(Person.prototype);//name,age,say
+模仿块级作用域
+	除了函数和对象之外，定义的“{}”都叫做代码块，例如：if，for，swicth.....，只能在代码块内进行引用变量作用域，叫做块级作用域，然而js里没有块级作用域的概念，在代码块外也可以引用代码块里的变量，但是我们可以通过闭包的特点墨迹块级作用域。
+	例如：
+	function numbers(count){
+		(function(){
+		for(var i=0,i<countli++)
+		{document.writeln(i)}
+	})()
+	document.writeln("--->"+i)
+	}
+	number(5);
+私有变量
+      例如:
+	function fun(){
+	var num=1;
+	}
+	alert(num);//除非函数里用return语句，否则外部无法使用局部变量
+	function Person(){
+	this.name="张三"
+	}
+	var p1=new Person() p1.name;//能调用对象里的属性
+      解决方法
+	function	 Person(age){
+		this.name="张三"
+		this.get=function(){
+		return age;
+	}
+		this.set=function(age){
+		age=age;
+	}
+	}
+	var p1=new Person(22);
+	注意：我们直接访问私有变量访问不到，但是可有通过get/set方法来进行访问。所以程序可以把get/set方法告诉给想调用的人
+
+可变参数
+	arguments:可变参数，可变数组，参数管理器
+	特点：
+	1.只能在函数内部里使用
+	2.用来替代函数的形参
+	3.以数组的形式进行存储，也可以用数组下面的属性和方法
+	4.对数组的添加和删除的方法不能用，例如：push
+	例如：function fun(){
+		document.writeln(arguments.length);
+		for(i=0;i<arguments.length;i++){
+		document.writeln(arguments[i]+"<br>");
+	}
+	}
+		fun(12,"asd",true)
+callee与caller方法
+callee该属性是一个指针，指向拥有这个arguments对象的函数(返回当前arguments所属函数的引用)
+	function f3(a,b){
+		arguments.callee.length;//返回2 调用的是变量的个数
+	}f3(1,2,3);
+caller:是保存这调用当前函数的函数的引用--返回调用者
+如在全局作业域中调用当前函数，它的值为null
+	function f1(){f2();}
+	function f2(){alert(f2.caller);}
+	f1();//返回f1的所有内容，因为f1是调用者
+
+ES5 语法
+	严谨模式（严格模式）use strict
+	用来消除语法的不合理，不严谨之处，使代码运行更安全，提高编译效率
+	限制的内容：
+	1.必须要有var声明变量
+	2.函数顶层不再指向window而是underfined
+	3.强制为eva创建新作用域，不能使用同名变量，或非法语法
+	4.禁止用delete删除变量
+	5.禁止使用argument下的callee和caller语法
+	6.禁止使用width语句
+	7.禁止函数参数重名
+	8.禁止对象属性重名
+	9.禁止使用八进制数
+	10.不允许在非函数的代码块内声明函数
+	例如：
+	“use strict”;//严格模式
+	var i=1;//不用var声明就会报错
+	document.writeln(i);
+	Date对象
+		Date.now()返回1970年1月1日至今的毫秒数
+	String对象
+	      trim（）去掉前后空格
+	Number对象
+	      toPressision()按指定位数显示数字格式，1-21位
+	Function函数
+	    bind改变上下文的this指向，返回一个函数
+	      例如：
+		var obj={
+		a:1,
+		b:2,
+		getsum:function(c,d){
+			return this.a+this.b+c+d;
+		}
+		}
+	window.a=0;
+	window.b=0;
+	document.writeln(dbj.getsum(3,4));//输出10
+	//var fun=obj.getsum；//输出7
+	var fun=obj.getsum.bond(obj);//输出10
+	document.writeln(fun(3,4));
+Array对象
+	1.Array.isArray()判断变量是否是数组类型，返回T/F
+	2.Array.indexof(数组，值)返回数组值中的第一个索引
+	3.Array.lastIndexof(数组，值)返回数组值中的最后一个索引
+	4.some(函数)检测数组中的某些值是否通过了指定函数
+	5.every(函数)检测数组中的所有值是否通过了指定函数
+	例如：
+	      var x=[1,2,5,17,14,7,15,4];
+	      dunction fun(value){
+		return value>=15;
+	}
+	document.writeln(x.some(fun)+"<br>");//true
+	document.writeln(x.every(fun));//false
+	6.forEach(函数)为数组中的每个元素执行指定操作
+	7.filter（函数）过滤数组中的值，返回符合条件的生成新的数组
+	8.map（函数）返回每次函数调用的结果数组
+	9.redure(函数)从头到尾遍历数组的值进行合并
+	10.redureRignt(函数)从尾到头遍历数组的值进行合并
+	var x=[1,2,5,17,14,7,15,4];
+	function fun(value,index,array){
+		document.writeln("值："+value+"索引"+index	+"数组"+array)
+	}
+	x.forEach(fun);//遍历没有返回值
+	x.filter(function(value){return value>15});//遍历过滤剩余结果
+	x.map(Math.aqrt);//遍历有返回值
+	区别：
+	1.forEach让数组里每一个值自己执行运算，没有值返回
+	2.map是让数组里的值都上交，函数来执行并返回
+	3.filter过滤数组里的所有值，返回程序员想要的		
+	      合并举例
+	      var x=[1,2,5,17,14,7,15,4];
+	      function fun(a,b){
+		return a*b;
+	}
+	document.writeln(x.reduce(fun));
+	Object对象
+	1.Object.freeze()冻结一个对象
+	    冻结指不能向对象添加，修改，删除属性值，也不能修改属性的可枚举性，可配置性能，此对象永远不可改变
+	2.Object.isFrozen()判断是否是一个冻结对象
+	3.Object.seal()密封一个对象
+ 	      密封指不能像对象添加，删除，也不能修改属性的可枚举性，可配置性，但是可以修改和查询
+	4.Object.isSeal()判断是否是一个密封对象
+	5.Object.preventExtensions()让对象不可扩展
+	不可扩展是指不能向对象添加属性，其他可以操作
+	例如：
+	var obj={name:"张三",age:23};
+	Object.freeze(obj);//对象被冻结
+	Obiect.seal(obj);//对象被密封
+	Object.preventExtensions(obj);//对象被不可扩展
+	document.writeln(obj.name);//是否可查询
+	obj.name="lisi";
+	document.writeln(obj.name);//是否可修改
+	delete obj.name;
+	document.writeln(obj.name);//是否可添加
+	6.Object.getOwnPropertyNames()返回一个对象的所有属性名称的数组
+	7.Object.prototype.propertyIsEnumberable()表示一个属性是否属于一个对象，返回T/F值
+	查属性函数之间的区别:
+		var obj={name:"zhangsan",age:23};
+		Object.defineProperty(obj,"id",{
+			value:"123",
+			enumerable:false
+		})
+		document.writeln		(Object.getOwnPropertyNames(obj));	
+		document.writeln(Object.key(obj));//被限定的属性查不到
+	验证属性：
+	var obj={name:"张三",age:23}	;
+	  var x=[1,2,3,4];
+	document.writeln(obj.propertyIsEnumberable("name"));
+	document.writeln(x.propertyIsEnumberable(x[0]));
+	document.writeln(Array.propertyIsEnumberable(x[0]));//不能比较原型
+
+BOM对象 窗体对象
+	window
+	BOM的核心对象是window，在浏览器中，window有双重对象，可以通过js访问的一个接口，又是ECMAscriot下的Global对象，在页面中的全局属性和方法都属于window对象，作为Global对象，所以也可以访问Glabal对象下的方法，例如：parseInt
+	例如：
+	window.age=23；
+	function fun(){alert(111)}
+	window.fun();
+	属性和方法
+	1.closed 返回窗口是否已被关闭
+	2.innerheight 返回窗口的文档显示区的高度（不带地址栏）
+	3.innerwidth 返回窗口的文档显示区的宽度
+	4.outerheight  返回窗口的外部高度（会带地址栏的高度）
+	5.outerwidth 返回窗口的外部宽度
+	6.pageXOffset 设置或返回当前页面相对于窗口显示区左上角的X位置
+	7.pageYOffset 设置或返回当前页面相对于窗口显示区左上角的X位置
+	8.screenLeft 只读整数，声明了窗口的左上角在屏幕上的x坐标
+	9.screenTop只读整数，声明了窗口的左上角在屏幕上的y坐标
+	10.screenX只读整数，声明了窗口的左上角在屏幕上的x坐标（支持火狐和苹果）
+	11.10.screenY只读证书，声明了窗口的左上角在屏幕上的y坐标（支持火狐和苹果）
+	12.close() 关闭浏览器窗口
+	13.moveBy()可相对窗口的当前坐标把它移动指定的像素
+	14.moveTo()把窗口的左上角移动到一个制定的坐标
+	15.open()打开一个新的浏览器窗口或查找一个已命名的窗口
+	16.print()打印当前窗口内容
+	17.resizeBy()按照制定的像素调整窗口的大小
+	18.resizeTo()把窗口的大小调整到指定的宽度和高度
+	19.scrollBy()按照指定的像素值来滚动内容
+	20.scrollTo()把内容滚动到指定的坐标
+open下的属性值
+	open(地址，窗体名称，css样式)
+	1.width宽度
+	2.height高度
+	3.top 居于窗口的y坐标
+	4.left 居于窗口的x坐标
+	5.fullscreen 是否允许最大化窗口（支持ie），设置yes/no
+	6.location 是否显示地址栏，设置yes/no
+	7.menubar 是否显示菜单栏，设置yes/no
+	8.resizeable是否允许改变窗体大小，设置yes/no
+	9.scrollbars是否允许滚动，设置yes/no
+	10.toolbar是否显示工具栏，设置yes/no
+location对象 地址对象
+	1.hash设置或返回从警号(#)开始的URL(锚)。
+	2.host 设置或返回主机名和当前URL的端口号。
+	3.hostname 设置或返回当前URL的主机名
+	4.href 设置或返回完整的URL
+	5.pathname 设置或返回当前URL的路径部分
+	6.port 设置或返回房前URL的端口号
+	7.protocol 设置或返回当前URL协议
+	8.search 设置或返回从问好(?)开始的URL（查询部分）
+history对象 历史纪录
+	1.length 返回浏览器历史列表中的URL数量。
+	2.back()加载histiry列表中的前一个URL。
+	3.forward()加载history 列表中的下一个RUL。
+	4.go()加载history列表中的某个具体页面
+navigator 浏览器的信息
+	1.appCodeName 返回浏览器的代码名
+	2.appName 返回浏览器名称
+	3.appVersion 返回浏览器的平台和版本信息
+	4.browserLanguage 返回当前浏览器的语言
+	5.cookieEnabled 返回指明浏览器中是否启用cookie的布尔值
+	6.javaEnabled 浏览器是否启用了java
+	7.language 浏览器的诸语言
+	8.onLine 返回指明系统是否处于脱机模式的布尔值
+	9.platform 返回运行浏览器的操作系统平台。
+screen显示屏信息
+	1.availHeight 返回显示屏幕的高度(除Windows任务栏之外)。
+	2.availWidth 返回显示屏幕的高度(除Windows任务栏之外)。
+	3.colorDepth 返回目标设备或缓冲器上的调色板的比特深度。
+	4.height 返回显示屏幕的高度。
+	5.pixelDepth 返回显示屏幕的颜色分辨率(比特每像素)。
+	6.width 返回显示器屏幕的宽度。
+
+DOM
+ document对象	文档对象
+	用来获得页面上所有的标签，和标签里的属性，通过树形结构进行查找，通过"."进行获取或写入，并且在js下也存储了所有html的对象
+	属性和方法
+	1.body 提供对<body>元素的直接访问
+	2.cookie设置或返回与当前文档有关的所有cookie
+	3.domain 返回当前文档的域名
+	4.title 返回当前文档的标题
+	5.URL 返回当前文档的URL
+	6.getElementById()返回对拥有指定id的第一个对象的引用
+	7.getElementByName()返回带有指定名成的对象集合
+	8.getElementByTagName()返回带有指定标签名的对象集合
+	9.getElementByClassName()返回对拥有指定class名成的对象集合
+	10.write() 向文档写HTML表达式或JavaScript代码
+	11.writeln() 等同于write()方法，多个换行符
+Node对象
+	是一种接口，里面所含的方法和属性都由孩子元素实现，除了IE都好使
+	属性和方法
+	1.nodeType获得节点类型
+	    1表示标签节点  2属性节点  3文本节点
+	2.nodeName节点名称
+	3.tagName获得标签名称
+	4.parentNode父类节点
+	5.nodeValue注释内容
+节点操作
+	1.document.createElement("div")创建节点
+	2.document.createTextNode()创建文本节点
+	3.document.getAttribute()获得属性值
+	  document.setAttribute()设置属性值
+	  document.removeAttribute()删除属性值
+	4.父类节点.appendChild()在末尾添加孩子节点
+	5.父类节点.removeChild()删除孩子节点
+	6.父类节点.insertBefore(新，指定元素)在父类之前插入，添加到指定元素之前
+	7.cloneNode(true.false)复制
+获取节点 Element
+	1.对象.fristChild()获得第一个孩子(带文本节点)
+	  对象.fristElementChild()获得第一个孩子	
+	2.对象.lastChild()获得最后一个孩子(带文本节点)
+	  对象.lastElementChild()获得最后一个孩子
+	3.对象.childNodes()获得所有的孩子(数组)
+	4.对象.previousSibling()获得上一个兄弟(带文本节点)
+	  对象.previousElementSibling()获得上一个兄弟
+	5.对象.nextSibling()获得下一个兄弟(带文本节点)
+	  对象.nextElementSibling()获得下一个兄弟
+	6.对象.parentNode()获得一层父类对象(带文本节点)
+	  对象.parentElement()获得一层父类对象
+Comment对象
+	1.对象.data获得注释内容
+	2.document.createComment()创建注释
+DocumentType对象
+	1.document.doctype.name获得标签名
+	2.docuemtn.doctype获得注记
+动态样式
+	动态加载js
+		var s=document.createElement("script");
+		s.src="js.text1.css";
+		document.bodu.appendChild(s);//添加孩子
+	动态加载css
+		var c=document.createElement("link");
+		c.href="css/link1.css";
+		c.rel="stylesheet";
+		var head=document.getElementsByTagName("head");
+		head[0].append(c);
+文档碎片 DocumentFragment
+	文档碎片相当于一个口袋或者仓库，叫做轻量级文档，用来提高对节点操作的速度，它实现了node下的所有方法，可以增删改查节点
+	例如：
+		var list=document.getElementById("list");
+		var li-=ull;
+		var f=document.createDocumentFragment();//创建口袋
+		for(i=0;i<=1000;i++){
+			li=document.createElement("li");
+			var text=document.createTextNode(i);
+			li.appendChild(text);
+			f.appendChild(li);//放入口袋
+		}
+		list.appendChild(f);
+表格对象操作
+	属性和方法
+	1.rows[]行的数组
+	2.cells[]列的属性
+	3.table.insertRow(i)创建行,从0开始
+	4.table.deleteRow(i)删除行，从0开始
+	5.tr.insertCell(i)创建单元格，从0开始
+	6.tr.deleteCell(i)删除单元格，从0开始
+	7.tr.rowIndex返回该行的索引值
+	8.td.cellIndex返回该列的索引值
+	9.td.colspan指定单元格跨的列数
+	10.td.rowspan指定单元格跨的行数
+	例如：
+	var table=document.createElement("table");
+		table.border="1";
+		table.width="100%";
+		var tr=table.insertRow(0);//创建行
+		tr.insertCell(0)//创建列
+			.appendChild(document.createTextNode("data"));
+		table.rows[2].cells[3].style.backgroundColor="red";//获取行列
+
+DOM扩展
+	1.querySelcetor()获得选择器里的第一个元素
+	2.querySelectorAll()获得选择器里的所有元素
+	3.matchesSelector()是否匹配选择器标签，返回t/f
+	 兼容性不好，需要加上浏览器前缀，例如：webkitMathesSelector()
+元素遍历
+	1.classList
+	(1)add()添加class名称，值已存在，则不会添加
+	(2)remove()删除class名称   
+	(3)contains()判断是否存在class名称
+	(4)toggle()添加删除class名称切换
+	例如：
+		var v=document.querySelector(".d1");
+		  v.onclick=function(){
+		  if(v.classList.contains("d2")){
+			v.classList.remove("d2")
+		}
+		else{
+			v.classList.add("d2");
+		}
+		v.classList.toggle("d2");//切换方法
+		}
+2.HTMLDocument
+	1.readyState判断文档是否加载完毕
+	2.compatMode判断浏览器兼容模式 CSS1Compat标准模式 BackCompat怪异模式
+	3.document.head获得head标签
+3.自定义数据属性
+	自定义属性必须"data-"开头
+	例如：
+	var h=document.querySelector(".font");//获得标签
+		var id=h.dataset.id;//获得data下的属性
+		var name=h.dataset.name;
+	<h1 class="font" data-id="00435" data-name="zhangsan">
+插入标记
+	1.innerHTML()添加标签和文本 获得里面的
+	2.outerHTML()添加标签和文本  获得整个的
+插入文本
+	1.innerText()??innserText添加文本  获得里面的
+	2.outerText()添加文本  获得整个的
+规定位置添加标签
+	insertAdjacentHTML()  在指定位置插入标签
+	(1)beforebegin 在前面添加兄弟
+	(2)afterbegin 在之前添加孩子
+	(3)beforeend  在之后添加孩子
+	(4)afterend   在之后添加兄弟
+	例如：
+	h.insertAdjacentHTML("beforeend","<p>pp</p>");
+	insertAdjacentText()在指定位置插入文本
+DOM2和DOM3扩展
+	1.样式处理
+	    对象.currentStyle.width获取样式 支持IE
+	    getComputedStyle(对象,"随便给")获取或修改样式 支持高版本
+	function getCss(obj,attr){
+		if(obj.currentStyle){
+		   return obj.currentStyle[attr];
+		}
+		else{return getComputedStyle(obj,false)[attr]}
+	}
+	function css(obj,attr,value){
+		if(arguments.length==2){
+		return getCss(obj.attr)
+		}
+		else if(arguments.length==3){
+		obj.style[attr]=value;	
+	}
+	}
+	css(div,"width","200px");
+偏移量
+	1.offsetWidth元素的宽度(填充+补白+边框)
+	2.offsetHeight元素的高度
+	3.offsetLeft居于左侧的偏移量
+	4.offsetTop居于上方的偏移量
+	5.offsetParent获取元素居于父类的偏移
+可视化窗口
+	1.document.body.clientWidth获得可视化窗口的宽度(带滚动条)
+	2.document.body.clientHeight获得可视化窗口的高度(带滚动条)
+	3.document.documentElement.clientWidth获得HTML的宽度
+	4.document.documentElement.clientHeight获得HTML的高度
+	5.对象.scrollWidth没有滚动条的总宽度
+	6.对象.scrollHeight没有滚动条的总高度
+	7.对象.scrollTOP滚动条上方偏移量
+	8.对象.scrollLeft滚动条左侧偏移量
+	
+事件event
+	事件流
+      		时间流描述的是从页面中接收事件的顺序；IE的事件流叫做事件冒泡，其他浏览器叫做事件捕获
+	事件冒泡
+		事件冒泡是从文档中最深的节点开始查找，逐渐向上传播
+		例如:div->body->html->document
+		注意：IE低版本会从body直接找到document，IE9以上会一直冒泡到window对象
+	事件捕获
+		事件捕获支持高版本浏览器，尽管规范里要求事件从document进行传播，但是浏览器都是从window对象开始捕获事件
+	例如：document->html->body->div
+	例如：	
+		h1.onclick=function(){alert("h1被点击")}
+		div.onclick=function(){alert("div被点击")}
+		body.onclick=function(){alert("body被点击")}
+		<html>
+			<body>
+			<div id="d1">
+				<h1>aaaa</h1>	
+			</div>
+			</body>
+		</html>
+DOM事件流
+	"DOM2级事件"规定事件流包括三个阶段:事件捕获，事件处理，事件冒泡，首先先发生时间捕获，为捕获事件提供机会，然后是实际的目标接收到事件，最后是再向上冒泡。
+	例如:document->html->body->div->body->html->document
+	属性和方法
+	1.altKey返回当事件被触发时，"ALT"是否被按下。
+	2.button返回当事件被触发时，哪个鼠标按钮被点击
+	3.clientX返回当事件被触发时，鼠标指针的水平坐标(获不带菜单栏的)
+	4.clientY返回当事件被触发时，鼠标指针的垂直坐标(获不带菜单栏的)
+	5.ctrlKey返回当事件被触发时，"CTRL"是否被按下。
+	6.relatedTarget返回与事件的目标节点相关的节点。
+	7.screenX返回当某个事件被触发时，鼠标指针的水平坐标。(整个窗口)
+	8.screenY返回当某个事件被触发时，鼠标指针的垂直坐标。(整个窗口)
+	9.shiftKey返回当事件被触发时，"SHIFT"是否被按下。
+	IE浏览器
+	10.cancelBubble如果像阻止时间传播到包容对象，必须把该属性设为true
+	11.keyCode对于keypress事件，返回被敲击的键生成的Unicode字符码
+	12.returnValue如果设置了该属性，它的值比事件句柄的返回值优先级高，把这个属性设置为fasle，可以取消发生时间的源元素的默认动作。
+	DOM2
+	13.bubbles返回布尔值，指时间是否时气泡事件类型。
+	14.cancelable返回布尔值，指示事件是否可拥可取消的默认动作。
+	15.currentTarget返回其事件监听器触发该事件的元素。
+	16.eventPhase,返回事件传播的当前阶段。
+	17.target返回触发此事件的元素(事件的目标节点)
+	18.type返回房前Event对象表示的事件的名称。
+	19.preventDefault()通过浏览器不要执行与事件关联的默认动作。
+	20.stopPropageation()不再派发事件。
+阻止冒泡事件
+	1.cancelBubble=true;IE8以下
+	2.returnValue=false;IE浏览器
+	3.preventDefault()其他浏览器
+	4.stopPropagation()其他浏览器
+	5.事件监听可以阻止
+事件监听
+	1.addEventListenter(事件名称,函数，true/false)事件监听(高版本浏览器)
+	  true表示捕获事件，false冒泡事件
+	2.removeEventListenter(事件名称,函数,true/false)删除事件监听
+	3.attachEvent()事件监听(IE低版本)
+	4.datachEvent()删除事件监听
+	注意:再addEventListenter里写事件用click,在attachEvent用onclick
+鼠标滚轮对象
+	1.mousewheel鼠标滑轮事件 支持除了火狐浏览器
+	2.event.wheelData返回滚轮事件的值 +120向上 -120向下
+	3.DOMMouseScroll鼠标滑轮事件 支持火狐
+	4.event.detail返回滚轮事件的值 +3向下  -3向上
+	例如
+		document.addEventListener("mousewheel",function(ev)){
+			alert(ev.wheelDelta);
+		},false)
+其他事件
+	1.contextmenu上下文事件 用来设置页面的鼠标右键菜单
+	2.readystatechange事件提供了页面加载状态的相关信息
+	3.pageshow和pagehide
+	pageshow叫做无论页面来自哪里，在重新加载页面时，进行触发
+	pagehide页面在卸载时进行触发
+设备事件
+	1.orientationchage是否切换了屏幕模式事件
+	2.window.orientation屏幕模式
+		0竖屏 90向左旋转90度 -90向右旋转90度
+	3.MozOrientation是否切换了屏幕模式事件
+	4.event.x event.y event.z判断屏幕模式
+		x=0,y=0,z=1为竖屏状态
+	5.deviceorientation设置屏幕3D旋转(主流浏览器)
+	6.event.alpha围绕z旋转 0~360
+	  event.beta围绕x旋转-180~180
+	  event.gamma围绕y旋转-90~90
+		x=0,y=0,z=0为竖屏状态
+	7.event.touches触摸事件
+	  touchstart手指触摸屏幕触发
+	  touchmove手指在屏幕上连续触发
+	  touchend手指从屏幕移开触发
+	  touchcanel系统停止跟踪触摸事件
+	8.event.type手势事件(苹果)
+	  getturestart当一个手指按下，另一个手指触摸
+	  gesturechange当任意一个手指在屏幕上发生变化进行触发
+	  gestureend当任意一个手指在屏幕上离开
+错误处理
+	错误类型
+	1.error基本错误类型，其他错误的实现了它，它在浏览器的控制台里抛出异常
+	2.evalError eval函数发生异常时进行抛出
+	  例如:new eval();//eval=1123;
+	3.rangeError 当数值超出相应的范围时抛出异常
+	  例如:var x=new Array(-2);x[x.length+1]
+	4.syntaxError 当eval()引用了js语法错误时抛出
+	  例如：eval("a"++"b")
+	5.typeError 当变量存储意外类型时，或者不存在时抛出异常
+	  例如：var a=new 10;
+	6.URLError当加密解密引用不正确时抛出异常
+	  例如:enodeURL(new 10)
+	注意错误情况:
+	1.undefined只是判断字符串的情况下，才能判断true和false值，但是无法和数字进行转化，所以判断一个变量是否是未定用:typeof a=="undefined"
+	2.页面上接收的值都是字符串类型，程序中出现的数字错误，要考虑到是否要判断类型和转化类型，不要判断"a==NaN",要验证isNaN(a)
+	3.判断一个变量是否为空，不要这样"if(value){}",也不要"value==null value==Infinity",要用typeof
+	4.验证对象类型,绝对不要"fun=="function""或"x==Array",而是"x instanceof Array"
+	区分致命性错误和非致命性错误
+	1.是否影响当前程序进行运行
+	2.是否影响了页面的一部分内容显示
+	3.当前的错误是否可以进行恢复
+	4.重复相同的动作是否可以消除错误
+	
+抛出异常
+  例如：
+ throw{name:"zhangsan"};
+ throw new Error("对不起，你引用了一个错误类型")
+处理异常
+  例如：
+  try{//出现错误的地方
+    document.writeln(10);
+  }
+   catch(error){//解决问题的地方
+     alert("error.message)
+  }
+  finally{//以上不管谁执行，finally都执行
+    document.writeln("asdasdasd")
+  }
+控制台输出语句
+  1.Error("报错提示")
+  2.consle.log(控制台的输出语句)
+  3.consle.info"将提示信息输出到控制台"
+  4.consle.warn“将警告信息输出到控制台”
