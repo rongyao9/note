@@ -1,0 +1,308 @@
+mysql:轻量级数据库，一般应用于小型项目，免费，可用于手机端
+sql server:中型数据库，一般用于中型项目，不免费，例如：政府项目
+oracle:大型数据库，用于大型项目，不免费，语法关键字较多，例如：电商平台
+database:用于云开发数据库
+
+char和varchar的区别？
+	char叫做固定字符串，一旦定义，长度不可改变，不满足长度，用标识符进行占位，操作速度块
+	varchar叫做可变字符串:长度随着定义内容进行改变，操作更灵活
+表名和列名命名规则
+	必须以字母开头，必须在1-30个字符之间；必须只能包含 A-Z,a-z,0-9,_,$和#;必须不能和用户定义的其他对象重名；必须不能是数据库的关键字
+
+注释的写法
+	#单行注释 --单行注释  /*多行注释*/
+sql语法
+	1.创建表
+	创建 表 表名(
+	字段1 类型(长度) 是否为空 主键，
+	字段2 类型(长度) 
+	......
+	)
+	例如：
+	create table book(){
+	  bon int(11) not null primary key,
+	  bname varchar(30)
+	}
+	create table gre(
+	  sno int(11) not null auto_increment(自动递增),
+	  gres float(9),
+	  primary key(sno)(定义主键)
+	)
+
+操作表
+	添加字段
+		alter table stu
+		add (age int(11) not null)
+	修改字段
+		alter table stu
+		modify sname varchar(50)
+	删除字段
+		alter table stu
+		drop column age 
+	删除表
+		drop table  book1
+处理数据
+	添加数据
+	定义全字段
+	  insert into stu (sno,aname,sex,age,brith,mon)
+	  values (3,'小明','男',22,'1993-3-3',34.5)
+	添加部分字段 但是不定义的字段必须设置可以为空
+	  insert into stu(sno,sname,sex,age)
+	  value (null,'小红','女',23)
+	在字段里设置空值
+	  insert into stu (sno,sname,sex,age)
+	  values(null,'小红','女',23)
+	定义全字段的缩写
+	  insert into stu
+	  values (null,'小丽','女','1990-2-3',234.3)
+	修改数据
+	修改全部信息
+	  update stu set sex='男'
+	指定修改内容
+	  update stu set sex='女' where sno=4
+	修改条件可用不同运算符号
+	  update stu set sex='女' where age>20
+	修改多个字段
+	  update stu set brith='1901-1-12',age=21 where sex='女'
+	删除数据
+	清空表
+	  delete stu 
+	删除指定条件的数据
+	  delete from stu where sno=4
+	删除条件可用不同运算符
+	  delete from stu where age>20
+	
+基本查询
+	查询所有字段
+	  select * from stu 
+	查询指定字段
+	  select sno,sname,sex,age from stu 
+	查询字段可以操作运算符
+	  select sno,sname,sex,age+20 from stu 
+	注意:空值不会参与任何运算
+	给字段起别名 as定义
+	  select  sno,sname,sex,age+20 as ages,brith+2'生日'
+	  from stu
+	给字段去重复
+  	  select distince sex,sname from stu 
+ 	注意:当去重复字段查询时，包含了其他字段，则当所有字段都为重复时才会去重复过滤条件
+
+where的用法 写作顺序要固定
+	select  * from stu where sno=6
+	可以在where语句里用比较运算符
+	=等于 <小于 >大于 <=小于等于 >=大于等于 !=不等  <>不等
+	select * from stu where age>=20
+	select * from stu where age!=20
+	select * from stu where age<>20 不等于的两种写法都可以使用
+ 
+其他运算符
+	between...and 所算去的范围是闭区间
+ 	  select * from stu where age between 20 and 22
+ 	  select * from stu where brith between '19101-01-01' and '19990-21-31'
+	in 查找匹配值，可以是任意一种类型
+	  select * from where sname in('张三','小红')
+	  select * from stu where age in(20,0,23)
+	like 模糊查询，匹配字符串，_表示一个字符，%表示多个字符 
+	  select * from stu where sname like '%web%'
+	  select * from stu where sname like '张_'
+	null 查询空值，空值不能用比较运算符进行查询
+	  select * from stu where mon is null 为空
+	  select * from stu where mon is not null 不为空
+	注意:null不属于数据库的类型，所以空值只能用is不能用"="查询
+	逻辑运算
+	  and 并且连接符，两个表达式都满足才查询
+		select * from stu where sex='男' and age>22
+  	  or 或者连接符，两个表达式之一满足就查询 
+		select * from stu where sex='男' or age>22
+	  not 非连接符，取相反值
+		select * from stu where age not in(0,20,23)
+优先级
+	数学运算符>连接符>比较运算符>其他比较运算符>逻辑运算符>not>and>or
+	例如:
+		select * from stu where age not in (0,20,23)
+		select * from stu where sname'张三' or sname='小明' and age>=22
+	注意:正常表达式会线运行and,后运行or,如果想反过来执行，则可以用括号使其优先级变高
+	排序 order by
+	asc正序(默认) desc倒序
+		select * from stu order by age desc
+		select * from stu order by age desc,mon desc
+	 
+分组函数 
+	函数内容
+	最大值和最小值
+		select max(age),min(age) from stu 
+	平均值和总和
+		select avg(mon),sum(mon) from stu
+	记录总个数
+		select count (*) from stu
+	也可以使用其他字段 但是忽略空值
+		select count (mon) from stu 
+	记录总共有多少种类，可以去重复
+		select count(distinct sex) from stu 
+	注意:sql语句的所有关键字,都可以嵌套使用
+	注意事项:
+		1.分组函数会忽略空值
+		2.分组函数不能直接与字段同时查询
+		3.分组函数的条件不能放在where语句里使用
+	分组函数 group by
+	查询性别男和女分别有多少人
+		select count(*),sex from stu group by sex
+	注意:查询条件里有多个字段，group by里就要放多少个字段,否则数据不对应
+		select count(*),sex,age,mon from stu
+		group by sex,age,mon
+	过滤条件 having
+	  where用来过滤基本字段，having用来过滤分组函数
+	例如
+		select count(*),sex from stu
+		where mon is not null 	
+		group by sex
+		having count(*)>=3
+	全部关键字
+		select count(*),sex from stu 
+		where mon is not null 
+		group by sex
+		having count(*)>=3
+		order by sex
+	注意：以上式单表查询的所有关键字，条件可以省略，但是顺序不能改变
+
+字符控制函数
+	1.lower(str) 将str的值全部置为小写字母
+	2.upper(str) 将str的值全部置为大写字母
+	例子：select upper(ename),ename,age,sex from emp
+	      select ename.age,sex from emp
+	      where upper(ename)="TOM" or lower(ename)='TOM'
+	3.concat(str1,str2,...) 将str1、str2等字符串连接起来
+	      select concat('a','b','c');
+	4.sbustr(str,pos,len)从str的第pos位开始，截取长度为len的字符串
+	      select substr('abc',1,2);
+	5.length(str) 获取str的长度
+	      select length('abc');
+	6.inser(str,substr) 获取substr在str中的位置
+	      select instr('abc','a');
+	7.lpad(str,len,padstr)/rpad(str,len,padstr) 首先判断str是都达到了len的长度，如果没有达到，那么在str的左侧/右侧对应添加padstr来使结果达到len的长度
+	注意：padstr常用的值有:'*'和''(空格)
+		select lpad(tname,8,'*') from tech 左补齐
+		select rpad(tname,8,'#') from tech 右补齐
+	8.trim(remstr from str) 从str中删除开头和结尾的remstr(不会处理字符串中间含有的remstr)
+		select trim('s' from tname) from tech
+	9.ltrim(str)  从str中删除左侧开头的空格
+	10.rtrim(str)  从str中删除右侧结尾的空格
+	11.replace(str,from_str,to_str) 将str中的from_str替换为to_str(会替换掉所有符合from_str的字符串)
+		select replace(tname,'D','***')from tech
+
+二、数字函数
+	1.round(x,d) 根据d指定的(小数)位数对x进行四舍五入(注意,d可以位负数，为附属的时候即位对个位以上四舍五入)
+		select round(26.5456,-1) from tech
+	2.truncate(x,d)根据d制定的(小数)位数来对x进行截断(不进行四舍五入)(注意,d可以为负数,为负数的时候即为对个位以上截断)
+		select truncate(43.65542,2) from tech
+
+
+三、日期函数
+  	1.sysdate() now()都表示为系统时间
+  		例如：
+  		select sysdate(),now() from stu
+  	2.dayofyear()当年的第几天
+  	3.dayofmonth()当月的第几天
+  	4.dayofweek()返回星期
+  		例如：
+  		select dayofmonth(birth),dayofweek(birth),
+  		dayofyear(birth),birth from stu
+	5.dayname()英文格式的星期 
+	6.last_day()当月的最后一天
+  	7.to_days()把日期转化成天数
+  		例如：
+  		select birth,dayname(birth),last_day(burth),
+  		to_days(birth) from stu
+四、通用函数
+	1.ifnull(属性1，属性2)当前一个值为null,则用第二个值代替
+  		例如：
+ 		 select name,age,ifnull(age,0),from stu
+
+  	2.if(属性1，属性2，属性3)当第一个值不为空，则显示第二个值，否则显示第三个值
+  		例如：
+  		select name,age,if(age,age,0) from stu
+ 
+  	3.nullif（属性1，属性2）当两个值相等，返回null，否则返回第一个值
+ 		 select name,age,nullif(age,23)
+	4.COALESCE（属性1，。。。）当第一个属性不为空，则显示自己，否则显示下一个，以此类推，可以放多个值
+ 		 例如：
+  			select sex,age,COALESCE（sex,age,0）from stu
+
+  	5.case when then else end 条件函数
+	  case 指定字段 when 需要符合条件1 then 表达式1
+		select id ,name,dept_id,case dept_id
+		when 101 then salaer *1.1
+		when 106 then salary *1.2
+		else salary *1.3 end salary from person 
+
+子查询
+	也叫做内查询，是一种多表查询的表现形式	
+		select * from emp where sal>(
+		select sal from emp where ename='李四')
+	注意：
+		1.子查询必须放在小括号内
+		2.子查询可以定义在from,where,having里
+		3.子查询必须放在等式的右边
+		4.子查询里的字段只能查询对应的一个字段
+		5.单行记录对应单行子查询，多行记录对应多行子查询
+	举例：
+		1.求所有人中，总薪资的最大和最小值	
+		select min(sal),max(sal)
+			from (select avg(sal*12+comm)as sal  from emp
+			group by ename)emp
+		2.按性别分组，看哪种性别比总平均工资大
+		select avg(sal),sex from emp group by sex
+		having avg(sal)>=
+			(select avg(ifnull(sal,0)) from emp)
+多行子查询
+	in在匹配值之内 any满足其中一个条件 all满足所有条件
+	in的用法
+		select * from emp where sal not in 
+			(select salfrom emp 
+			where ename in('李四','Tom','小敏'))
+	any的用法
+		select * from emp where sal > any
+			(select sal from emp
+			  where ename in('李四','Tom','小敏')
+			)
+	all的用法
+		select * from emp where sal > all
+			(select sal from emp 
+			where ename in('李四','Tom','小敏'))
+	空值问题
+	  当子查询内出现空值，则会造成查询数据不正确，但是多行子查询的in,any,all关键字，会忽略空值不计，解决的最好方法，可以用单行函数进行嵌套，例如：ifnull(sal,0)解决
+	
+	多表查询
+	    笛卡儿积
+	       没有条件链接，或者链接了错误条件，造成数据是两个表的乘积，值没有对应
+	    例如：select * from emp,dept
+	    等值链接
+		匹配多表的主外键值，关联条件的数比表的数量少一个，多个条件用and进行链接
+
+	     例如
+		select * from emp,dept where emp.did=dept.did
+	     起别名
+		select * from emp e,dept d where e.did=d.did		
+		select e.ename,e.dname from emp e,dept dwhere e.did=d.did
+		select e.*,d.name from emp e,dept d where d.did=d.did
+	     注意：
+		1.起别名是为了简化重复利用表名字
+		2.起别名可以区分不用表里的相同字段
+		3.别名.*用来查询当前表里的所有字段 
+	自连接 
+		查询两个相同表，用来表示两个表的相同的关系，或者比较
+		例如Lselect e1.ename'领导',e2.ename '员工'
+		    fom emp e1,emp e2
+		    where e1.eid=e2.mgr
+	内链接  (mysql没有内链接)
+		关联没有人员的部门(左链接)
+		  select * from dept d,emp e where e.did=d.did(+)
+		关联没有人员的部门(右链接)
+		  select * from dept d,emp e where d.did=e.did(+)
+	外连接
+		关联没有人员的部门
+		select * from dept d left outer join emp e on (e.did=d.did)
+		关联没有部门的人员
+		selset* from dept d right outer jion emp e on(e.did=d.did)
+		两者都关联
+		select * from dept d full outer join emp e on(e.did=d.did)
