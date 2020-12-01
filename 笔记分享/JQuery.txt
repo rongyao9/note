@@ -1,0 +1,222 @@
+jquery介绍
+  jquery是js的一个框架，是一个轻量级框架，比js用法更简洁，并完成更多的功能，它能兼容低版本和html5+css3属性，能实现表单验证，页面动画，后台交互，游戏制作等功能，需要导入jquery插件。
+  导入方式（导入在script语法之前）
+	<script src="js/jqeury.js"></script>
+  语法
+	1.$(document).ready(function(){
+	  //媒体文件之前加载
+	  })
+	2.$(function(){
+	  //媒体文件之前加载
+	  })
+	3.$(window).load(function(){
+	  //所有文件之后加载
+	  })
+	4.(function(){
+	  //所有文件之前加载
+	  })(jQuery)
+  选择器
+    基本选择器
+	1.$("*")通配符选择器
+	2.$("div")标签选择器
+	3.$(".font")类选择器
+	4.$("#text")id选择器
+    关系选择器
+	1.$("div p")后代选择器
+	2.$("div>p")孩子选择器
+	3.$("h1,p,a")并集选择器
+	4.$("p.font")交集选择器
+	5.$("h1~p")兄弟选择器
+    属性选择器
+	1.$("img[alt]")属性选择器
+	2.$("input[type=text]")属性选择器
+    伪类选择器
+	1.$("div:first")获得第一个元素
+	2.$("div:last")获得最后一个元素
+	3.$("div:eq(2)")获得第几个元素，从0开始***
+	4.$("div:gt(3)")获得索引大于3的元素
+	5.$("div:lt(3)")获得索引小于3的元素
+	6.$("div:not(.d1)")刨除某一类元素
+	7.		   even偶数、odd奇数
+  事件
+	1.click()鼠标单击事件
+	2.dblclick()鼠标双击事件
+	3.blur()失去焦点
+	4.focus()获得焦点
+	5.mouseover()鼠标移近
+	6.mouseout()鼠标移出
+	7.mouseleave()鼠标移近
+	8.mousenter()鼠标移出
+	9.mousedown()鼠标按下
+	10.mouseup()鼠标抬起
+	11.keydown()键盘按下
+	12.keyup()键盘抬起
+	13.keypress()键盘按住
+	14.hover()鼠标悬停
+  方法
+	1.css()改变标签样式
+	  $("h1").css({"font-size":"40px","color":"red"});
+	  $("h1").css({fontSize:"40px",color:"red"});
+	  $(".box").css("width");//获得属性值
+	2.width()获得或修改元素的宽度
+	  height()获得或修改元素的高度
+	3.innerWidth()获得或修改元素的宽度（包括内边距，不包括边框）
+	  innerHeight()获得或修改元素的高度
+	4.outerWidth()获得或修改元素的宽度（包括内边距和边框）
+	  outerHeight()获得或修改元素的高度
+	5.index()获得索引值，从0开始，找不到返回-1
+	6.length 获得页面上标签的个数，也可以获得数组和字符串的长度
+	7.size() 只能获得页面上标签的个数
+	8.html()获得或写入页面上的标签和文本
+	9.text()获得或写入页面上的文本
+	10.val()获得或写入文本框的值
+  筛选
+	1.eq() 获得第几个元素
+	2.first() 获得第一个元素
+	3.last() 获得最后一个元素
+	4.hasClass() 是否包含一个class名称
+	5.filter() 筛选出指定元素
+	6.is() 是否所属某一个标签
+	7.map() 将一组元素转换成其它数组
+	8.has() 获得指定的孩子对象
+	9.not() 刨除某一个元素
+	10.slice() 获得元素的指定范围
+  查找
+	1.children() 查找所有孩子
+	2.find() 查找指定孩子
+	3.next() 下一个兄弟
+	4.nextall() 下面所有兄弟
+	5.nextUntil() 查找下面兄弟，到指定元素结束
+	6.parent() 最近的父类
+	7.parents() 所有父类
+	8.parentsUntil() 查找父类，到指定元素结束
+	9.prev() 上一个兄弟
+	10.prevall() 上面所有兄弟
+	11.prevUntil() 查找上面兄弟，到指定元素结束
+	12.siblings() 所有兄弟
+  串联
+	1.add()选择多个
+	2.contents()查找内部所有子节点
+  函数
+	1.each()为对象执行一个函数，没有事件，类似于循环
+	（1）无参数
+		$("ul li").each(function(){$(this).css({backgroundColor:"red"})});
+	（2）一个参数 i表示集合中的索引，从0开始
+		$("ul li").each(function(i){if(i<3){$(this).css({backgroundColor:"red"})}});
+	（3）两个参数，etm表示当前元素，类似this
+		$("ul li").each(function(i){if($(etm).is(".text")){$(this).css
+		({backgroundColor:"red"})}});
+属性
+	1.attr() 获得或写入属性
+	2.removeAttr() 删除属性
+	3.prop() 事件属性
+	4.removeProp 删除事件属性
+CSS类
+	1.addClass() 添加class属性
+	2.removeClass() 删除class属性
+	3.toggleClass() 添加删除切换
+动画效果
+	1.show() 显示元素 show(毫秒数,回调函数)
+	2.hide() 隐藏元素
+	3.toggle() 显示隐藏切换
+	4.slideDown() 向下显示
+	5.slideUp() 向上隐藏
+	6.slideToggle() 上下切换
+	7.fadeIn() 淡入
+	8.fadeOut() 淡出
+	9.fadeTo(毫秒数,透明度,回调函数) 降低透明度
+	10.fadeToggle() 淡入淡出切换
+	11.animate({样式},毫秒数,回调函数)
+	12.stop(true,true) 停止动画
+		第一个值立即执行动画，第二个值立即结束动画
+	13.delay(毫秒数)延迟执行
+
+偏移量
+	1.offset() 获得或写入元素的偏移量
+	2.position() 获取相对父类的偏移量
+	3.scrollTop() 获得或写入滚动条顶部偏移量
+	4.scrollLeft() 获得或写入滚动条左侧偏移量
+	5.$(window).height() 可见区域高度
+	6.$(document).height() 整个页面的高度
+
+href="http://wpa.qq.com/msgrd?v=3&uin=2754934&site=qq&menu=yes"
+
+文档处理
+  添加孩子（内添加）
+	1.append()在孩子元素之后添加
+	2.appendTo()在页面上匹配的元素添加到指定的标签里尾部
+	3.prepend()在孩子元素之前添加
+	4.prependTo()在页面上匹配的元素添加到指定的标签里头部
+  添加兄弟（外添加）
+	1.before()在元素之前添加兄弟
+	2.insertBefore()把匹配的元素添加指定标签前
+	3.after()在元素之后添加兄弟
+	4.insertAfter()把匹配的元素添加到指定元素后
+  添加父类（包裹）
+	1.wrap()把匹配的元素用指定元素分别包裹起来
+	2.wrapAll()把匹配的元素用指定元素整个包裹起来
+	3.wrapInner()把匹配的元素的子元素包起来
+  替换
+	1.replaceWith()把原有标签替换
+	2.replaceAll()同上，写法不同
+  复制
+	1.clone()复制指定元素
+  删除
+	1.empty()删除所有子节点
+	2.remove()删除指定子节点
+	3.detach()删除制定子节点，绑定的事件会保留
+事件处理
+	1.on()绑定事件
+	2.off()删除on事件
+	3.bind()绑定多次和多个事件
+	4.one()绑定事件，只能执行一次
+	5.trigger()触发制定事件
+	6.unbind()删除bind
+事件委派
+	1.live()动态添加事件内容
+	2.die()删除live
+	3.delegate()动态添加多次和多个时间内容
+	4.undelegate()删除delegate
+
+bind的写作方式
+	1.绑定一个事件
+	    $(".box").bind("click",function(){})
+	2.绑定多个事件，执行一个效果
+	    $(".box").bind("click mouseover",function(){})
+	3.绑定多个事件  执行不同效果	
+	   $(".box").bind({
+	   click:function(){},
+	   mouseover:function(){},
+	  mouseout:function(){}	
+		})
+	4.绑定自定义事件
+	 $(".box").bind("aaa",function(){})
+	 $(".box").trigger("aaa");//触发自定义事件
+
+时间对象
+	获取方式
+	$(".d1").mousemove(function(event){
+		event.type;//事件对象
+	})
+	对象下的属性和方法
+		1.event.type获得事件名称
+		2.event.which获得键盘按键
+		3.event.pageX获得鼠标x轴位置	
+		4.event.pageY获得鼠标y轴位置
+		5.event.target获得操作事件的标签
+函数
+	1.setInterval(函数，毫秒数)周期执行
+	2.setTimeOut(函数，毫秒数)延迟执行
+	3.clearInterval()清空setInterval
+	4.clearTimeOut()清空setTimeOut
+	写法1	
+		function fun(){
+		alert("aaaa")
+		}
+		setTimeout(fun(),2000);
+	写法2
+		var t=setInterval(function(){
+		alert(i);
+		i++;
+		if(i==5){clearInterval(t);}
+		},1000);
