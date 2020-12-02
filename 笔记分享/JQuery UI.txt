@@ -1,0 +1,100 @@
+添加class
+.addClass("ClassName",1000,"easeOutBounce",function(){})
+值的顺序：class名称，动画时间，动画效果，回调函数
+百叶窗
+$(".toggle").toggle("blind",{direction:left},1000,function(){})
+direction方向 (down,left,right,up) 默认：up
+值的顺序：方向，动画时间，回调函数
+反弹效果
+$(".toggle"").toggle("bounce",{times:10,distance:500},1000)
+[distance] N 默认：20 反弹的距离
+[times] I 默认：5 反弹的次数
+值的顺序：bounce必填，反弹的距离，反弹的次数，动画时间，回调函数
+剪辑特效
+$(".toggle").toggle("clip")
+剪辑的方向[direction] ： vertical垂直剪切（默认），horizontal水平剪切 
+值的顺序：clip必填，剪辑的方向，动画时间，回调函数
+降落特效
+$(".toggle").toggle("drop")
+[direction]方向： down,left(默认),right,up
+[options] 特效： linear ease easeOutBounce
+值的顺序：drop必填，方向，效果，动画时间，回调函数
+爆炸特效
+$(".toggle").toggle("explode")
+[pieces] I 默认：9  碎片的个数
+值的顺序：explode必填， 碎片的个数，动画时间，回调函数
+折叠特效
+ $(".d2").toggle("fold",{size:100,horizFirst:true},1000);
+size设置尺寸：填写数字，默认15
+horizFirst设置先折叠的方向：true先水平后垂直,false先垂直后水平
+值的顺序：fold必填， 折叠尺寸，先水平还是先垂直，动画时间，回调函数
+突出效果
+  $(".d2").toggle("highlight",{color:"green"},2000);
+color设置颜色:rgba(),单词，十六进制值
+值的顺序：highlight必填，初始的颜色，动画时间，回调函数
+膨胀效果
+ $(".d2").toggle("puff",{percent:300},2000);
+percent缩放百分比：默认150
+值的顺序：puff必填，缩放比例，动画时间，回调函数
+缩放比例
+$(".d2").toggle("scale",{direction:"horizontal",
+                 origin:"center",percent:50},2000);
+direction方向：both两边（默认），horizontal垂直，vertical水平
+origin布局的位置：center水平居中，middle垂直居中
+percent缩放百分比：没有默认值，但是设置后方向才会好使
+scale被调整的区域：box设置padding和border可以被调整,content填充内容可被调整，both都可被调整
+值的顺序：scale必填，缩放方向，布局的位置，缩放的尺寸，被调整的区域
+动画时间，回调函数
+闪动效果
+$(".d2").toggle("pulsate",{times:10},2000);
+times闪动次数：设置数字，不可以为小数和负数，默认5
+值的顺序：scale必填，闪动次数，动画时间，回调函数
+震动效果
+ $(".d2").effect("shake",{direction:"up",distance:50,times:8},2000);
+direction移动方向:默认为left，up down left right
+distance移动距离:默认为20，设置正整数
+times震动次数:默认为5次，设置正整数
+值的顺序：scale必填，移动方向，移动距离，震动次数，动画时间，回调函数
+
+Draggable:拖拽
+$(".toggle").draggable()
+scroll:true,设置是否添加滚动条,true添加
+scrollSensitivity:500,设置滚动条偏移量
+scrollSpeed: 800，设置滚动条的移动速度
+axis:x 限制移动方法 x或y
+containment:".d1" 指定一个父类名称，只允许在父类里面移动
+cursorAt：{left:50,top:40} 设置光标显示位置 方向top、right、bottom、left
+cursor:move 设置光标样式 例如:default、move、pointer、crosshair 和css类似
+handle: "p"设置对象必须拖拽到指定区域，可以指定孩子标签
+revert设置移动定位
+true允许回到原点 false不允许回到原点
+valid不可移进 invalid不可移出
+helper：clone(克隆)
+  	
+Droppable:放置
+$(".toggle").droppable()
+accept只接受的类型（选择器）
+activeClass设置鼠标按下时对象的样式
+hoverClass设置鼠标悬停时对象的样式
+drop：function(){}鼠标松开时执行的函数
+greedy 设置事件不传播，孩子不会有父类的相同事件 true阻止传播 
+
+Sortable:排序
+$(".toggle").sortable()
+ connectWith: ".d1" 设置可以相互拖放排序的列表选项 
+Selectable选择
+$(".toggle").selectable()
+需要在CSS中加入ui-selected{}选择后
+		ui-selecting{}选择中
+
+滑动出视区
+slide
+轮廓转移
+$(".toggle").effect("transfer")
+
+手风琴点击事件
+ $( "#accordion" ).accordion();//获得手风琴菜单外面最大的父类即可
+设置html对象可以手动拖拽放大缩小
+ $( "#resizable" ).resizable();//获得要被改变大小的对象
+设置tab页的切换方式
+$( "#tabs" ).tabs();//获得tab页外面最大的父类即可
