@@ -1,0 +1,674 @@
+vue.js
+    是js的一种框架，叫做渐进式框架，可以用来定义响应式，动画，连接后台等内容，语法定义简单，数据双向绑定，节省页面代码，采用mvvm模式
+    
+    语法
+	<div id="div1"><!--挂载点-->
+	    <h1><!--模板-->
+		hello{{msg}}<!--插值表达式-->
+	    </h1>
+	</div>
+	
+	 new Vue({//创建实例
+   	     el:"#div1", //挂载点,
+   	     data:{//数据
+             msg:"word"
+     	   },
+      	  methods:{//函数
+
+     	   }
+   	     })
+模板，挂载点，实例
+	挂载点：是vue里要制定的标签
+	模板：是执行js里调用的变量
+	实例：用来生成对象
+	数据：用来定义变量
+	函数：用来执行事件
+	差值表达式：用来输出js里的值
+	例如：
+		<div></div>
+		 new Vue({//创建实例
+     		   el:"#div1", //挂载点,
+      	           template:"<a href='#'>hello{{msg}}</a>"
+      		   data:{//数据
+      		      msg:"word"
+     		   },
+  		  })
+事件和方法
+	 <div id="div1" v-on:click="fun">
+        	hello {{msg}}
+    	 </div>
+	 methods:{//函数
+            fun:function(){
+                this.msg="sddsdf"//修改数据
+                alert(this.msg)//查询数据
+            }
+        }
+    v-on用来绑定事件，也可以简称成@click
+
+vue的生命周期
+	每个Vue实例在被创建时都要经过一系列初始化过程--例如，需要设置数据监听、编译模板、将实例挂在到DOM并在数据变化时更新DOM 等，同时在这个过程中也运行一些叫做声明周期钩子的函数，这给了用户在不同阶段添加自己代码的机会。
+	注意：尽量不要在vue里使用箭头函数或者闭包之类的语法，否则会改变this关键指向。
+	执行过程：当new vue创建实例后，会自动调用构造函数，然后把变量参数初始化，设置data里的数据，寻找是否绑定了函数，或者执行数据监听等函数内容，再来寻找挂载点，并且把数据输出到挂载点实时更新。
+	事件修饰符
+	    stop 阻止单机事件冒泡
+	    prevent 不再重载页面
+	    capture 添加捕获模式(要添加监听函数)
+	    self 触发回调函数(必须操作本身，而非孩子元素)
+	    once 事件只能点击一次
+	例如：
+	    <a v-on:click.stop="fun">写作方式
+	    <a v-on:click.stop.prevent="fun">执行多个
+	    <a v-on:click.stop.prevent>省略函数
+	按键修饰符
+	    enter回车  delete删除或回退 esc退出 
+	    up上  down下  left左  right右
+	    alt   shift   ctrl 
+	例如
+	    <input v-on:keyup.13=="fun">指定键盘值进行调用
+	    <input v-on:keyup.enter="fun">指定键盘值进行调用
+	事件修饰符举例:
+	    <input id="inp" type="text" v-on:keyup.enter="fun">
+	    methods:{
+		fun:function(){
+		    alert("按下了回车，值:"+this.values)
+		}
+		}
+监听属性  watch
+    举例1：
+	<div>
+	    <h1>{{count}}</h1>
+	    <button v-on:click="count++">点击</button>	
+	</div>	
+	var vm=new Vue({
+	    data:{count:1}
+	})
+	vm.$watch('count',function(news,old){//监听函数
+		alert("原值为："+old+",便成为："+news)
+	})
+    举例2：
+	<input type="text" v-model="count">
+	<h1>{{count}}</h1>
+	watch:{
+		fun1:function(){
+		this.count++;
+	}	
+	}
+计算属性  computed
+	 <div id="div1">
+      	     姓: <input type="text" v-model="first"/>
+      	     名:<input type="text" v-model="last">
+     	     <h1>{{fullname}}</h1>
+   	 </div>
+	 computed:{
+                    fullname:function(){
+                        return this.first+this.last;
+                    }
+                }
+
+钩子函数
+	beforecreate:举个栗子：可以在这加个loading事件
+	create:在这结束loading，还做一些初始化，实现函数自执行
+ 	mounted:在这发起后端请求，拿回数据，配合路由钩子做一些事情
+	beforeDestory:确认删除XX吗?destoryed:当前组件已被删除，清空相关内容
+
+指令
+    1.v-text用来显示文本
+    2.v-html用来显示标签
+	    例如：
+		{{num}}可以定义变量和表达式
+		<div v-text="num"></div>输出文本
+		<div v-html="num"></div>可以格式化标签
+    3.v-on绑定事件 v-on:click 简写@click
+    4.v-bind绑定数据 v-bind:title简写方式 :title
+    5.v-model双向绑定属性
+	<div id="img1">
+	    <input type="text" v-bind:value="title"/>
+	    <img  src="js/pg5.jpg" v-bind:title="title"/>
+	</div>
+	 data:{
+                    title:"this is a img"
+               }
+	model下的修饰符
+	  1.lazy 在change事件中执行
+	  2.number 限定变量为整数类型
+	  3.trim 过滤首尾空格
+	例如：
+	  <input v-model.lazy="msg">
+	  <input v-model.number="msg" type="number">
+	  <input v-model.trim="msg">
+	v-bind修改样式表
+	  以对象形式输出样式
+	 	<div id="div1" v-bind:class="{d1:first,d2:last}"> </div>
+	  以数组形式输出样式   	 
+		<div id="div1" v-bind:class="[first,last]"> </div>
+	  以布尔值判断是否输出
+		<div id="div1" v-bind:class="{d1:frist,d2:last}"></div>
+		  data:{
+                    first:"d1",last:"d2" //调用calss名称的时候
+                    first:true, last:false //调用布尔判断是否显示的时候
+                }
+    6.v-if v-else v-else 判断指令
+	   <h1 v-if="show">看看文字效果</h1>
+    7.show 用来显示某个标签或属性
+	   <h1 v-show="show">看看文字效果</h1>
+        区别：
+	    show会更改css的display值进行隐藏显示元素，if会添加或删除标签，进行显示和隐藏
+	例如：
+		 <div id="div1">
+      		   <h1 v-if="show">看看文字效果</h1>
+       		   <input type="button" value="点击" @click="fun"/>
+   		 </div>
+	       data:{
+                    show:true
+                },
+                methods:{
+               fun:function(){
+                   var v=this.show==true?false:true;
+                   this.show=v;
+               }
+            }
+    判断语句的全部用法
+	例如：
+	<div id="text">
+		<input type="text" v-model:value="name">
+        	<h1 v-if="name=='领导'">你好，领导</h1>
+        	<h1 v-else-if="name=='客户'">欢迎光临，客户</h1>
+        	<h1 v-else>嗨，员工</h1>
+    	</div>
+	new Vue({
+	  	el:"#text",
+                data:{
+                    name:"领导"
+                }
+	})
+    8.v-for 循环指令  两种语法 for...in for...of
+	 <ul id="list">
+        	<li v-for="v in num">三等奖</li>遍历数字
+		<li v-for="v in attr">{{v}}</li>//遍历数组
+        	<li v-for="(v,i) in attr">{{i+":"+v}}</li>//i索引 v是值
+       		<li v-for="e in emp">{{e}}</li>//遍历对象
+       		<li v-for="(v,i) in emp">{{v+":"+i}}</li>//i属性 v是值
+       		<li v-for="v in sites">{{v.name+v.age}}</li>//遍历对象数组
+       		<li v-for="(value,key,index) in sites">
+             	 {{index+","+key+","+value.name}}//index属性，key索引，value是值
+      		  </li>
+   		 </ul>
+	 data:{
+                    num:5,
+                    attr:["a","b","c","d"],
+                    emp:{name:"张三",age:33,sex:"男"},
+                    sites:[
+                        {name:"张三",age:33,sex:"男"},
+                        {name:"李四",age:22,sex:"女"},
+                        {name:"王五",age:21,sex:"男"},
+
+                    ]
+                }
+    9.v-pre用来忽略某个标签执行Vue代码(包括子元素也会忽略)
+	<li v-pre>不会被vue执行</li>
+    10.v-vloak 这个指令是用来保持在元素上直到关联实例结束时进行编译
+        <div v-cloak>看看什么时候显示{{mag}}</div>
+    11.v-once 只渲染元素和组件一次，其所有的子节点将被视为静态内容并跳过
+	<span v-once>This will never change:{{mag}}</sapn>
+
+
+vue的过渡和动画
+	要实现的动画必须放在transition标签里  name属性指定过渡效果
+	<transition name="nameoftransition">
+	    <div></div>
+	</transition>
+	class名称
+	    1.v-enter:定义进入过渡的开始状态。在元素被插入之前生效
+	    2.v-enter-active:定义进入过渡生效时的状态，这个类可以被用来定义进入过渡的过程时间，延迟和曲线函数
+	    3.v-enter-to:2.1.8版及以上 定义进入过渡的结束状态，在动画完成之后移除。
+  	    4.v-leave:定义离开过度的开始状态，在离开过渡被触发时立刻生效
+	    5.v-leave-active:定义离开过渡生效时的状态，这个类可以被用来定义离开过度的过程时间，延迟和曲线函数
+	    6.v-leave-to：2.1.8版以上 定义离开过渡的结束状态，在动画完成之后移除
+
+执行动画效果
+    <div id="app">
+    	 <input type="button" @click="show!=show" value="点击我"/>
+         <transition name="fade">
+             <h1 v-show="show">看看文字效果</h1>
+         </transition>
+    </div>
+    <style>
+        .fade-enter-active,.fade-enter-active{
+           transition: all 1s ease;
+        }
+        .fade-leave-to,.fade-enter{
+            opacity:0;
+        }
+    </style>
+  	new Vue({
+                el:"#app",
+                data:{show:true}
+            })
+
+自定义指令
+	全局绑定
+	    例如:
+		<div id="app">
+      		  <input type="text" v-focus/>
+    		</div>
+	
+            vue.directives('focus',{//绑定指令函数
+                inserted:function(el){//当绑定元素创建时调用
+                    el.focus()//让元素获得焦点
+                }
+            })
+            new Vue({el:"#app"  })
+
+	局部绑定
+		例如：
+	 new Vue({
+                el:"#app",
+                directives:{
+                    focus:{
+                        inserted:function(el){
+                            el.focus();
+                        } } } 
+		 })
+
+	钩子函数
+	    1.bind 只能调用一次
+	    2.inserted 当元素被创建之后进行调用
+	    3.update 当元素模板更新时进行调用
+	    4.componetUdated 当元素模板更新时进行调用
+	componetUpdated的参数：
+	    1.el 获得被绑定的元素
+	    2.binding 一个对象，包含如下：
+		(1)name  指令名称
+		(2)value  显示的字符串
+		(3)expression  差值表达式的变量
+		(4)arg 指令参数
+		(5)modifiers  一个包含修饰符的对象
+	用法例如:
+	    <h1 id="app  v-run:h.aa.bb="msg+'a'"></h1>
+		Vue.directive("run",{
+                bind:function(el,binding){
+                    el.innerHTML="name:"+binding.name+"<br>"
+                    +"value:"+binding.value+"<br>"
+                    +"expression:"+binding.expression+"<br>"
+                    +"age:"+binding.age+"<br>"
+                    +"modifiers:"+binding.modifiers+"<br>"
+                }
+            })
+自定义组件
+     todolist列表
+	<div id="app">
+    		<input type="text" v-model:value="v">
+    		<input type="button" @click="fun" value="添加" />
+   		<ul v-for="item of list">
+     		    <li>{{item}}</li>
+   		</ul>
+	</div>
+	    new Vue({
+                el:"#app",
+                data:{
+                    v:"",
+                    list:[]
+                },
+                methods:{
+                    fun:function(){
+                        this.list.push(this.v);
+                        this.v="";
+                    }
+                }
+            })
+
+	自定义todolist
+	    全局组件
+	    	例如：
+		<div id="app">
+	  		<ul>
+      				 <item></item>
+   	 		</ul>
+		</div>
+		Vue.component('item',{
+               template:"<a href='#'>item</a>"
+              })
+              new Vue({
+                el:"#app",
+                data:{
+                    v:""
+                }
+            })
+	    局部组件
+	<div id="app">
+		<ul>
+    		   <item></item>
+   		 </ul>
+	</div>
+	 var todo="<h1>123</h1>"
+            new Vue({
+                el:"#app",
+                data:{
+                    v:""
+                },
+                components:{
+                    "item":todo
+                }
+            })
+	参数传递
+	 <div id="app">
+      	  <input type="text" v-model:value="v" >
+       	  <input type="button" @click="fun" value="添加" />
+       	  <ul v-for="item of list" >
+       	     <item-list  :con="v">{{item}}</item-list>
+       	  </ul>
+   	 </div>
+	自定义事件调用父类组件的自定义事件
+		Vue.component("item-list",{
+                props:["con",'index'],//子类接收父类里的变量
+                template:"<li @click='fun1'>{{con}}</li>",
+                methods:{
+                    fun1:function(){
+                this.$emit('detele',this.index);//调用父类组件的自定义事件
+                    }
+                }
+            })
+
+		 new Vue({
+          	  el:"#app",
+          	  data:{
+          	      v:"",
+         	       list:[]
+          	  },
+            methods:{
+                fun:function(){
+                    this.list.push(this.v);
+                    this.v=""
+                },
+                del:function(index){
+                    this.list.splice(index,1)
+                }
+            }
+        })
+	
+重点：
+	props:[变量1，变量2];用来调用父类里的变量
+	this.$emit('函数名',传值);用来调用父类里的函数
+
+过滤器
+	过滤页面操作的值，按照一定的显示方式写入vue
+	例如：
+	  全局定义
+		<div id="app" >
+   		 <input type="text" v-model="msg">
+   		 <h1>值为{{msg|capitalize}}</h1>
+   		 </div>
+	    Vue.filter("capitalize",function(value){
+                    if(!value){return ""}
+                    value=value.toString();
+                    return value.charAt(0).toUpperCase()+value.slice(1)
+
+                })
+            new Vue({
+                el:"#app",
+                data:{msg:""}
+            })
+	局部定义
+	 new Vue({
+                el:"#app",
+                data:{
+                    msg:""
+                },
+                filters:{
+                    sum:function(value){
+                        if(!value){return 0}
+                        value=parseInt(value)
+                        return value+100;
+                    }
+                }
+            })
+混入
+	用来定义一部分复用方法和变量属性，把vue代码分离，提取出来是为了多个模块可以复用，混入可以包含任意组件选项
+	例如
+	<div id="app"></div>
+	  var vm=new Vue({
+              el:"#app"
+          })
+          var mi={
+              created:function(){
+                  document.write("hello");
+              }
+          }
+          var Comp=Vue.extend({
+              mixins:[mi]
+          })
+          var con=new Comp();
+选项合并
+	当组件和混入对象有同名选项时，会进行混合使用
+	例如：
+	  var mi={
+              created:function(){
+                  document.writeln("我是混入")
+              }
+          }
+          new Vue({
+              mixins:[mi],
+              created:function(){
+                  document.writeln("我是实例")
+              }
+          })
+    优先级：
+	Vue实例的优先级比混入的要高
+      例如：
+	  var mi={
+              methods:{
+                  fun:function(){
+                      document.writeln("我是混入")
+                  }
+              }
+          }
+          var vm=new Vue({
+              mixins:[mi],
+              methods:{
+                  fun:function(){
+                      document.writeln("我是实例")
+                  }
+              }
+          })
+          vm.fun();
+全局混入
+	定义全局混入，当前的所有vue实例都可以注册使用，但是不建议使用，因为一旦定义，会影响到所有vue实例，不用都不行
+	例如：
+	  Vue.mixin({created:function() {
+              var m = this.$options.v;
+              if (m) {
+                  document.writeln(m)
+              }
+          }
+          })
+          new Vue({
+                  v:"hello"
+          })
+表单操作
+	1.文本框
+	    <input type="text" v-model="msg"/>
+     	   <p>消息是：{{msg}}</p>
+	2.单选框
+	性别: <input type="radio" value="nan" name="sex" v-model="sex"/>男
+       	      <input type="radio" value="nv" name="sex" v-modex="sex"/>女
+	3.复选框
+         (1)是否同意<input type="checkbox" v-model="bool" name="bool"
+                     value="false" @change="fun" />
+        <span>{{str}}</span><br>
+	 (2)爱好
+	<input type="checkbox" name="like" v-model="like" value="唱歌"/>唱歌
+        <input type="checkbox" name="like" v-model="like" value="跳舞"/>跳舞
+        <input type="checkbox" name="like" v-model="like" value="运动"/>运动
+        <p>你的爱好是{{like}}</p>
+	4.下拉框
+	 职业：<select v-model="selet">
+         <option value="001">学生</option>
+         <option value="002">老师</option>
+         <option value="003">程序员</option>
+        </select>
+        <p>你的职业是{{selet}}</p>
+	js:
+	   new Vue({
+                el:"#app",
+                data:{
+                    msg:"",sex:"",bool:"",like:[],str:"不同意", selet:""
+                },
+                method:{
+                    fun:function(){
+                        if(this.bool==true){this.str="同意" }
+                        else{this.str="不同意" }
+                    }
+                }
+            })
+	
+路由
+	js:https://unpkg.com/vue-router/dist/vue-router.js
+	下载：cnpm install vue-router
+js下路径的写法
+	<div id="app">
+    <p><!--定义菜单部分 to里定义路径-->
+        <router-link to="/foo">菜单1</router-link>
+        <router-link to="/bar">菜单2</router-link>
+    </p>
+	<!--切换菜单要显示的内容部分-->
+    <router-view></router-view>
+</div>
+	//定义要替换router-view的标签内容
+	const Foor = {template: "<h1>这是foor路径</h1>"}
+	const Bar = {template: "<h1>这是bar路径</h1>"}
+	//数组里指定了每个路径要替换的标签对象
+	const roues = [
+                {path: '/foo', compoment: Foor},
+                {path: '/bar', compoment: Bar}
+            ]
+            const router = new VueRouter({//创建路由对象，注册内容
+                routes: roues
+            })
+            const app = new Vue({//把路由对象绑定在vue实例里
+                router
+            }).$mount("#app")//el:"#app"
+脚手架下的路由
+  1.引入路由模块
+	import Router from 'vue-router'
+  2.启动路由
+	Vue.use(Router)
+  3.定义要跳转的标签
+	<router-link class="rou" to="/index">首页</router-link>
+  4.定义要显示内容的标签
+	<router-view></router-view>
+  5.绑定路由
+	import Index from '@/components/Index'
+	import About from '@/components/About'
+	import Pro from '@/components/Pro'
+	export default {
+  	name: 'center',
+     	component:[Index,About,Pro]
+  	}
+  6.创建路由对象
+	export default new Router({
+	routes:[{
+	path:'/index',//路径要和标签里的路径一致
+	name:'index'//name名称要和vue实例里的name属性一直
+	component:Index,//注册模块要和import导入的名称一致
+	}]
+	})
+  也可以写成
+	<a v-link={path:'aa/index'}></a>也可以用其他标签跳页
+	var index=Vue.extend({template:"<h1></h1>"})可以写一个标签替代
+	var index=Vue.extend({template:"#home"})或者查找页面上存在的标签
+路由配置
+	1.hashbang 定义的路径只能在模板下使用，默认为true
+	2.history 是否启动js下的history对象，存储历史记录，默认为false
+	3.abstract 是否要依赖浏览器下的历史管理工具，默认为false
+	4.root 是否调用绝对路径，默认是null
+钩子函数
+    1.全局钩子
+      beforeEach在路由切换前调用
+      afterEach在路由切换后调用
+      例如：
+	router.beforeEach((to,from,next)=>{})
+	to要进入的路由对象
+	from正要离开的路由对象
+	next进行下一状态
+    2.单个路由钩子
+      const router=new VueRouter({
+	routers:{
+	  beforeEach((to,from,next)=>{})
+	}
+      })
+    3.组件内钩子
+      const home={
+	template:'',
+	beforeRouterEnter((to,from,next)=>{})//beforeEach
+	beforeRouterLeave((to,from,next)=>{})//afterEach
+      }
+
+安装测试工具 vue-devtools
+  1.通过git下载源码
+	运行git->Git Bash
+	$ git clone http://github.com/vuejs/vue-devtools
+  2.进入目录
+	运行cd vue-devtools
+  3.安装依赖模块
+	npm install
+  4.运行生成的插件
+	npm run build
+  5.打开谷歌浏览器，进入更多工具->扩展程序
+	选择'加载已解压的扩展程序'，进入vue-devtools>shells>chrome进行安装
+
+vuex 状态管理器
+  Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并 以相应的规则保证状态以一种可预测的方式变化。
+  实际就类似于html5本地存储，相当于一个小型的的数据库，所有vue的模块都可以对vuex里的数据执行增删改 查，一般用于大型项目，小型项目过于复杂。
+  1.安装
+	npm insstall vuex --save
+  2.导入模块
+	import Vuex from 'vuex'
+  3.启动vuex
+	Vue.use(Vuex)
+
+解构分类
+  store：仓库，用来存放数据的数据库
+  state：状态，可以把它当成一个数据库表
+  gettes：获得数据的方法，类似于vue计算函数，对获取数据进行处理
+  mutations：变更，执行数据的增删改查函数，必须同步处理
+  action：动作，对数据函数进行处理，或者设置事物的提交和回滚，可以调用异步函数
+  modules：分模块处理，可以把不同数据放在不同的表里，实际就是创建多个store实例
+
+实例
+  const store=new Vuex.Store({
+    state:{count:0},
+    mutations:{
+      increate(){this.state.count++}
+    }
+  })
+  eexport default store
+
+其它vue文件需要导入模块使用
+  import store from '@/store'
+
+属性和方法
+  1.store.state.count js中获取vuex变量的方式
+  2.$store.state.count 组件里获取vuex变量的方式
+  3.gettes 获得变量的方法
+    gettes:{
+      getTest:state=>{return state.length}
+    }
+  4.store.commit(函数名称,参数)执行mutations函数
+  5.action处理函数
+    state:{count:0}
+    mutations:{
+      add(){this.state.count++}
+    }
+    actions:{
+      add(context){context.commit('add')}//可触发 mutations里的函数
+    }
+  6.modules对state分模块处理
+    const moduleA={
+      state:{},mutations:{},actions:{}
+    }
+    const moduleB={
+      state:{},mutations:{},actions:{}
+    }
+    const store=new Vuex.store(){
+      modules:{a:moduleA,b:moduleB}
+    }
