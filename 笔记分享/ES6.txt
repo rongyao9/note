@@ -1,0 +1,928 @@
+ES6
+	ECMAScript6,简称ES6，是js语言的一种标准
+  let命令
+	用来生命变量，类似于var，但是所声明的变量只在代码块内有效
+	  例如:
+	 {
+        var a=12;
+        let b="dd"; 
+   	 }
+  	  document.write(a);//可以访问
+  	  document.write(b);//不可以访问
+        不存在变量提升
+	  例如：
+	   console.log(a);//输出undefined
+    	    var a=123;
+    	    console.log(b);//报错
+    	    let b=333;
+	暂时性死区
+	  只要在块级作用域下声明let，它就"绑定"在这个区域内不受外界影响
+	  例如:
+	    var a=11;
+		if(true){
+		  a=22;
+		  document.writeln(a)l//报错
+		  let a;
+		}
+	    document.writeln(a);
+	  注意:只要函数里声明let变量，就不会在访问外面同名变量
+	不允许重复声明
+	  例如
+		function fun(){
+		  let a=10;
+		  var a=1;
+		}//报错
+块级作用域和do表达式
+	let a=123;
+	  function fun(){
+	     if(true){
+ 		let a="aaaa";
+	   }
+		document.writeln(a);//输出123，无法访问块级作用域里面的内容
+	}
+	fun ();
+do表达式
+	可以让外界访问块级作用域内的变量
+	例如:
+		let x=do{
+		let t=12;
+		t+=2;
+	}
+const命令
+	const声明一个只读的常量，一旦声明不可改变
+	例如:
+	   const PI=3.14;//常量
+	错误用法
+		1.const PI=3.14;PI=3.5;//报错
+		2.const PI;//报错
+		3.var PI=3;const PI=3.14;//报错
+	正确
+		const PI=3.14;
+		VARX=PI*2;
+注意:const实际并不是变量的值不可改动，而是变量指向的内存地址不可改动，对于基本数据而言，值保存在内存地址中，但是对于复合类型的数据，变量指向的内存地址只是一个指针，const只能保证这个指针是固定的，以至于它指向的数据结构是不是可变的，就不能控制
+	例如：
+		const x=[];//对象类型
+		x.push("hello");//可以赋值
+	 	x[1]="sdf";
+		const x=234;//但是不可以改变数组
+		document.writeln(x);//报错
+声明变量的方法
+	var let const function import class
+顶层对象属性和全局对象
+	在ES5的语法中，顶层对象指向的是window，但是在node环境下，顶层对象指向的是global对象
+	ES5下：
+		var a=1;
+	 	window.a=2;
+		alert(window.a)l//2 alert(a);//2
+	ES6下：
+		var a=1;
+		global.a;//1
+		this.a;//1
+		let b=1;
+		window.b;//underfined
+	注意:
+       	    1.在浏览器中，顶层对象是window，但是node和web workee没有weindow
+	    2.在浏览器和wen worker,selft指向的是顶级对象，但是node没有self
+	    3.在node中，顶级对象是global，但是其他环境都不支持
+	this注意
+	    1.在全局环境中，this会返回顶层对象，在node和ES6中，this返回当前模块
+	    2.对于函数中的this,如果函数不作为对象的方法运行，this会指向顶级对象，但是在严格模式下，this会返回endefined
+	    3.不管是严格模式还是普通模式，new Function('return this')()总会返回全局对象，但是浏览器用了内容安全政策(CSP)，那么eval和new Function无法使用
+	解决方法
+	    1.自己封装函数
+		var getGlob=function(){
+		  if(typeof self!=="undefined"){return self}
+		  if(typeof window!=="undefined"){return window}
+		  if(typeof global!=="undefined"){return global
+		}
+	    2.ES6
+		require('system.global/shim')
+		import shim from'system.global/shim';
+		shim();
+变量的解构赋值
+	ES6允许按照一定模式从数组和对象中提取值，然后对变量进行赋值，被称为解构赋值。只要等号两边模式匹配，则左边的变量就会被赋上对应的值，如果解构不成功，则值会变成undefind
+	定义：
+		var a=1;var b=2;var c=3
+		let[a,b,c]=123;
+		let[a,[b,c]]=[1,[2,3]];
+		let[a,,c]=[1,2,3];
+		let[a,...b][1,2.3,4];//注意可变数组后面不能定义变量
+		let[a,b,c]=[1,2];//c的值undefined
+	错误写法
+		let[a,b]=1;//报错
+		let[a,b]=undefined;//报错
+		let[a,b]={}//报错
+	设置默认值
+		let[a=2,b]=[];
+		let[a=2,b=2]=[];//a=2 b=2
+	对象的解构函数
+		let{name,age}={name:"zhang",age:23}
+	给变量定义别名
+		let{name,age:sex}={name:"zhang",age:22}
+		sex//22
+		age//报错
+	把对象赋给解构函数
+		var emp={
+		    p:["hello",{y:"word"}]
+		}
+		let{p,p:[x,{y}]}=emp;
+	字符串的解构赋值
+		let[a,b,c,d,e]="hello";
+		a=h b=e.....
+		let {length:len}="hello";
+		len=5
+	数值和布尔的解构赋值
+		let {toString:s}=true;
+		s===Boolean.prototype.toString;//true
+		let {toFixed:f}=123.34;
+		f===Number.prototype.toFixed;//true
+	函数参数的解构赋值
+		function fun([a,b]){
+		  return a+b
+		}
+	用途
+		let x=100;let y=200;
+		[x,y]=[y,x];
+		document.writeln(x);
+		document.writeln(y);
+	圆括号问题
+	  可以使用括号的情况
+		1.let[(b)]=[3];
+		  let[p:(d)]={p:23}
+		  let[(emp.name)]=["zhang"]
+引用对象
+	字符串扩展
+		ES6加强了对Unicode的值，并且扩展了字符串对象。在js可用\uxxxxxx形式表示一个字符，例如：\u0061 返回字母a。但是,如果超出\u0000~\uFFFFF的范围，则必须用2个双字节字节形式表达，例如：\UD842\UDFB7 
+	 	ES5的写法：\UD842\UDFB7
+		ES6的写法：\u{20BB7}
+      属性和方法
+	1.codePointAt()通过字符来获取Unicode的值 以UTF-16格式存储
+	  charCodeAt()通过字符来获取Unicode的值 获得单字节
+	2.String.fromCodePoint()通过Unicode获取字符
+	  String.fromCode()通过Unicode获取字符 获得单字节
+	3.at()通过位置找字符
+	  charAt()通过位置找字符 获得单字节
+	4.normalize()把Unicode格式正规化
+	5.遍历器for of
+	  例如:
+		for(var x of s){
+			document.writeln(x+"<br>")
+		}
+	6.includes()表示是否找到了字符串	
+	7.startsWith()字符串是否在原字符串的头部，返回T/F
+	8.endsWith()字符串是否在原字符串的尾部，返回FT/F
+	9.reqeat()原字符串重复n次,返回新字符串
+	10.padStart(位数,字符串)头部补全字符串
+	11.padEnd(位数，字符串)尾部补全字符串
+	例如:
+	     var str="asd."repeat(3);//asdasdasd
+		var str1="123".padStart(5,"*");//*123
+		var str2="123".padEnd(8,"asdv");//123asvas
+	模板字符串
+	    转译字符
+	    ES5:"sand \n asndj"
+	    ES6:`sand \n asndj`
+	         `sand
+		  asndj`
+	定义变量
+		var  num=22;
+		ES5:"sand"+num+"asndj"
+		ES6:`sand ${num} asndj`
+	定义方法	
+		ES5:var s="sand asndj" s.trim()
+		ES6:`${s.trim}`
+	定义表达式	   
+		ES5:"sand"+(num1+num2)+"asndj"
+		ES6:`sand ${x}+${y} asndj`
+		    `sand ${x+y} asndj`
+	输出语句
+		ES5:alert("aaa")
+		ES6:alert`aaa
+	定义后台语句 例如:php
+		ES5:var s="<ul>"+
+			"<%for(i=0;i<data.length;i++){
+			<li>data[i]</li>
+		}"+"</ul>">
+		ES6:var evelEx=/<%=(.+?)%>/g
+		    var expr=/<%=(\s\S+?)%>/g
+		    var s=s.replace(evalEx,'`);\n echo($1);\n echo(`')
+			       .replace(expr=/<,'`);\n $1 \n echo(`')
+	string.raw()
+		用来充当模板字符串的处理函数，返回一个反斜线都被转译的字符串，队形替换变量后的模板字符串
+	例如:
+		var v=String.raw`Hi\n${2+3}`
+		输出:Hi
+		     5
+模板字符串的限制
+	除了js，其他语言目前只支持LateX语言
+正则的扩展
+	定义：
+		var re=new RegExp('a','i')
+		var re=/a/i;
+		var re=new RegExp(/a/i);//ES6
+	属性和方法
+		1.u修饰符 匹配unicode模式
+		例如：/`\uD83D/u
+		2.y修饰符 粘连修饰符 类似与g修饰符
+		例如:/a+/y 当遇到非匹配的字符，下面则不再继续查找
+		3.s修饰符 可以匹配任意字符，包括可以换行
+		例如:/foo.bar/s
+		4.sticky表示是否设置了y修饰符 返回T/F
+  		5.flages返回正则表达式定义的修饰符
+数值的扩展
+	数字number
+	1.二进制用0b或0B开头
+	2.八进制用0o或00开头
+		0b1110001==113//true 0o767==503//true
+		Number('0b111')//7   Number('0o345')//229
+	属性和方法
+	1.isFinite()用来检查一个数值是否是有限的
+	2.isNaN()用来检查要给数值是否是数字类型
+	3.parseInt()把字符串转化成整形
+	4.parseFloat()把字符串转化成浮点型
+	5.isInterger()用来判断一个书是否是整数
+	6.EPILON极小常量，目的是为了计算浮点数设置一个误差范围
+	7.MAX_SAFE_INTEGER数值范围的最大上限 2`53(2的53次幂)
+	8.MIN_SAFE_INTEGER数值范围的最小下限 2`53(负2的53次幂)
+	9.isSafeInteger()用来判断一个整数是否落在范围内
+
+Math数学函数的扩展
+	属性和方法
+	1.Math.trunc()去掉一个数字的所有小数
+	2.sign()判断数字是正数，负数还是零
+	  正数返回1 附属返回-1 零返回0 其他值返回NaN
+	3.cbrt()计算一个数的立方根
+	4.clz32()返回32位2进制数有多少个前导0
+	5.imul()计算32位内的数字的乘积
+	6.fround()返回一个数的单精度浮点数
+	7.hypot()返回所有参数的平方和的平方根
+	8.expm1()返回e`x-1`
+	9.loglp()返回log(x+1)公式
+	10.log10()返回以10为底的x对数，如果x小于10，返回NaN
+	11.log2()返回以2为底的x的对数，如果x小于0，返回NaN
+	12.sinh()返回双曲正弦
+	13.cosh()返回双曲余弦
+	14.tanh()返回双曲正切
+	15.asinh()返回反双曲正弦
+	16.acosh()返回反双曲余弦
+	17.atanh()返回反双曲正切
+	18.signbit()判断一个数字的正负  正数返回false
+	19.2**3//8 (**)计算指数运算符
+Integer数据类型
+	js所有数字都保存成64位浮点数,这决定了整数的精确程度只能到53个二进制数，大于这个整数范围，js无法表示，在科学和金融计算方面不精确，在ES6里创建了Integer数据类型，这个类型只能用来表示整数，没有位数限制，任何位数的整数都可以精确表示
+	Integer数据类型后缀必须加上n表示
+	例如:
+		1n+2n=3n//十进制数
+		0b1101n;//二进制数
+		0o776;//八进制数
+		0xff9;//十六进制数
+	错误用法
+		new Intrger();//报错
+		Integer(undefined);//报错
+		Integer(null);//报错
+		Integer("1132n");//报错
+	注意:
+		6n/4n=1n;//结果只能转化成整数,去掉了小数
+		2n+3;//报错 不能拿Integer和number类型做运算
+		ln==true//报错 不能拿Integer类型值和其他类型值进行比较
+函数的扩展
+	1.基本用法
+		function fun(x,y){
+		if(typeof x=="undefined")
+	}
+		function fun(x,y){
+		y=y||"hello"
+	}
+	ES6 语法
+		function fun(x=1,y=2){}
+	2.与解构函数默认值结合使用
+		function fun([x,y=3]){}
+		fun([1,2])
+		function fun({name,sex:age}){
+	
+		}
+		fun({name:"zhangsan",age:23})
+	3.参数默认值的位置
+		function fun(x=1,y){}
+		fun()//1 undefind
+		fun(2)//2 undefined
+		fun(,3)//报错
+		fun(unfined,3)//1,3
+	4.函数的length属性
+		返回没有指定默认值的参数
+		例如:
+			function fun(a=1,b){}
+			fun.length;//输出1,a有默认值所以不算
+		注意:
+			function fun(a=1,b){}
+			fun,length;//输出0 因为a有默认值,就不会继续查找
+	5.作用域
+		一旦形参设置了默认值,函数进行声明初始化时,参数会形参一个单独的作用域,等到初始化结束后,这个作用于就会消失，不设置默认值作用域就不会出现。
+	let x=1;
+	function fun(y=x){
+		let x=2;
+		document.writeln(y)
+	}
+	fun();
+	注意：如果调用函数时给参数赋值，则显示赋值的结果。如果调用函数没有赋值，则找全局变量的同名函数。但是函数体外没有任何值，也不会找函数体内的同名变量，因为函数海内有在内存中运行
+6.封装函数:判断有没有传参
+	例如
+		function throwMess(){}
+		throw fun(x=throwMess()){
+			return x;
+		}
+		fun()
+7.rest参数
+	rest叫做可变参数，用域获取函数的多余参数，类似于argument是，可以替代可变数组，写作形式:...变量名，可以用数组下的方法和属性
+	例如:
+		function fun(x,...y){
+		alert(y);//2,3,4
+		}
+		fun(1,2,3,4)
+	注意：其他变量必须放在可变参数之前
+		function fun(var v of values){
+		alert(v);
+		}
+		fun(3,4,5)
+8.严格模式
+	functuin fun(){
+	  "use strict";//在函数里用严格模式	
+	}
+注意:除了严格模式里要求的条件之外,再函数里定义默认值， 解构赋值,可变参数也会报错
+9.name属性
+	用来返回函数的名称
+	例如：
+		function fun(){} fun.name;//fun
+		var fun1=function(){} fun1.name;//fun1
+		var fun2=function test(){}fun2.name;//test
+10.箭头函数
+	function fun(v){
+	    return v;
+	}
+	ES6箭头函数:var fun=v=>v
+	公式 var 函数名称=传递参数=>返回值
+	function fun(v){return 5}
+	ES6箭头函数:var fun=v=>5
+	function fun(x,y){return x+y}
+	ES6箭头函数:var fun=(x,y)=>x+y
+	function fun(x=1,...y){return{name:y,age:x}}
+	ES6箭头函数:var fun=(x=1,...y)=>({name:y.age:x})
+    与其他方法连用
+	var y=x.map(value=>value*value);
+	document.writeln(y);
+    注意事项
+	1.函数体内的this对象是定义所在的对象，而不是使用时的对象
+	2.不可以当构造函数使用，不可以通过new关键字创建
+	3.箭头函数里不存在arguments，但是可以用rest代替
+	4.不可以使用yield命令，不可以操作Generator函数
+	例如:
+		var id=34；	
+		function fun(){
+			setTimeout(()=>{console.log("id:",this,id)},100)
+		}
+		fun.call({id:21})l//输出21
+	注意:this再闭包里会指向全局对象，而箭头函数会把他固定再当前对象里
+嵌套箭头函数
+	function fun(){
+		return{say:function(){
+			return{sing:function(){
+				return{xiang:function(){
+					return:"abc";
+				}}
+			}}
+		}}
+	}
+	let fun=()=>({say:()=>({sing:()=>({xiang:()=>"abc"})})});
+绑定this
+	在箭头函数里绑定this关键字，用来替代call,apply，bind函数，但是并非适合所有场合,所以在ES7提出了"函数绑定"用双冒号(::)进行执行，左边是一个对象，右边是一个函数，该运算符将自动将左边作为上下文环境绑定到函数上
+	例如"
+		father.apply(son,name)
+		ES7:son::father(name)
+	尾调用优化
+		尾调用就是函数的最后执行的语句，调用了另一函数
+		例如：
+			function fun(){
+			  return gun();
+			}
+			function fun(x){
+			if(x>0){return gun();}
+			return mun();
+			}
+	优化方式
+	例如：
+		function fun(){
+		   let m=1;
+		   let n=2;
+		   return gun(n+m)
+		}
+		function fun(){
+		   return gun(3)
+		}
+		gun=()=>3;
+	尾递归
+		function fun(n){
+			if(n==1) return 1;
+			return n*fun(n-1)
+		}
+	优化:
+		function fun(n,tal){
+			if(n==1) return tal;
+			return n*fun(n-1,n*tal)
+		}
+		fun(5,1);
+数组的扩展
+	1.定义
+		x[1,2,3]
+		consols.log(x);//1 2 3遍历值，没有数组下的属性和方法
+	替换函数的参数
+		function fun(x,y,z){}
+		var a=[1,2,3];	
+		fun(...a);//x=1 y=2 z=3 遍历数组值,分别给参数赋值
+	合并数组
+		var x=[1,2,3];
+		var y=["a","b","c"];
+		ES5:var z=x.concat(y);
+		ES6:var z=[x,...y];
+	与解构赋值的结合
+		var x=[1,2,3,4];
+		ES5:x[0]
+		ES6:var [a,...y]=x;
+	字符串
+		var x=[..."hello"]
+		//[h,e,l,l,o]拆分字符串
+	属性和方法
+		1.from()将对象转化成真正的数组
+		2.of()将一组值转化为数组
+		3.copyWithin()将数组内部指定位置的成员复制到其他位置
+		4.find()找出第一个符合条件的数组成员，返回undefined
+		5.findIndex()找出第一个符合条件的数组成员，找不到返回-1，找到返回位置
+		6.fill()给指定值填充一个数组(替换)
+		7.entries()对数组的整个键值对的变量
+		8.keys()对数组的键值的遍历
+		9.values()对数组的值遍历
+		10.includes()数组中是否包含指定值，返回T/F
+	例如：
+		for(let index of x.keys()){
+			document.writeln(index);
+		}
+		for(let v of x.values()){
+			document.writeln(v)
+		}
+		for(let[index,value] of x.entries()){
+			document.writeln(index+":"+value+"<br>");
+		}
+数组的空位
+	数组的空位是指，在某一个位置没有任何值
+	例如[1,,3]
+	注意：空位不是undefined，如果一个位置是undefined，证明他是有值的，只是存储的是undefind类型
+	在ES5的方法下，大多数会忽略空位，不参与运算，例如：forEach(),filter(),some()等
+	map()计算会跳过这个空位，但是位置会保留
+	在ES6明确将空位转成了undefined
+	copyWithin()不会忽略空位，会连空位一起复制
+对象的扩展
+  定义：
+    ES5：
+	var emp={}
+	var obj=emp
+    ES6：
+	var emp={}
+	var {obj:emp}=emp
+    ES5：
+	function fun(x,y){
+	    return {x,y}
+	}
+	var emp=fun(2,3)
+	emp.x
+    ES6：
+	function fun(x,y){
+	    return{x:x,y:y}
+	}
+	var {x:x,y:y}
+	var {x:y,y:y}=fun(2,3)
+
+  对象中变量和函数的新定义
+        var emp={};
+        function getName(name){
+            return name in emp?emp[name]:null;
+        }
+        function setName(name,value){
+            emp[name]=value;//去处或设置属性可以用"[]"
+        }
+        emp.exports={setName,getName};//把函数覆给对象
+        emp.setName("name","张三");
+        document.writeln(emp.getName("name"));
+        简写：var emp={fun(){return name;}}
+  属性名表达式
+    ES5：emp.name="aa"
+    ES6：emp[name]="aa"
+	 emp['a'+'bc']="asd"
+    例如：
+	for(i=1;i<5;i++){
+	    alert(emp['name'+i])
+	}
+  获取属性表达式的用法
+	var lastName="aaaa"
+	var emp={
+	    'bname':"bbbb"
+	    [lastName]:"cccccc"
+	}
+	document.writeln(emp['bname']);
+	document.writeln(emp[lastName]);
+	
+  属性和方法
+	1.获取函数的名称
+	例如：
+	var emp={say(){}}
+	emp.say.name;//say
+	2.Object.is()比较两个值是否相等
+	在ES5里比较两个值相等，用"=="或"==="，但是他们的缺点是，要考虑类型和 数值是否是相等的，并且NaN的比较会不等于自身，"+0"和"-0"是相等
+	在ES6里提出"同值相等"的算法，用来标记两个是否严格相等
+	例如：
+	NaN===NaN//false	Object.is(NaN,NaN);//true
+	+0===-0//true		Object.is(+0,-0)//false
+	3.Object.assign()将原对象的所有可枚举性属性复制到目标对象
+	例如：
+	var emp1={name:"zhangsan"};
+	var emp2={age:23};
+	var emp3={sex:"男"};
+	Object.assign(emp1,emp2,emp3)
+	//emp1[name,sex,age]
+	注意：此方法实行的是浅复制，而不是深复制，如果原对象的某个属性值是对 象，那么目标对象复制得到的是这个对象的引用。
+	4.属性的遍历
+	for...in遍历该对象的和继承对象的可枚举的属性
+	    for(var attr in emp1){alert(attr)}
+	Object.keys(obj)遍历该对象的可枚举的属性
+	    var attr=Object.keys(emp);alert(attr)
+	Object.getOwnPropertyNames(obj)遍历该对象的所有属性(不包括Symbols)
+	    var attr=Object.getOwnPropertyNames(emp);alert(attr)
+	Object.getOwnPropertySymbols(obj)遍历该对象的所有Symbols属性
+	    var emp={[Symbol()]:0,a:0,b:0}
+	    var attrs=Object.getOwnPropertySymbols(emp);alert(attr)
+	Reflect.ownkeys(obj)遍历该对象的所有属性，包括(字符串,Symbols,是否可 枚举)
+	    var emp={[Symbol()]:0,a:0,b:0}
+	    var attrs=Reflect.ownKeys(emp);alert(attr)
+	5._proto_属性 用来读取当前对象的原型链对象
+	    ES5：var son=Object.create(father)
+		 son.say=function(){}
+	    ES6：var son={say:function(){}}
+		 son._proto_=father
+	6.Object.setPrototypeOf()与_proto_属性相同，用来设置读取对象的原型链对象
+	  例如：
+		Object.setPrototypeOf(son,protoType)
+	7.Object.getPrototypeOf()用来读取对象的原型链对象
+		function Emp(){}
+		var e=new Emp(){}
+		Object.getPrototypeOf(e)
+	8.Object.keys()遍历所有属性
+	  Object.values()遍历所有值
+	  Object.entries()遍历所有属性和值
+	  例如：
+	  var emp={name:"zhang",age:23,sex:"nan"}
+	  var key=Object.keys(emp);//name age sex
+	  var value=Object.values(emp);//zhang 23 nan
+	  var obj=Object.entires(emp);//[[name,zhang],[age,23],[sex,nan]]
+	9.对象的扩展运算符
+	  let {x,y,...z}={x:1,y:2,a:3,b:4};
+	  z//{a:3,b:4}
+	10.0bject.getOwnPropertyDescriptors()用来返回对象数的描述对象
+	  例如：
+	  var emp={name:"张"}
+	  Object.defineProperty(emp,"name",{
+	  	writable:true;
+		value:"张";
+	  })
+	  console.log(Object.getOwnPropertyDescriptor(emp,"name"))
+	11.null传导运算符
+	  如果读取对象内容的某个属性，往往需要判断该对象是否存在，这样层层判断比较麻烦，所以ES6里提出了"null传导运算符"
+	  例如：
+		var emp{
+			name:{a:1,b:2}
+		}
+	  ES5：var v=(emp&&emp.name&&emp.name.a&&emp.name.b||"default")
+	  ES6：var v=emp?.name?(.a||.b)||"default"
+
+Symbol类型
+  ES5定义的属性都是字符串，这容易造成属性名冲突，如果引用了js里提供的对象，我们在为这个对象创建新的属性，就会重名，所以ES6引入了新的类型，防止与字符串类型冲突
+  ES6下的类型有7种：number string boolean null undefined object Symbol
+  定义：
+	var s1=new Symbol("aa");
+	var s2=new Symbol("aa");
+	console.log(s1);//Symbol(aa)
+	s1.toString();//Symbol(aa)
+	s1==s2;//false
+  注意：由于他不属于字符串类型，所以输出值时都会带着"Symbol"名称，在比较两个Symbol的值是否相等时，比较的是地址是否相等
+  作为属性的定义
+	var s=new Symbol();
+	方法一：
+	var emp={} emp[s]="zhangsan";
+	方法二：
+	var emp={[s]="zhangsan"}
+	方法三：
+	var emp={}
+	Object.defineProperty(emp,s,{value:'zhang'})
+	emp[s];//输出zhangsan
+
+  属性名的遍历
+	Object.getOwnPropertySymbols(obj)遍历该对象的所有Symbols属性
+	var emp={[Symbol()]:0,a:0,b:0}
+	var attrs=Object.getOwnPropertySymbols(emp);alert(attr)
+	Reflect.ownKeys(obj)遍历该对象的所有属性，包括（字符串,Symbols,是否可枚举）
+	var emp={[Symbol()]:0,a:0,b:0}
+	var attrs=Reflect.ownKeys(emp);alert(attr)
+  属性和方法
+	1.Symbol.for()可以使用同一个Symbol值
+	2.Symbol.keyfor()返回 Symbol类型值的key值
+	  例如：
+		var s1=Symbol.for("aa");
+		var s2=Symbol.for("aa");
+		s1==s2;//true
+		Symbol.keyfor(s1);//aa
+	3.Symbol.hasInstance属性指向一个内部方法，对象使用instanceof运算符时调用这个方法
+	  例如：
+		class MyClass={
+		  [Symbol.hasInstance](v){
+		  	return v instanceof Array;
+		  }
+		}
+		[1,2,3] instanceof MyClass()
+	4.Symbol.isConcatpreadable属性等于一个布尔值，表示该对象使用Array.prototype.concat()时是否展开
+	  例如：
+		var x=["c","d"];
+		["a","b"].concat(x,"e");
+		x[Symbol.isConcatpreadable]//true
+	5.Symbol.species属性指向当前对象的构造函数
+	  	class myarray extends Array{
+		    get[Symbol.species](){return Array}
+		}
+	6.Symbol.match属性指向一个函数，当执行str.match()时，如果该属性存在，会调用它返回该方法的属性。
+		class emp{
+		    {Symbol.match}(){return "hello"}
+		}
+		emp.match(new Emp);
+	7.Symbol.replace属性指向一个方法，当对象被调用String.prototype.replace方法调用时会返回该方法的值
+		var x={}
+		x[Symbol.replace=(...s)=>return s]
+		"hello".replace(x,"world");//[hello,world]
+	8.Symbol.search属性指向一个方法，当对象被调用String.prototype.search方法调用时会返回该方法的值
+		[Symbol.search](String){
+		    return string.indexof(this.value)
+		}
+	9.Symbol.split属性指向一个方法，当对象被调用String.prototype.split方法调用时返回该方法的值
+		"foobar".split(new emp("oo"));//["f","bar"]
+	10.Symbol.iterator属性指向对象的默认遍历方法
+		*[Symbol.iterator](){
+			var i=0;
+			while(this[i]!=="undefined"){yield this[i];i++}
+		}
+
+set和map数据结构
+  set集合
+	它类似于数组，但是成员都是唯一的，没有重复，底层也是由数组实现
+  定义：var s=new Set();//定义集合
+	s.add("a");//给集合赋值
+	for(var i of s){//遍历集合
+	    document.writeln(i);
+	}
+  不接受重复值
+	var x=[1,2,3,4,2,1];
+	x.forEach(v=>s.add(v));
+	//1,2,3,4
+  属性和方法
+  1.size获取集合长度
+  2.add()给集合添加值
+  3.dalete()删除值,返回布尔值表示是否删除成功
+  4.has()该数值是否是set里的成员，返回布尔值
+  5.clear(）清空所有成员
+
+简单的赋值取值方式
+  var s=new Set([1,2,43,6,8,9]);//赋值
+  [...s];//取出
+
+赋值类型和重复问题
+  var s=new Set([null,null,NaN,NaN,undefined,undefined,{},{}]);
+  注意：在集合里，空值会显示成空位，即使为NaN类型也不得重复输入，但是定义两个对象类型，被视为不相等，因为它存在两个地址中
+ 遍历操作
+  1.keys()遍历键名
+  2.values()遍历值
+  3.entries()遍历键名和值
+  4.forEach()使用函数遍历每个成员
+    例如：
+	for(var k of s.key()){alert(k)};//1 2 43
+	for(var v of s.values()){alert(k)};//1 2 43
+	for(var e of s.entries()){console.log(e)};//[1,1] [2,3] [43,43]
+	s.forEach((value,key,array)=>console.log(value*2));//2 4 86
+WeakSet集合
+  与set集合类似，也是不能定义重复值，但是，有两个区别
+  1.只能存储对象类型
+  2.集合中对象都是弱引用，垃圾回收机制不考虑WeakSet对对象的引用，当其它对象不再引用 这个对象，不管是否在集合中，都会被垃圾回收机制清空
+    例如：
+	var x=[[1,2],[3,4]];
+	var y=["a","b"];
+	var emp={name:"zhang",age:23}
+	var w.new WeakSet();
+	w.add(y);
+	w.add(emp);
+	console.log(w);
+    注意：WeakSet不能存储基本类型值，不能在构造器里放一维数组和对象，该集合下的属性 和方法和set一样
+Map集合
+  在Object对象里，都是以键值对的形式存储，但是属性必须都是字符串类型，所以就有了限 制。map集合是“值-值”对应，key和value可以是任何类型，但是key不允许重复，value可以 重复
+  定义：
+	var m=new Map(["name","zhang"],["age",23])
+	m.set("sex","男");
+	m.get("sex");//男
+  map里可以定义任何类型
+	var s=new Set(["name","aa"],["age",23]);
+	var m=new Map(s);
+	m.get("name");//aa
+  map的key值不得重复，但是对象类型比较的是地址
+	例如：
+	var m1=new Map();
+	m1.set("a","1111");
+	m1.set("a","2222");
+	m1.get("a");//2222 因为覆盖了第一个值
+	
+	var m2=new Map();
+	m2.set(["a","1111"]);
+	m2.set(["a","2222"]);
+	m2.get(["a"]);//undefined 因为输入和输出不是同一个内存地址
+	
+	const k1=["a"] const k2=["a"]
+	m2.get([k1]);//111 m2.get(k2);//222 因为地址不同
+  注意：对于基本类型值，或者+0和-0，在map的key里会认为是相同值，所以会覆盖，但是数 组和对象类型，会认为地址不同，所以不会被覆盖
+  属性和方法
+	1.size获取长度
+	2.set(key,value)设置值
+	3.get(key)获取值
+	4.has()判断一个值是否存在map集合中，返回布尔类型
+	5.delete(key)删除指定值
+	6.clear()清空所有值
+  遍历方法
+	1.keys()遍历键名
+	2.values()遍历值
+	3.erntries()遍历键名和值
+	4.forEach()遍历map下的所有成员
+ map与其它数组的转化
+  集合转化数组：
+	var m=new Map();
+	m.set("a","aa");
+	m.set("b",11)
+	var x=[...m]
+  数组转集合：
+	var x=[["a",1],["b",2]]
+	var ml=new Map(x);
+	console.log(ml);
+  1.map与对象的转化
+	集合转化成对象
+	var m=new Map();
+	m.set("name","z");
+	m.set("age",23);
+	function fun(map){
+	    let obj=Object.create(null);
+	    for(let [k,v] of map){
+	        obj[k]=v
+	    }
+	    return obj;
+	}
+	对象转化成集合
+	function fun(obj){
+	    var m=new Map();
+	    for(var k of Object.keys(obj)){
+	        m.set(k,obj[k]);
+	    }
+	    return m;
+	}
+	console.log(fun(emp));
+  3.集合和JSON的转化
+	集合转化成JSON
+	var m=new Map().set("a","aa");.set("b",11);
+	function fun(map){//把集合转化成JSON
+		
+	}
+	JSON转化成集合
+	var json={"a":"1","b":"2"};
+	function fun(json){
+		return getMap(JSON.parse(json))
+	}
+	function getMap(obj){
+	    var m=new Map();
+	    for(var k of Object.keys(obj)){
+		m.set(k,obj[k]);
+	    }
+	    return m;
+	}
+	console.log(fun(emp));
+
+WeakMap集合
+  与map集合类似，也执行键值对储存，两个区别：
+  1.WeakMap只接受对象类型作为key值，但是除了null之外
+  2.WeakMap的键值名指向的对象不计入垃圾回收机制
+  例如：
+  var w=new WeakMap()
+  var emp={a:1}
+  w.set(emp,"cc");
+  var x=[1,2,3]
+  w.set(x,"ss")
+  注意：其它方法与map集合的使用方法一致
+
+Proxy对象
+  用来修改某些操作的默认行为，叫做拦截器，在语言层面上做出修改，所以属于一种“元编 程”，对对象设置了一个“拦截层”，当外界访问对象，必须通过此拦截层进行过滤，所以又 叫做“代理器”。
+  var pro=new Proxt(target,handler)
+  target所拦截的目标对象，handler要拦截的行为
+  例如：var emp={name:"zhang",age:23,sex:"男"};
+	var pro=new Proxy(emp,{
+		get:function(){
+		    return 35;
+		}
+	})
+	pro.name;//35 pro.age;//35
+	emp.age;//23
+  注意：当给一个对象过滤时，一定要调用过滤器，不要直接操作原对象
+  属性和方法
+  1.get(target,propKey,receiver)拦截获取对象属性的函数
+    target对象 target属性 receiver是Reflrect.get部分
+  2.set(target,propKey,value,receiver)拦截设置对象属性值的函数
+    value设置属性里的值
+  3.has(target,propKey)拦截判断当前属性是否属于此对象，返回布尔值
+  4.deleteProKey(target,propKey)拦截删除对象的属性的函数
+  5.ownKeys(target)拦截遍历对象属性的函数
+    拦截Object.key(),getOwnPropertyName(),getOwnPropertySymbols()
+  6.getOwnPropertyDescriptor(target,propKey)拦截设置属性权限的函数
+  7.defineProperty(target,propKey,proDesc)拦截设置属性权限的函数
+    拦截Object.defineProperty,defineProperties()
+  8.setPrototypeOf(target,proto)拦截原型链的指向 proto原型链参数
+  9.getPrototypeOf(target)拦截原型链的指向
+  10.apply(target,array)拦截操作父类构造器
+  11.construct(target,array)拦截操作构造器
+  例如：
+	var emp={name:"zhang",age:23};
+	  var pro=new Proxy(emp,{
+	    set:function(target,proKey,value){
+	      if(propKey=="age"{
+	        if(typeof value !="number"){
+		  throw new Error("年龄必须是数字类型")
+		}
+		if(value>150){
+		  throw new Error("请输入正确年龄范围")
+		}
+	      })
+	    }
+	  })
+	  pro.age=160;
+
+this问题
+  虽然Proxy可以对目标对象进行访问设置，但是他不是目标对象的透明代理，在不做任何拦截 的情况下，也无法保证与目标对象一致，主要原因在代理对象下，目标内部的this关键字会指 向代理
+  例如：
+	var emp={
+	    fun:function(){
+		document.writeln(this==proxy)
+	    }
+	}
+	const proxy=new Proxy(emp,{});
+	emp.fun();//false
+	proxy.fun();//true
+  如果把对象放在weakMap和weakSet里，代理器就会访问不到属性
+	const _name=new weakMap();
+	var emp{get:name(){return _name.get(this)}}
+	emp.name="aa";
+	const proxy=new Proxy(emp,{});
+	proxy.name;//undefined
+Reflect对象
+	Reflect对象和Prixy对象一样，是为了操作对象而提供的新API
+	目的:
+		1.将Object对象的一些明显属于语言内部方法放在Reflect对象,例如:
+	Object.definePropety
+		2.修改某些Object方法的返回结果，让方法变得更合理，例如:
+	Object.definePropety方法下如果无法定义属性会抛出错误,而Reflect对象会返回false
+	例如:
+		ES5：
+		    Object.defineProperty(emp,"name",{
+			
+		    })
+		ES6:
+		   if( Reflect.defineProperty(emp,"name",{
+			
+		    }))
+		3.让Object操作变成函数行为,比如:name in obj这种不是函数行为
+		ES5：
+		    "name" in emp;//true
+		ES6:
+		    Reflect.has(emp,"name");//true
+		4.Reflect对的方法与Proxy对象方法一一对应
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
