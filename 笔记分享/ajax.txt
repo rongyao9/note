@@ -1,0 +1,98 @@
+ajax
+    异步传输技术，是一种交互式网页应用开发技术，ajax可以实现网页的异步更新，即在不重新加载这个页面的情况下，对网页局部进行更新，也叫做异步传输，局部更新技术。用来提高页面的反应速度，节省服务器的响应时间。
+
+1.jquery的ajax
+    例如：
+	$.a.ajax({
+		type:"get",//传输方式get/post
+		url:"work1.php?name="+u+"&pa="+p,//定义路径
+		dataType:""//传值类型
+		data:""//变量
+		success:function(msg){//回调函数
+			alert(msg);
+		}
+	})
+    1.var pram=$("input").serialize()//获得要所有name值，拼接成传值方式
+    2.data:pram定义data变量
+    
+    json数据格式
+	json可以存储多个值，并且可以存储多个类型值，用作于前后台传值，代码写作简单，更小更块，更容易解析，同时也支持多种语言
+	定义基本类型:{"age":22} {"name":"zhangsan"}
+	定义数组类型:{"x":[1,2,5,7]}
+	定义兑现类型:{"age":22,"name":"zhangsan","sex":"男"}
+	取值:emp.name emo.sex jon.x[2]
+	js方法
+		json.parse()把json转化成对象
+		json.strintify()把json转化成字符串
+	php
+		json_encode()把数组转化成json
+		json_decode()把json转化成数组
+	python
+		json.dumps():把字典转化成json
+		json.loads():把json转化成字典
+json与ajax
+    1.ajax里定义类型
+	dataType:"json"
+    2.在后台定义数组
+	$x=array("str"=>"成功","name"=>"admin");
+    3.转化成json格式
+	json_encode($x)
+    4.在回调函数里取出
+	success:function(msg){//回调函数
+		alert(msg.str+","+msg.name)
+	}
+
+python的json格式转化
+    例如：
+	tu={'name':'zhangsan','age':22,'sex':'男'}
+	v=json.dumps(tu)
+	print(json.dumps(tu))转化成json
+	print(json.loads(v))转化成字典
+
+
+js的ajax
+	1.window.XMLHttpRequest高版本浏览器的ajax对象
+	2.window.ActiveXObject("Msxml2.XMLHttp")IE7以上和火狐低版本
+	3.window.ActiveXObject("Microsoft.XMLHTTP")支持IE7以下的
+	4.ajax.onreadystatechange设置回调函数
+	5.ajax.open(传值方式,路径,布尔)
+	  传值方式位get/post
+	  布尔值为true是异步 false同步
+	6.ajax.send(null)发送请求 null可以替换成要传值的变量	
+	7.ajax.readystate请求过程参数值
+	  0请求未初始化 1服务器已连接  2请求已接收 3请求处理中
+	  4请求已完成  complete请求已完成(IE低版本)
+	8.ajax.responseText()取出后台返回的变量
+    执行过程
+	例如：
+		var htmlHttp;//判断浏览器兼容性
+		function getAjax(){
+		    if(window.XMLHttpRequest){//高版本
+			hemlHttp=new XMLHttpRequest()
+		}
+		else if(window.ActiveXObject){//IE7以上
+		   try{
+			htmlHttp=new ActiveXObject("Msxml2.XMLHTTP")
+		}
+		   catch(e){
+			htmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		}
+		   return htmlHttp;	
+		}
+		//执行ajax操作
+	    function show(){
+		var u=document.getElementsByName("user")[0].value;
+	 	var p=document.getElementsByName("pass")[0].value;
+		htmlHttp=getAjax();//得到ajax对象
+		var url="work4.php?name="+u+"&pass="+p;//定义路径
+		htmlHttp.onreadystatechange=changed;//设置回调函数
+		htmlHttp.open("GET",url,true);//请求后台
+		htmlHttp.send(null);//发送
+		}
+jquery的ajax下的其他函数
+	1.timeout：要求为Number类型的参数，设置请求超时时间(毫秒)
+	2.async:要求为Boolean类型的参数，默认设置为true，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为false。注意，同步请求将锁住浏览器，用户其他操作必须等待请求完成才可以执行。
+	3.error：要求为function类型的参数，请求失败时被调用的函数。该函数有3个参数，即XMLHttpRrquest对象、错误信息、捕获的错误对象(可选)。
+	4.global：要求为Boolean类型的参数，默认为true。表示是否触发全局ajax时间。设置为false将不会触发全局ajax时间，ajaxStart或ajaxStorp可用于空值各种ajax时间。
+	5.jsonp:要求为String类型的参数，在一个jsonp请求中重写回调函数的名字。该值用来替代在"callback=?"这种GET或POST请求中URL参数里的"callback"部分，例如{jsonp:'onJsonPLoad'}会导致将"onJsonPLoad=?"传个服务器。
