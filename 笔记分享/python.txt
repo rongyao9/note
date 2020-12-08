@@ -1,0 +1,566 @@
+IDE：集成开发环境，如：webstrom，dw，ps
+前端：html,css,js,jquery...
+后台：c/c++,java,php,python
+b/s和c/s架构：
+b/s：运行在浏览器里，如：淘宝、百度
+c/s：安装在电脑里，如：QQ，360
+安装：
+  1.服务器：python里集成好的
+  2.数据库：mysql
+  3.编译语言：python
+
+python简介
+  python是一个结合考虑解释性，编译性，互动性和面向对象的语言。python的设计有很强的可读性，相比其它后台语言语法结构更简单。
+  解释性：在开发过程中没有编译的环节。
+  交互式：在python里写的提示符，直接互动执行你写的程序
+  面向对象：在python里也支持对象的封装、继承、多态
+python的优点
+  1.易于学习：关键字少，结构简单
+  2.易于阅读：代码结构清晰，用缩行进行代码写作
+  3.易于维护：代码量少，查找方便
+  4.广泛的标准库：python语言是跨平台的，可以运行在多种系统中
+  5.互动模式：可以从终端输入执行代码获得结果语言
+  6.可移植：代码开源，可以放在任何平台上
+  7.可扩展：可以自定义一些运行速度快，或者不开放的代码，在程序中调用
+  8.数据库：python提供了数据库连接接口
+  9.GUI编程：支持图形用户界面编程
+  10.可嵌入性：可以把python嵌入到c/c++的程序里
+语法特点：
+  1.使用缩进的形式表示代码块，不用大括号
+  2.多行语句用反斜杠\来实现
+	例如：tocal=a+\
+		    b+\
+		    c
+  3.标识符
+	1.标识符大小写敏感
+	2.第一个字符必须是字母或下划线开头
+	3.由字母、数字、下划线组成
+  4.python以utf-8编码，所有字符串都是Unicode字符串
+  5.注释
+	#单行注释
+	'''多行注释'''
+	"""多行注释"""
+  6.空行
+	一般在python里我们用空行来分隔，表示新的代码开始。空行与缩进不同，它并不是python语法的一部分，添加空行只是便于代码的维护
+  7.输入语句
+	input("请输入")
+  8.输出语句
+	print("输出内容")
+  9.导入sys模块
+	import somemodule
+	from somemodule import somefunction,firstsome
+	from somemodule import *
+字符串输入格式
+	%s字符串	%c字符		%d十进制
+	%i整数		%u无符号整数	%o八进制
+	%x十六进制	%X十六进制大写	%e浮点数格式1
+	%E浮点数格式2	%f浮点数格式3	%g浮点数格式4
+	%G浮点数格式5	%%文字%
+print("我叫%s,今年%d岁了" %("小李",20))
+print("我叫{},今年{}岁了" .format("小李",20))
+print("我叫{1},今年{0}岁了" .format("小李",20))
+print("我叫{name},今年{age}岁了" .format(name="小李",age=20))
+
+数据类型
+  不可变数据：字符串，数字，布尔，元组
+  可变数据：列表，集合，字典
+  注意：空值表示none
+运算符
+  算术运算符
+	+加 -减 *乘 /除 %模 **次幂 //向下取整
+  	a**b a的b次幂		'hello'*5 字符串输出5遍		-9//2得-5
+  比较运算符
+	==相等 !=不等 <小于 >大于 <=小于等于 >=大于等于
+  赋值运算
+	= += -= *= /= %= **= //=
+  逻辑运算符
+	and并且 or或者 not非
+判断语句
+  if语法
+	if 判断条件:
+		执行语句
+	elif 判断条件:
+		执行语句
+	... ...
+	else:
+		执行语句
+循环语句
+  1.while语句
+	while 满足条件:
+		执行语句
+	else:
+		执行语句
+  2.for语句
+	range(开始,结束)函数 自动生成数字序列
+	for(range(5)){
+		执行语句;#0 1 2 3 4
+	}
+	for(range(5，9)){
+		执行语句;#5 6 7 8
+	}
+	for(i in 'asds'){
+		执行语句;#a s d s
+	}
+结束语句
+  break 跳出循环
+  continue 跳出本次循环
+  pass 类似于 continue，是空语句，一般作为占位来用，保持程序的完整性
+  例如：
+	for i in 'sdmnjdsn':
+		if i=='n':
+			pass
+			print("pass执行")
+		else:
+			print(i)
+
+数字
+  int 例如：100,2,12 整数
+  float 例如：12.34,56.23 浮点型
+  complex 例如：3.14j,3.4+1.2j 复数类型
+  复数：是由实数和虚数部分组成，可用a+bj的方式表示，如果b省略则为0，a和b都是浮点类型，用来计算复杂数值
+  数值转化方法
+	1.int(x)转化成整数
+	2.float(x)转化成小数
+	3.complex(x)转化成复数，实数为x，虚数为0
+	  complex(x,y)转化成复数，实数为x，虚数为y
+  数学对象下的属性和方法
+	import math
+	1.abs(x)求绝对值
+	2.ceil(x)向上取整
+	3.floor(x)向下取整
+	4.round(x,n)四舍五入 n表示保留小数点几位
+	5.max(x1,x2......)求最大值
+	6.min(x1,x2......)求最小值
+	7.pow(x,y)求x的y次幂
+	8.sqrt(x)求x的平方根
+	9.modf(x)返回x的整数和小数部分
+	10.pi返回圆周率
+  随机模块的属性和方法
+	1.shuffe(列表)把列表随机排序
+	2.choice()从变量中抽取随机数
+	3.randrange(开始,结束,递增值)查找指定范围的随机数
+	4.random()0-1之间的随机数
+	5.uniform(最小值,最大值)查找指定范围的随机数
+字符串
+  转译字符
+  \\反斜杠 \'单引号 \"双引号 \n换行 \r回车 \000空 \b退格
+  符号的应用
+	+ 字符串连接 a + b
+	* 重复输出字符串 a * 2
+	[] 通过索引获取字符串中字符 a[1]
+	[:] 截取字符串中的一部分，遵循左闭右开原则
+	in 成员运算符 - 如果字符串中包含给定的字符返回 True
+	not in 成员运算符 - 如果字符串中不包含给定的字符返回 True
+  属性和方法
+	1.capitalize()将字符串的第一个字符转换为大写
+	2.center(width,fillchar)返回一个指定的宽度width居中的字符串，fillchar为填充的字符，默认为空格。
+	3.count(str,beg=0,end=len(string))返回str在string里面出现的次数，如果beg或者end指定则返回指定范围内str出现的次数
+	4.endswith(suffix,beg=0,end=len(string))检查字符串是否以obj结束，如果beg,或者end指定则检查指定的范围内是否以obj结束，如果是则返回True
+	5.find(str,beg=0 end=len(string))检查str是否包含在字符串中，如果指定范围beg和end，则检查是否包含在指定范围内，返回开始的索引值，否则返回-1
+	6.index(str,beg=0,end=len(string))跟find()方法一样，只不过如果str不再字符串会报一个异常
+	7.isalnum()如果字符串至少有一个字符并且所有字符都是字母或数字则返回 True
+	8.isalpha()如果字符串至少有一个字符并且所有字符都是字母则返回 True
+	9.isdigit()如果字符串只包含数字则返回 True
+	10.isspace()如果字符串只包含空白，则返回 True
+	11.join(seq)以指定字符串作为分隔符，将seq中所有的元素(的字符串表示)合并为一个新的字符串
+	12.len(string)返回字符串长度
+	13.lower()转换字符串中所有大写字符为小写
+	14.lstrip()截掉字符串左边的空格或指定字符
+	15.max(str)返回字符串str中最大的字母
+	16.min(dyt)返回字符串str中最小的字母
+	17.replace(old,new,[,max])将字符串中的str1替换成str2，如果max指定，则替换不超过max次
+	18.rfind(str,beg=0,end=len(string))类似于find()，不过是从右边开始查找
+	19.rindex(str,beg=0,end=len(string))类似于index(),不过是从右边开始。
+	20.rstrip()删除字符串字符串末尾的空格
+	21.split(str="",num=string.count(str) num=string.count(str))以str为分隔符截取字符串，如果num有指定值，则仅截取num+1个子字符串
+	22.startswith(substr,beg=0,end=len(string))检查字符串是否是以指定子字符串substr开头，是则返回True，如果beg和end指定值，则在范围内检查
+	23.strip([chars])删除字符串头尾的空格
+	24.swapcase()将字符串中大写转换为小写，小写转换为大写
+	25.upper()转换字符串中的小写字母为大写
+
+列表
+  类似于数组，用来存储多个值，长度是可变的，下标从0开始，用[]定义
+  x=[1,3,5,7]
+  添加:x[4]=33
+  修改:x[0]=11
+  删除:del x[2]
+  查询:x[2]
+
+  操作符
+	1.len(x) 获得长度
+	2.x+y 拼接列表
+	3."v" in x 判断列表里是否包含指定元素
+	4.for i in x 遍历循环
+	5.[beg:end] 截取列表中的一部分值
+
+  属性和方法
+	1.max(x)最大值
+	2.min(x)最小值
+	3.list(seq)把元组转化成列表
+	4.x.append()尾部添加
+	5.x.extend()在尾部添加多个值
+	6.x.count()统计相同值出现的次数
+	7.x.index()查找元素的位置
+	8.x.insert(i,obj)将对象插入列表
+	9.x.pop(i)通过索引移除元素
+	10.x.remove(v)通过值进行移除
+	11.x.sort(fun,reverse)排序 fun是函数 reverse为true表示降序
+		例如：z.sort(reverse=True)函数新版本不能用
+	12.x.clear()清空列表
+	13.x.copy()复制列表
+
+元组
+  元组与列表类似，不同之处在于，元组元素不能改变，元素定义在小括号内
+  y=(1,2,3,4)
+  y="a","b","c"
+  查询：y[2]
+  修改：y[1]=22报错
+  删除：del y[2]
+  注意：元组中如果只包含一个元素，需要在元素后面添加逗号，否则括号会被当成运算符进行使用
+  例如：
+	tup1=(20) type(tup1) int类型
+        tup2=(20,) type(tup2) tuple类型
+  操作符
+	1.len(y) 获得元组的长度
+	2.y1+y2 拼接元组
+	3.(a,)*4 复制元组
+	4.for i in y 遍历元组
+	5.y[-2] 倒着查找
+	6.y[beg:end] 截取元组范围
+
+属性和方法
+	1.type()验证所有元素的类型
+	2.tuple()列表转化成元组
+	3.min()最小值
+	4.max()最大值
+
+字典
+  字典是一个可变容器，可存储任意类型，每一个键值对用key=>value存储，以冒号进行分隔，多个值用逗号分隔，用大括号进行定义
+  z={'abc':11,23:34.5}
+  查询：z['abc']
+  修改：z['abc']=33
+  删除：del z['abc']
+  注意：
+	1.value可以存储任意类型值
+	2.key值不可改变，所以可以存储数字，字符串，元组
+	3.key不能为空且不能重复，如果重复最后一个值则覆盖重复值
+ 
+属性和方法
+	1.len(z)获得字典的个数
+	2.str(z)以字符串形式输出字典
+	3.z.clear()清空字典
+	4.z.copy()浅复制字典
+	5.z.fromkeys()覆盖原字典，创建新字典
+	6.z.get(key,default)返回key所对应的值，如果没有则返回default
+	7.key in z检查key值是否在字典里存在
+	8.z.items()把字典转化成列表[元组]
+	9.z.setdefault(key,default)和get一样，如果值不存在，则会添加新的
+	10.z.keys()返回key值的迭代器，用list取出
+	11.z.values()返回value值的迭代器，用list取出
+	12.z.update(z1)把z1的所有值添加到z里
+	13.z.pop(key,default)删除指定key值
+	14.z.popitem()随机删除字典里的值，返回key值(一般会删除末尾的)
+
+集合
+  set集合是一个无序不重复的元素序列，可以用{}或者set()定义，但是创建一个空集合不能用{}，要用set()定义
+  k={1,4,6,9}
+  k=set("a","b","c")
+  添加：k.add("d")
+  删除：s.remove("a")
+  属性和方法
+	1.add()添加
+	2.remove()删除
+	3.clear()清空
+	4.k.copy()复制
+	5.k.discard()删除集合中指定元素
+	6.k.intersection()返回集合的交集
+	7.k.union()返回两个集合的并集
+	8.k.symmetic_difference()返回两个集合中不重复的元素
+	9.k.isdisjoint()判断两个集合是否包含相同元素
+	10.k.issubset()判断两个集合的值是否完全匹配
+	11.s.pop()随机删除元素
+
+函数
+	1.普通函数
+	  def fun():
+		执行语句
+	  fun()
+	2.带参数函数
+	  def fun(a,b):
+		执行语句
+	  fun(1,2)
+	3.带返回值的函数
+	  def fun(a,b):
+		执行语句
+		return a+b
+	  v=fun(1,2)
+	4.带默认值的函数体
+	  def fun(a,b='abc'):
+		执行语句
+		return a+b
+	  v=fun(1,2)
+异常
+  try-except
+  try:
+	print(3/0)
+  except ZeroDivisionError
+	print("除数不能为0")
+  可以与else进行连用
+  try:
+	print(3/1)
+  except:
+	print("除数不能为0")
+  else:
+	print("aaa")
+  raise抛出异常
+  raise ZeroDivisionError("除数不能为0")
+  print(3/0)
+
+迭代器
+  用来循环集合里的值，从第一个元素循环到结尾，但是不能回退。
+  迭代器有两个基本的方法iter()和next()
+  例如：
+	list=[2,4,76,9,0,21]
+	t=iter(list)#把迭代器放在迭代对象里
+	next(t)#通过next方法判断下一次要取出的元素是否有值
+  注意：next会保存当前循环的位置，当下一元素没有值，则停止寻找
+  例如：
+	while t:
+	  try:
+		print(next(t))
+	  except:
+		sys.exit();
+
+日期
+  定义
+	import time
+  格式化符号
+	%Y四位的年份	%y两位的年份	%m月份
+	%d天		%H 24小时	%I 12小时
+	%M分钟		%S秒		%w星期
+	%W一年中的星期	%j年份的第几天	%a简写星期名称
+	%A完整星期名称	%b简写月份名称	%B完整月份名称
+  属性和方法
+	1.time.strftime()格式化输出日期
+	2.time.time()返回当前时间的时间戳(1970开始)
+	3.time.sleep(5)延迟调用线程的运行，秒数计算
+日历
+  定义日历
+	import calendar
+  例如：
+	cal=calendar.month(2019,1)
+
+正则表达式
+  定义
+	import re
+  标志位
+	1.re.I 大小写不敏感		2.re.L 本地化识别
+	3.re.M 多行匹配			4.re.S 换行在内的所有字符串的匹配
+	5.re.U 根据Unicode字符集解析	6.re.x更灵活的格式
+  属性和方法啊
+	1.re.search(正则,字符串,标志)返回第一个成功的匹配
+	2.re.match(正则,字符串,标志)匹配字符串的开始位置，如果开始位置不符合则失败
+	3.re.sub(正则,替换,被替换,标志)替换匹配的字符串
+	4.re.compile(正则,标志)生成正则表达式
+	5.re.findall(字符串,开始,结束)找到所有匹配的字符串，并返回一个列表
+	6.finditer(正则,字符串,标志)找到所有匹配的字符串，并返回一个迭代器
+	7.split(正则,字符串,次数,标志)按照匹配的字符串分隔
+	8.span()返回所有匹配值的索引
+	9.group()返回所有匹配值的字符串
+
+面向对象——类
+  对象：一切事物皆为对象
+  类：用来描述具有相同属性和方法的集合
+  成员变量：在类里面定义变量，也叫做局部变量
+  成员方法：在类里面定义方法，也叫做局部方法
+  数据成员：类边框或者实例变量，用于处理类及实例对象的相关数据
+  方法重写：子类和父类用相同的方法，却做不同的事情，这个过程也叫方法覆盖
+  实例变量：在类的声明中，属性是用变量来表示的，这种变量叫做实例变量
+  继承：一个子类（派生类）继承父类（基类）的属性和方法，无需重新定义
+  实例化：创建一个类的实例，类的具体对象，在内存中生成
+
+类的定义：
+	class MyClass:
+		i=123
+		n="abc"
+		def fun(self):
+			return "hello"
+	x=MyClass()
+	print(x.i)
+	print(x.fun())
+
+构造器
+  又叫构造函数，用来给对象赋初值
+  _init_()构造方法，该方法在类实例化时会自动调用
+  slef代表类的实例，而非类本身，可以用this关键字，但是建议使用slef
+  例如：
+	class Emp:
+	  def __init__(self,name,age):
+	    self.name=name
+	    self.age=age
+	  def prt(self):
+	    prit("我是：%s，我今年%d岁了" %(self.name,self.age))
+	e.Emp("小丽",22)
+	e.prt()
+self的用处
+  例如：
+	Class Test:
+	  def prt(self):
+	    print(self)
+	    print(self.__class__)
+	t1.Test()
+	t1.prt()#0x0164F6B0,Test
+
+get和set的使用
+  例如：
+  class Emp:
+    def __init__(self,name,age):
+	self.name=name
+	self.age=age
+    def getName(self):
+	return self.name
+    def setName(self,name):
+	self.name=name
+    def prt(self):
+	print("我叫%s，我今年%d岁了" %(self.name,self.age))
+    e1=Emp("傻妞",22)
+    e1.prt()
+    e1.setName("小兰")
+    print(e1.getName())
+
+类的私有属性和私有方法
+    __属性名称：两个下划线开头，声明该属性为私有变量，只能在内部使用
+    __方法名称：两个下划线开头，声明该属性为私有方法，只能在内部使用
+    例如：
+	class Just:
+	__privCount=0#私有变量
+	pubCount=0
+	def count(self):
+		self.__privCount+=1
+		self.pubCount+=1
+		print(j.__privCount)#只能在类里进行调用
+	j=Just()
+	j.count()
+	print(j.pubCount)
+
+类的专方法
+  1.__init__构造函数		2.__class__类名			3.__del__析构函数
+  4.__repr__打印转换		5.__len__长度			6.__cmp__比较运算
+  7.__add__加运算		8.__sub__减运算			9.__mul__乘运算
+  10.__truediv__除运算		11.__mod__求余数		12.__pow__乘方
+  13.__call__函数调用		14.__getitem__按索引值取值	15.__setitem__按索引值赋值
+  例如：
+	class Vector:
+	  def __init__(self,a,b):
+		self.a=a
+		self.b=b
+	  def __str__(self):
+		print("a=%d,b=%d" %(self.a,self.b))
+	  def __add__(self,other):
+		return Vector(self.a+other.a,self.b+other.b)
+	v1=Vector(2,3)
+	v2=Vector(4,6)
+	print(v1+v2)
+
+继承
+  子类继承父类，可以使用父类里的属性和方法，无需重新定义，但是私有变量和私有方法无法继承到
+  例如：
+	class Father():
+	  name=''
+	  age=0
+	  __mon=0
+	  def __init__(self,name,age,mon):
+		self.name=name
+		self.age=age
+		self.__mon=mon
+	  def say(self)
+		print("%s说：我%d岁了，我有%d钱" %(self.name,self.age,self.__mon))#私有变量钱数获不到
+	s=Son("小明",12,10000,"高中")
+	s.say()
+  注意：在不同文件中，子类会访问不到父类的私有变量
+
+多继承
+	class Father():
+	  name=''
+	  age=0
+	  __mon=0
+	  def __init__(self,name,age):
+		self.name=name
+		self.age=age
+	class Mon():
+	  sex=''
+	  def __init__(self,sex):
+		self.sex=sex
+	class Son(Father,Mon):
+	  sch=""
+	  def __init__(self,name,age,sex,sch):
+		Father.__init__(self,name,age,0)
+		Mon.__init__(self,sex)
+		self.sch=sch
+	  def say(self)
+		print("%s说：我%d岁了，性别是%s" %(self.name,self.age,self.sex))
+		print("学校%s" %(self.sch))
+	s=Son("小明",12,"女","高中")
+	s.say()
+
+文件操作
+  定义
+	open(路径,打开模式，设置缓冲，字符集，报错，区分换行符，参数类型)
+  打开模式	
+	1.t文本模式			2.x写模式	 	3.b二进制模式
+	4.+打开文件更新(可读写)		5.U通用换行模式  	6.r只读	
+	7.rb二进制方式只读		8.r+打开文件读写 	9.rb+二进制读写
+	10.w写入，文件不存在创建新的	11.wb二进制写入(同上)	12.w+读写(同上)
+	13.wb+二进制读写(同上)		14.ab二进制形式追加末尾，文件不存在创建新的
+	15.a+读写追加末尾(同上)		16.ab+读写二进制形式追加末尾
+	17.a追加末尾
+    属性和方法
+	1.file.close()关闭文件
+	2.file.flush()刷新文件内部缓冲，直接把内部缓冲区的数据立刻写入文件
+	3.file.next()返回下一行数据
+	4.file.read(字节数)从文件里读取指定字节数，如果没给定读取所有
+	5.file.readline(字节数)读取整行，包括"\n"
+	6.file.readlines()读取所有行并返回列表
+	7.file.seek(开始位置,偏移值)
+	  偏移值：0从头开始读，1从当前位置开始，2从末尾开始
+	8.file.tell()返回文件的当前位置
+	9.file.truncale(字节数)从文件的首行首字母开始截断
+	10.file.write(字符串)将字符串写入文件，返回字符长度
+	11.file.writelines(列表)将列表写入文件，如果需要换行自己加入换行符
+	12.file.name文件名称
+    例如：
+	file = open("abc.txt","r",)
+		print(file.name)
+		for i in range(4):
+  		  line=next(file)
+   		 print("第%d行-%s" %(i,line))
+	str1=file.read(10)	#按字符串读取
+	str2=file.readline(20)  #按行读取
+	str3=file.readlines() 	#按列表读取所有
+	file.seek(-3,2)		#度倒数3个字符串 读取方式是二进制
+	len=file.tell()		#返回当前位置
+	file.truncate(10)	#从头截断到10位
+	list1=["aa","cc","cccc"]
+	file.write(s)		#添加字符串
+	file.writelines(list1)	#将列表添加
+	file.close()		#关闭文件
+
+数据库连接
+	1.安装mysql驱动
+	2.import pymysql导入模块	
+	3.pymsql.connect(主机名，用户名，密码，数据库)链接数据库
+	4.cursor=db.cursor()创建一个游标对象
+	5.cursor.execute(sql)执行sql语句
+	db=pymysql.connect(host = 'localhost',user
+='root',passwd='123',port=3306,db='test',charset='utf8')
+    查询数据
+	num=cursor.execute("select * from dept")#num返回条数
+  	r=cursor.fetchall()#查询所有元组
+	for v in r:
+    		print(v[1])#返回第二个字段的值
+    第二种连接数据方式
+	1.安装mysql驱动
+	2.import,mysql.connector导入模块
+	3.mysql.cinnect(主机名，用户名，密码，数据库)链接数据库
+	4.cursor=db.cursor()创建于给游标对象
+	5.cursor.excute(sql)执行sql语句
