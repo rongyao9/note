@@ -4,6 +4,8 @@
 
 ## 使用前注册
 
+### vue2
+
 批量注册指令，新建 directives/index.js 文件：
 
 ```
@@ -31,6 +33,31 @@ import Directives from './JS/directives'
 Vue.use(Directives)
 
 ```
+### vue3
+批量注册指令，新建 /setup/directives/index.js 文件：
+
+```
+import type{ App } from 'vue'
+
+import { setupStopPropagation } from './stopPropagation'
+import { setupToggleTouch } from './toggleTouch'
+
+export function setupGlobDirectives (app: App){
+  setupStopPropagation(app)
+  setupToggleTouch(app)
+}
+
+```
+
+在 main.js 引入并调用：
+
+```
+import App from './App.vue'
+import { setupGlobDirectives } from '@/setup/directives'
+const app = createApp(App)
+setupGlobDirectives(app)
+```
+
 
 ##### 指令定义函数提供了几个钩子函数（可选）：
 - bind: 只调用一次，指令第一次绑定到元素时调用，可以定义一-个在绑定时执行一次的初始化动作。
@@ -42,14 +69,59 @@ Vue.use(Directives)
 
 ##### 几个实用的 Vue 自定义指令：
 
+- 阻止冒泡 v-stopPropagation
+- 移动端触屏事件 v-toggleTouch
 - 复制粘贴指令 v-copy
-- 长按指令 v-longpress
 - 输入框防抖指令 v-debounce
 - 禁止表情及特殊字符 v-emoji
-- 图片懒加载 v-LazyLoad
-- 权限校验指令 v-premission
-- 实现页面水印 v-waterMarker
-- 拖拽指令 v-draggable
+
+## v-stopPropagation
+
+ 需求：阻止冒泡
+
+```
+import { Directive, App } from 'vue'
+
+const stopPropagation: Directive = {
+
+  mounted (el) {
+    el.onclick = (e:Event) => {
+      e.stopPropagation
+    }
+  }
+}
+
+export function stopStopPropagation(app: App){
+  app.directive('stopPropagation',stopPropagation)
+}
+```
+
+## v-toggleTouch
+
+需求：切换移动端触屏状态
+
+```
+import { Directive, App } from 'vue'
+import store from '@/store'
+
+const toggleTouch: Directive = {
+  mounted (el) {
+    el.ontouchstart = () => {
+      const touching = true
+      store.commit('SET_TOUCHING',touching)
+    }
+    el.ontouchend = () => {
+      const touching = false
+      store.commit('SET_TOUCHING',touching)
+    }
+  }
+}
+
+export function setupToggleTouch (app: App) {
+  app.directive('toggleTouch', toggleTouch)
+}
+```
+
 
 ## v-copy
 
